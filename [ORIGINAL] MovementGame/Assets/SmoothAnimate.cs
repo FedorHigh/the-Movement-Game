@@ -18,6 +18,8 @@ public class SmoothAnimate : MonoBehaviour
     public void play(IAbility call = null)
     {
         caller = call;
+        Debug.Log("Cast:");
+        Debug.Log(caller.GetID());
         anim.Container = container;
         time = 0;
         playing = true;

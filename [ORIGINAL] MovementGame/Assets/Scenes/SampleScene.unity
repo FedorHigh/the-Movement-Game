@@ -942,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 385044736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.000003068121, y: 0.0000038704316, z: 0}
+  m_LocalPosition: {x: -0.0000035794747, y: 0.000004334883, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2232,7 +2232,7 @@ MonoBehaviour:
   - {fileID: 728889676}
   - {fileID: 728889677}
   - {fileID: 728889680}
-  currentAbility: 1
+  currentAbility: 2
 --- !u!114 &728889673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2263,7 +2263,7 @@ MonoBehaviour:
   m_Target: {fileID: 39818440}
   m_PlayOnAwake: 0
   m_LoopMode: 0
-  m_Method: 1
+  m_Method: 0
   m_Duration: 0.37852532
   m_MaxSpeed: 100
   m_EasingMode: 0
@@ -2382,15 +2382,41 @@ MonoBehaviour:
   spline: {fileID: 0}
   constraint: {fileID: 0}
   player: {fileID: 0}
-  addedVelocity: {x: 0, y: 100, z: 0}
+  addedVelocity: {x: 0, y: 150, z: 0}
   savedVelocity: {x: 0, y: 0, z: 0}
   appliedVeclocity: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
-  duration: 0.1
+  duration: 0.15
   speed: 0
-  active: 0
-  ID: 0
+  defDist: 15
+  addDist: 20
+  chargeBoost: 2
+  charging: 0
+  ID: 3
+  tmpknot:
+    Position:
+      x: 0
+      y: 0
+      z: 0
+    TangentIn:
+      x: 0
+      y: 0
+      z: 0
+    TangentOut:
+      x: 0
+      y: 0
+      z: 0
+    Rotation:
+      value:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+  curKey: 0
+  charge: 0
+  minCharge: 0
+  maxCharge: 3
 --- !u!1 &737317070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,8 +3014,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421094624}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.058322545, y: 0.70469755, z: 0.05832256, w: 0.7046974}
-  m_LocalPosition: {x: 0, y: 0.00000015481726, z: 0}
+  m_LocalRotation: {x: -0.058322635, y: 0.70469743, z: 0.05832261, w: 0.70469743}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3283,7 +3309,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -3317,8 +3343,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504647093}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05832255, y: 0.70469755, z: 0.058322564, w: 0.7046974}
-  m_LocalPosition: {x: -6.2000117, y: 2.690796, z: 0.00000071525574}
+  m_LocalRotation: {x: 0.18057741, y: 0, z: 0, w: 0.9835608}
+  m_LocalPosition: {x: -0.2000122, y: 8.250795, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3756,8 +3782,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883108623}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.058322545, y: 0.70469755, z: 0.05832256, w: 0.7046974}
-  m_LocalPosition: {x: 0, y: 0.00000015481726, z: 0}
+  m_LocalRotation: {x: -0.058322635, y: 0.70469743, z: 0.05832261, w: 0.70469743}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -38,8 +38,8 @@ public class LockOnManager : MonoBehaviour
             lookaround.Priority = 10;
             locked.Priority = 1;
 
-            lookaround.m_YAxis.m_InputAxisName = savedYaxis;
-            lookaround.m_XAxis.m_InputAxisName = savedXaxis;
+            //lookaround.m_YAxis.m_InputAxisName = savedYaxis;
+            //lookaround.m_XAxis.m_InputAxisName = savedXaxis;
         }
         else
         {
@@ -52,8 +52,8 @@ public class LockOnManager : MonoBehaviour
             savedXaxis = lookaround.m_XAxis.m_InputAxisName;
             savedYaxis = lookaround.m_YAxis.m_InputAxisName;
 
-            lookaround.m_YAxis.m_InputAxisName = "";
-            lookaround.m_XAxis.m_InputAxisName = "";
+            //lookaround.m_YAxis.m_InputAxisName = "";
+            //lookaround.m_XAxis.m_InputAxisName = "";
 
         }
     }

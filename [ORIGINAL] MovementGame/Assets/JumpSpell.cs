@@ -39,17 +39,21 @@ public class JumpSpell : MonoBehaviour, IAbility
             if (!Input.GetKey(curKey)) {
                 if (charge < minCharge) charge = minCharge;
                 ReleaseCharge();
+                charging = false;
             }
 
             charge += Time.deltaTime;
             if (charge >= maxCharge) {
                 charge = maxCharge;
                 ReleaseCharge();
+                charging = false;
             }
         }
     }
     public void ReleaseCharge() {
-        if (player.dashing) return;
+        player.currentAbility.Reset();
+        Debug.Log("RELEASED");
+        //if (player.dashing) return;
         player.dashing = true;
         constraint.enabled = false;
 
@@ -78,7 +82,7 @@ public class JumpSpell : MonoBehaviour, IAbility
     }
     public void Cast(KeyCode key)
     {
-        if (player.dashing) return;
+        if (player.dashing | !player.grounded) return;
         player.dashing = true;
         constraint.enabled = false;
 
@@ -98,8 +102,9 @@ public class JumpSpell : MonoBehaviour, IAbility
 
     public void HeavyCast(KeyCode key)
     {
+        curKey = key;
         charging = true;
-        player.dashing = true;
+        //player.dashing = true;
         charge = minCharge;
     }
 
