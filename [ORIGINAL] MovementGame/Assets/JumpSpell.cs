@@ -16,9 +16,13 @@ public class JumpSpell : MonoBehaviour, IAbility
     public Vector3 appliedVeclocity;
     public Rigidbody rb;
     public SmoothAnimate anim;
-    public float duration, speed;
-    public bool active;
+    public float duration, speed, defDist, addDist, chargeBoost;
+    public bool charging;
     public int ID;
+    public BezierKnot tmpknot;
+
+    public KeyCode curKey;
+    public float charge, minCharge, maxCharge;
     //public ParticleSystem particles;
     void Start()
     {
@@ -30,20 +34,28 @@ public class JumpSpell : MonoBehaviour, IAbility
         self = GetComponent<JumpSpell>();
 
     }
-    public int GetID()
-    {
-        return ID;
+    void Update() {
+        if (charging) {
+            if (!Input.GetKey(curKey)) {
+                if (charge < minCharge) charge = minCharge;
+                ReleaseCharge();
+            }
+
+            charge += Time.deltaTime;
+            if (charge >= maxCharge) {
+                charge = maxCharge;
+                ReleaseCharge();
+            }
+        }
     }
-    public void Reset()
-    {
-        constraint.enabled = true;
-        player.dashing = false;
-    }
-    public void Cast(KeyCode key)
-    {
+    public void ReleaseCharge() {
         if (player.dashing) return;
         player.dashing = true;
         constraint.enabled = false;
+
+        tmpknot = spline.Spline.ToArray()[1];
+        tmpknot.Position.y = defDist + (charge/maxCharge) * addDist;
+        spline.Spline.SetKnot(1, tmpknot);
 
         anim.duration = duration;
         anim.container = spline;
@@ -52,16 +64,49 @@ public class JumpSpell : MonoBehaviour, IAbility
 
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
+        rb.AddForce(appliedVeclocity * (charge/maxCharge) * chargeBoost, ForceMode.Impulse);
+    }
+    public int GetID()
+    {
+        return ID;
+    }
+    public void Reset()
+    {
+        constraint.enabled = true;
+        player.dashing = false;
+        charging = false;
+    }
+    public void Cast(KeyCode key)
+    {
+        if (player.dashing) return;
+        player.dashing = true;
+        constraint.enabled = false;
+
+        tmpknot = spline.Spline.ToArray()[1];
+        tmpknot.Position.y = defDist;
+        spline.Spline.SetKnot(1, tmpknot);
+
+        anim.duration = duration;
+        anim.container = spline;
+        anim.play(self);
+        
+
+        rb.linearVelocity = Vector3.zero;
+        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
         rb.AddForce(appliedVeclocity, ForceMode.Impulse);
     }
 
     public void HeavyCast(KeyCode key)
     {
-        throw new System.NotImplementedException();
+        charging = true;
+        player.dashing = true;
+        charge = minCharge;
     }
 
     public void LightCast(KeyCode key)
     {
-        throw new System.NotImplementedException();
+        rb.linearVelocity = Vector3.zero;
+        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
+        rb.AddForce(appliedVeclocity, ForceMode.Impulse);
     }
 }
