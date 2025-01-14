@@ -19,8 +19,13 @@ public class DashSpell : MonoBehaviour, IAbility
     public SmoothAnimate anim;
     public float duration, speed;
     public bool active;
+    public int ID;
 
-    
+    public int GetID()
+    {
+        return ID;
+    }
+
     //public ParticleSystem particles;
     void Start()
     {
@@ -37,7 +42,7 @@ public class DashSpell : MonoBehaviour, IAbility
         constraint.enabled = true;
         player.dashing = false;
     }
-    public void Cast()
+    public void Cast(KeyCode key)
     {
         if (player.dashing) return;
         player.dashing = true;
@@ -53,12 +58,12 @@ public class DashSpell : MonoBehaviour, IAbility
         rb.AddForce(appliedVeclocity, ForceMode.Impulse);
     }
 
-    public void HeavyCast()
+    public void HeavyCast(KeyCode key)
     {
         throw new System.NotImplementedException();
     }
 
-    public void LightCast()
+    public void LightCast(KeyCode key)
     {
         throw new System.NotImplementedException();
     }

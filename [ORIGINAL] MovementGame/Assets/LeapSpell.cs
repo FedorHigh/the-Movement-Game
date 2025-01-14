@@ -18,6 +18,7 @@ public class LeapSpell : MonoBehaviour, IAbility
     public SmoothAnimate anim;
     public float duration, speed;
     public bool active;
+    public int ID;
     //public ParticleSystem particles;
     void Start()
     {
@@ -27,14 +28,17 @@ public class LeapSpell : MonoBehaviour, IAbility
         spline = splineObj.GetComponent<SplineContainer>();
         constraint = splineObj.GetComponent<ParentConstraint>();
         self = GetComponent<LeapSpell>();
-    }
     
+    }
+    public int GetID() { 
+        return ID;
+    }
     public void Reset()
     {
         constraint.enabled = true;
         player.dashing = false;
     }
-    public void Cast()
+    public void Cast(KeyCode key)
     {
         if (player.dashing) return;
         player.dashing = true;
@@ -50,12 +54,12 @@ public class LeapSpell : MonoBehaviour, IAbility
         rb.AddForce(appliedVeclocity, ForceMode.Impulse);
     }
 
-    public void HeavyCast()
+    public void HeavyCast(KeyCode key)
     {
         throw new System.NotImplementedException();
     }
 
-    public void LightCast()
+    public void LightCast(KeyCode key)
     {
         throw new System.NotImplementedException();
     }

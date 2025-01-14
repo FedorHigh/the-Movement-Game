@@ -730,6 +730,146 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201960213}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &349542949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 349542950}
+  - component: {fileID: 349542951}
+  - component: {fileID: 349542952}
+  m_Layer: 0
+  m_Name: vertJump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &349542950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349542949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1375033959}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &349542951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349542949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Spline:
+    m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Splines:
+  - m_EditModeType: 1
+    m_Knots:
+    - Position:
+        x: 0
+        y: 0
+        z: 0
+      TangentIn:
+        x: 0
+        y: 0
+        z: -1
+      TangentOut:
+        x: 0
+        y: 0
+        z: 1
+      Rotation:
+        value:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+    - Position:
+        x: 0
+        y: 20
+        z: 0
+      TangentIn:
+        x: 0
+        y: 0
+        z: 0
+      TangentOut:
+        x: 0
+        y: 0
+        z: 0
+      Rotation:
+        value:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+    m_MetaData:
+    - Mode: 2
+      Tension: 0.5
+    - Mode: 1
+      Tension: 0.5
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Knots:
+    m_KnotsLink: []
+--- !u!1773428102 &349542952
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349542949}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 1751695784}
+    weight: 1
 --- !u!1 &385044736
 GameObject:
   m_ObjectHideFlags: 3
@@ -1883,11 +2023,11 @@ GameObject:
   - component: {fileID: 728889673}
   - component: {fileID: 728889672}
   - component: {fileID: 728889674}
-  - component: {fileID: 728889675}
   - component: {fileID: 728889676}
   - component: {fileID: 728889677}
   - component: {fileID: 728889678}
   - component: {fileID: 728889679}
+  - component: {fileID: 728889680}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -2091,6 +2231,7 @@ MonoBehaviour:
   tmp:
   - {fileID: 728889676}
   - {fileID: 728889677}
+  - {fileID: 728889680}
   currentAbility: 1
 --- !u!114 &728889673
 MonoBehaviour:
@@ -2130,24 +2271,6 @@ MonoBehaviour:
   m_ObjectForwardAxis: 2
   m_ObjectUpAxis: 1
   m_StartOffset: 0
---- !u!114 &728889675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728889665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff3238279bac3d4b983db63f3f3f011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 728889667}
-  body: {fileID: 728889665}
-  object1: {fileID: 495661223}
-  object2: {fileID: 0}
-  object3: {fileID: 0}
-  distance: 10
 --- !u!114 &728889676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2172,6 +2295,7 @@ MonoBehaviour:
   duration: 0.1
   speed: 0
   active: 0
+  ID: 0
 --- !u!114 &728889677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,6 +2320,7 @@ MonoBehaviour:
   duration: 0.3
   speed: 80
   active: 0
+  ID: 0
 --- !u!114 &728889678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,6 +2366,31 @@ MonoBehaviour:
   cameraDistance: 1
   savedXaxis: 
   savedYaxis: 
+--- !u!114 &728889680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728889665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b61d77a5d5f734cbcb6fcc88e52d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineObj: {fileID: 349542949}
+  spline: {fileID: 0}
+  constraint: {fileID: 0}
+  player: {fileID: 0}
+  addedVelocity: {x: 0, y: 100, z: 0}
+  savedVelocity: {x: 0, y: 0, z: 0}
+  appliedVeclocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  duration: 0.1
+  speed: 0
+  active: 0
+  ID: 0
 --- !u!1 &737317070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2665,7 @@ MonoBehaviour:
     m_MaxSpeed: 10
     m_AccelTime: 0
     m_DecelTime: 0
-    m_InputAxisName: 
+    m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: 0
@@ -2539,7 +2689,7 @@ MonoBehaviour:
     m_MaxSpeed: 600
     m_AccelTime: 0
     m_DecelTime: 0
-    m_InputAxisName: 
+    m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -2725,6 +2875,7 @@ Transform:
   m_Children:
   - {fileID: 39818441}
   - {fileID: 737317071}
+  - {fileID: 349542950}
   m_Father: {fileID: 1306015356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1773428102 &1375033960
@@ -3132,7 +3283,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -3166,8 +3317,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504647093}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18057741, y: 0, z: 0, w: 0.9835608}
-  m_LocalPosition: {x: -0.2000122, y: 8.250795, z: -12}
+  m_LocalRotation: {x: -0.05832255, y: 0.70469755, z: 0.058322564, w: 0.7046974}
+  m_LocalPosition: {x: -6.2000117, y: 2.690796, z: 0.00000071525574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

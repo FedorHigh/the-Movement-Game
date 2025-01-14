@@ -397,11 +397,11 @@
 "Assets/DashSpell.cs"
 "Assets/HELLO GITHUB.cs"
 "Assets/Interfaces.cs"
+"Assets/JumpSpell.cs"
 "Assets/LeapSpell.cs"
 "Assets/LockOnManager.cs"
 "Assets/PlayerController.cs"
 "Assets/SmoothAnimate.cs"
-"Assets/SpawnSpell.cs"
 "Assets/SplineManager.cs"
 -langversion:9.0
 /deterministic

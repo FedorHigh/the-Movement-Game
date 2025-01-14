@@ -49,13 +49,13 @@ public class AbilityInputManager : MonoBehaviour
             //Debug.Log(abilities[0].ToString());
             //Debug.Log(abilities[1].ToString());
             if (light) {
-                abilities[currentAbility].LightCast();
+                abilities[currentAbility].LightCast(castKey);
             }
             else if (heavy)
             {
-                abilities[currentAbility].HeavyCast();
+                abilities[currentAbility].HeavyCast(castKey);
             }
-            else abilities[currentAbility].Cast();
+            else abilities[currentAbility].Cast(castKey);
         }
     }
 
