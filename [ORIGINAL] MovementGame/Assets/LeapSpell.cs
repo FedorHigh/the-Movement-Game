@@ -20,6 +20,8 @@ public class LeapSpell : MonoBehaviour, IAbility
     public bool active;
     public int ID;
     //public ParticleSystem particles;
+    public TrailRenderer trail;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,6 +30,7 @@ public class LeapSpell : MonoBehaviour, IAbility
         spline = splineObj.GetComponent<SplineContainer>();
         constraint = splineObj.GetComponent<ParentConstraint>();
         self = GetComponent<LeapSpell>();
+        trail.time = duration;
     
     }
     public int GetID() { 
@@ -37,12 +40,16 @@ public class LeapSpell : MonoBehaviour, IAbility
     {
         constraint.enabled = true;
         player.dashing = false;
+        player.currentAbility = null;
+        trail.emitting = false;
     }
     public void Cast(KeyCode key)
     {
         if (player.dashing) return;
         player.dashing = true;
         constraint.enabled = false;
+        player.currentAbility = self;
+        trail.emitting = true;
 
         anim.duration = duration;
         anim.container = spline;

@@ -20,6 +20,7 @@ public class DashSpell : MonoBehaviour, IAbility
     public float duration, speed;
     public bool active;
     public int ID;
+    public TrailRenderer trail;
 
     public int GetID()
     {
@@ -35,18 +36,23 @@ public class DashSpell : MonoBehaviour, IAbility
         spline = splineObj.GetComponent<SplineContainer>();
         constraint = splineObj.GetComponent<ParentConstraint>();
         self = GetComponent<DashSpell>();
+        trail.time = duration;
     }
 
     public void Reset()
     {
         constraint.enabled = true;
         player.dashing = false;
+        player.currentAbility = null;
+        trail.emitting = false;
     }
     public void Cast(KeyCode key)
     {
         if (player.dashing) return;
         player.dashing = true;
         constraint.enabled = false;
+        player.currentAbility = self;
+        trail.emitting = true;
 
         anim.duration = duration;
         anim.container = spline;

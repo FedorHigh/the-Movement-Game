@@ -1,11 +1,12 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Animations;
 
 
 public class LockOnManager : MonoBehaviour
 {
     public BetterController player;
-    public GameObject rtc, target, camerapoint, pointer;
+    public GameObject rtc, target, camerapoint, pointer, protector;
     public float radius, fallOffRadius;
     public LayerMask layer;
     public CinemachineFreeLook lookaround;
@@ -14,6 +15,8 @@ public class LockOnManager : MonoBehaviour
 
     public string savedXaxis;
     public string savedYaxis;
+
+    ConstraintSource tmpsource;
     void LockOn() {
         //target = null;
         Collider[] targets = Physics.OverlapSphere(transform.position + rtc.transform.forward*radius, radius, layer);
@@ -34,7 +37,7 @@ public class LockOnManager : MonoBehaviour
         if (tmptrg == target | tmptrg == null){
             target = null;
             player.lockedOn = false;
-
+            protector.SetActive(false);
             lookaround.Priority = 10;
             locked.Priority = 1;
 
@@ -45,7 +48,10 @@ public class LockOnManager : MonoBehaviour
         {
             target = tmptrg;
             player.lockedOn = true;
-            
+            protector.SetActive(true);
+            //tmpsource.sourceTransform = target.transform;
+            //protector.GetComponent<ParentConstraint>().SetSource(0, tmpsource);
+
             lookaround.Priority = 1;
             locked.Priority = 10;
 
@@ -61,6 +67,7 @@ public class LockOnManager : MonoBehaviour
     {
         player = GetComponent<BetterController>();
         rtc = player.rtc;
+        //tmpsource.weight = 1;
     }
 
     void Update()
@@ -71,6 +78,7 @@ public class LockOnManager : MonoBehaviour
             LockOn();
         }
         if (player.lockedOn) {
+            protector.transform.position = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
             rtc.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
             camerapoint.transform.position = transform.position + (( (target.transform.position - transform.position) / 2 ) * cameraDistance);
         }

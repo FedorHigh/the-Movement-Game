@@ -56,6 +56,7 @@ public class JumpSpell : MonoBehaviour, IAbility
         //if (player.dashing) return;
         player.dashing = true;
         constraint.enabled = false;
+        player.currentAbility = self;
 
         tmpknot = spline.Spline.ToArray()[1];
         tmpknot.Position.y = defDist + (charge/maxCharge) * addDist;
@@ -79,12 +80,14 @@ public class JumpSpell : MonoBehaviour, IAbility
         constraint.enabled = true;
         player.dashing = false;
         charging = false;
+        player.currentAbility = null;
     }
     public void Cast(KeyCode key)
     {
         if (player.dashing | !player.grounded) return;
         player.dashing = true;
         constraint.enabled = false;
+        player.currentAbility = self;
 
         tmpknot = spline.Spline.ToArray()[1];
         tmpknot.Position.y = defDist;
@@ -110,6 +113,7 @@ public class JumpSpell : MonoBehaviour, IAbility
 
     public void LightCast(KeyCode key)
     {
+        if (player.dashing) return;
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
         rb.AddForce(appliedVeclocity, ForceMode.Impulse);
