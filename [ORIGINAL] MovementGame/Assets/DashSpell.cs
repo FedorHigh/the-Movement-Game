@@ -21,10 +21,45 @@ public class DashSpell : MonoBehaviour, IAbility
     public bool active;
     public int ID;
     public TrailRenderer trail;
+    public float BaseCD, LightCD, HeavyCD;
+    public float CDleft;
+    public bool ready, charging;
+    public float charge, minCharge, maxCharge, chargeBoost;
+    public KeyCode curKey;
+    public bool IsReady() { return ready; }
 
     public int GetID()
     {
         return ID;
+    }
+
+    void Update() {
+        if (!ready)
+        {
+            CDleft -= Time.deltaTime;
+            if (CDleft <= 0)
+            {
+                CDleft = 0;
+                ready = true;
+            }
+        }
+        if (charging)
+        {
+            if (!Input.GetKey(curKey))
+            {
+                if (charge < minCharge) charge = minCharge;
+                ReleaseCharge();
+                charging = false;
+            }
+
+            charge += Time.deltaTime;
+            if (charge >= maxCharge)
+            {
+                charge = maxCharge;
+                ReleaseCharge();
+                charging = false;
+            }
+        }
     }
 
     //public ParticleSystem particles;
@@ -49,6 +84,12 @@ public class DashSpell : MonoBehaviour, IAbility
     public void Cast(KeyCode key)
     {
         if (player.dashing) return;
+
+        curKey = key;
+
+        ready = false;
+        CDleft = BaseCD;
+
         player.dashing = true;
         constraint.enabled = false;
         player.currentAbility = self;
@@ -66,11 +107,46 @@ public class DashSpell : MonoBehaviour, IAbility
 
     public void HeavyCast(KeyCode key)
     {
-        throw new System.NotImplementedException();
+        ready = false;
+        CDleft = maxCharge;
+
+        curKey = key;
+        charging = true;
+        charge = minCharge;
+    }
+    public void ReleaseCharge() {
+        ready = false;
+        CDleft = HeavyCD;
+
+        if (player.currentAbility != null) player.currentAbility.Reset();
+        //Debug.Log("RELEASED");
+        //if (player.dashing) return;
+        player.dashing = true;
+        constraint.enabled = false;
+        player.currentAbility = self;
+
+        //tmpknot = spline.Spline.ToArray()[1];
+        //tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
+        //spline.Spline.SetKnot(1, tmpknot);
+
+        anim.duration = duration;
+        anim.container = spline;
+        anim.play(self);
+        //particles.Play();
+
+        rb.linearVelocity = Vector3.zero;
+        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
+        rb.AddForce(appliedVeclocity * (charge / maxCharge) * chargeBoost, ForceMode.Impulse);
     }
 
     public void LightCast(KeyCode key)
     {
-        throw new System.NotImplementedException();
+        ready = false;
+        CDleft = LightCD;
+
+        rb.linearVelocity = Vector3.zero;
+        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
+        rb.AddForce(appliedVeclocity * (charge / maxCharge), ForceMode.Impulse);
     }
+
 }

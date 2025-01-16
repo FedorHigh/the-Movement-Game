@@ -3,6 +3,7 @@ using Interfaces;
 using UnityEngine.Splines;
 using UnityEngine.Animations;
 using Cinemachine;
+using System.Data.SqlTypes;
 
 public class JumpSpell : MonoBehaviour, IAbility
 {
@@ -20,10 +21,15 @@ public class JumpSpell : MonoBehaviour, IAbility
     public bool charging;
     public int ID;
     public BezierKnot tmpknot;
+    public float BaseCD, LightCD, HeavyCD;
+    public float CDleft;
+    public bool ready;
 
     public KeyCode curKey;
     public float charge, minCharge, maxCharge;
     //public ParticleSystem particles;
+
+   
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,6 +41,13 @@ public class JumpSpell : MonoBehaviour, IAbility
 
     }
     void Update() {
+        if (!ready) { 
+            CDleft -= Time.deltaTime;
+            if (CDleft <= 0) {
+                CDleft = 0;
+                ready = true;
+            }
+        }
         if (charging) {
             if (!Input.GetKey(curKey)) {
                 if (charge < minCharge) charge = minCharge;
@@ -51,7 +64,10 @@ public class JumpSpell : MonoBehaviour, IAbility
         }
     }
     public void ReleaseCharge() {
-        player.currentAbility.Reset();
+        ready = false;
+        CDleft = HeavyCD;
+
+        if(player.currentAbility!=null) player.currentAbility.Reset();
         Debug.Log("RELEASED");
         //if (player.dashing) return;
         player.dashing = true;
@@ -71,10 +87,7 @@ public class JumpSpell : MonoBehaviour, IAbility
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
         rb.AddForce(appliedVeclocity * (charge/maxCharge) * chargeBoost, ForceMode.Impulse);
     }
-    public int GetID()
-    {
-        return ID;
-    }
+   
     public void Reset()
     {
         constraint.enabled = true;
@@ -85,6 +98,10 @@ public class JumpSpell : MonoBehaviour, IAbility
     public void Cast(KeyCode key)
     {
         if (player.dashing | !player.grounded) return;
+
+        ready = false;
+        CDleft = BaseCD;
+
         player.dashing = true;
         constraint.enabled = false;
         player.currentAbility = self;
@@ -105,6 +122,9 @@ public class JumpSpell : MonoBehaviour, IAbility
 
     public void HeavyCast(KeyCode key)
     {
+        ready = false;
+        CDleft = maxCharge;
+
         curKey = key;
         charging = true;
         //player.dashing = true;
@@ -114,8 +134,15 @@ public class JumpSpell : MonoBehaviour, IAbility
     public void LightCast(KeyCode key)
     {
         if (player.dashing) return;
+
+        ready = false;
+        CDleft = LightCD;
+
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
         rb.AddForce(appliedVeclocity, ForceMode.Impulse);
     }
+
+    public int GetID() { return ID; }
+    public bool IsReady() { return ready; }
 }

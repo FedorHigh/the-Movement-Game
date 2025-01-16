@@ -5,7 +5,7 @@ public class SmoothAnimate : MonoBehaviour
 {
     public SplineAnimate anim;
     public SplineContainer container;
-    public float time, speed, duration;
+    public float time, speed, duration, speedOverwrite;
     public bool playing;
     IAbility caller;
     //public string resetMethod;
@@ -17,6 +17,7 @@ public class SmoothAnimate : MonoBehaviour
     }
     public void play(IAbility call = null)
     {
+        speedOverwrite = 1;
         caller = call;
         Debug.Log("Cast:");
         Debug.Log(caller.GetID());
@@ -30,12 +31,13 @@ public class SmoothAnimate : MonoBehaviour
     {
         time = 0;
         playing = false;
-        if(caller != null) caller.Reset();
+        if (caller != null) caller.Reset();
+        else Debug.Log("NULL CALLER");
     }
     void Update()
     {
         if (playing) {
-            time += Time.deltaTime;
+            time += Time.deltaTime*speedOverwrite;
             if (time >= duration) { 
                 time = duration;
                 anim.ElapsedTime = time;

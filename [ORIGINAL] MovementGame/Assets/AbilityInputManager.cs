@@ -6,7 +6,7 @@ using System.Numerics;
 public class AbilityInputManager : MonoBehaviour
 {
     public bool jumpD, lightD, heavyD, altD;
-    public bool jump, light, heavy, alt;
+    public bool jump, light_, heavy, alt;
     public KeyCode jumpKey, lightKey, heavyKey, altKey, nextKey, prevKey, castKey;
     public Object[] tmp;
     public IAbility[] abilities;
@@ -31,7 +31,7 @@ public class AbilityInputManager : MonoBehaviour
         altD = Input.GetKeyDown(altKey);
 
         jump = Input.GetKey(jumpKey);
-        light = Input.GetKey(lightKey);
+        light_ = Input.GetKey(lightKey);
         heavy = Input.GetKey(heavyKey);
         alt = Input.GetKey(altKey);
 
@@ -45,10 +45,10 @@ public class AbilityInputManager : MonoBehaviour
             else currentAbility = currentAbility-1;
         }
 
-        if (Input.GetKeyDown(castKey)) {
+        if (Input.GetKeyDown(castKey) & abilities[currentAbility].IsReady()) {
             //Debug.Log(abilities[0].ToString());
             //Debug.Log(abilities[1].ToString());
-            if (light) {
+            if (GetComponent<Light>()) {
                 abilities[currentAbility].LightCast(castKey);
             }
             else if (heavy)
