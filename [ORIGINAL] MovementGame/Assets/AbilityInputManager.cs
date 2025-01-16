@@ -48,7 +48,7 @@ public class AbilityInputManager : MonoBehaviour
         if (Input.GetKeyDown(castKey) & abilities[currentAbility].IsReady()) {
             //Debug.Log(abilities[0].ToString());
             //Debug.Log(abilities[1].ToString());
-            if (GetComponent<Light>()) {
+            if (light_) {
                 abilities[currentAbility].LightCast(castKey);
             }
             else if (heavy)

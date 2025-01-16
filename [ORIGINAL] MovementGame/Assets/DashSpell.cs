@@ -7,9 +7,9 @@ using static UnityEngine.ParticleSystem;
 
 public class DashSpell : MonoBehaviour, IAbility
 {
-    public GameObject splineObj;
-    public SplineContainer spline;
-    public ParentConstraint constraint;
+    public GameObject splineObj, splineObjHeavy;
+    public SplineContainer spline, splineHeavy;
+    public ParentConstraint constraint, constraintHeavy;
     public BetterController player;
     public IAbility self;
     public Vector3 addedVelocity;
@@ -17,14 +17,14 @@ public class DashSpell : MonoBehaviour, IAbility
     public Vector3 appliedVeclocity;
     public Rigidbody rb;
     public SmoothAnimate anim;
-    public float duration, speed;
+    public float duration, speed, durationHeavy;
     public bool active;
     public int ID;
     public TrailRenderer trail;
     public float BaseCD, LightCD, HeavyCD;
     public float CDleft;
     public bool ready, charging;
-    public float charge, minCharge, maxCharge, chargeBoost;
+    public float charge, minCharge, maxCharge, chargeBoost, lightBoost;
     public KeyCode curKey;
     public bool IsReady() { return ready; }
 
@@ -70,6 +70,8 @@ public class DashSpell : MonoBehaviour, IAbility
         player = GetComponent<BetterController>();
         spline = splineObj.GetComponent<SplineContainer>();
         constraint = splineObj.GetComponent<ParentConstraint>();
+        splineHeavy = splineObjHeavy.GetComponent<SplineContainer>();
+        constraintHeavy = splineObjHeavy.GetComponent<ParentConstraint>();
         self = GetComponent<DashSpell>();
         trail.time = duration;
     }
@@ -77,6 +79,7 @@ public class DashSpell : MonoBehaviour, IAbility
     public void Reset()
     {
         constraint.enabled = true;
+        constraintHeavy.enabled = true;
         player.dashing = false;
         player.currentAbility = null;
         trail.emitting = false;
@@ -93,6 +96,7 @@ public class DashSpell : MonoBehaviour, IAbility
         player.dashing = true;
         constraint.enabled = false;
         player.currentAbility = self;
+        trail.time = duration;
         trail.emitting = true;
 
         anim.duration = duration;
@@ -108,7 +112,7 @@ public class DashSpell : MonoBehaviour, IAbility
     public void HeavyCast(KeyCode key)
     {
         ready = false;
-        CDleft = maxCharge;
+        CDleft = HeavyCD;
 
         curKey = key;
         charging = true;
@@ -122,15 +126,17 @@ public class DashSpell : MonoBehaviour, IAbility
         //Debug.Log("RELEASED");
         //if (player.dashing) return;
         player.dashing = true;
-        constraint.enabled = false;
+        constraintHeavy.enabled = false;
         player.currentAbility = self;
+        trail.emitting = true;
+        trail.time = durationHeavy;
 
         //tmpknot = spline.Spline.ToArray()[1];
         //tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
         //spline.Spline.SetKnot(1, tmpknot);
 
-        anim.duration = duration;
-        anim.container = spline;
+        anim.duration = durationHeavy;
+        anim.container = splineHeavy;
         anim.play(self);
         //particles.Play();
 
@@ -143,10 +149,11 @@ public class DashSpell : MonoBehaviour, IAbility
     {
         ready = false;
         CDleft = LightCD;
+        //Debug.Log("light cast dash");
 
-        rb.linearVelocity = Vector3.zero;
+        //rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity * (charge / maxCharge), ForceMode.Impulse);
+        rb.AddForce(appliedVeclocity*lightBoost, ForceMode.Impulse);
     }
 
 }
