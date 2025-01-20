@@ -33,7 +33,7 @@ public class aimDirector : MonoBehaviour
         else {
             ray = new Ray(cnm.position, cameraPoint.position - cnm.position);
         }
-        hit = Physics.Raycast(ray, out hitData, 1000f, layers);
+        hit = Physics.Raycast(ray, out hitData, 10000f, layers);
         if (hit) marker.transform.position = hitData.point;
         else {
             if (player.lockedOn)

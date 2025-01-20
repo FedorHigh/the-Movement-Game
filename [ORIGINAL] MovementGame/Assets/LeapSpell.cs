@@ -129,8 +129,8 @@ public class LeapSpell : MonoBehaviour, IAbility
     public void HeavyCast(KeyCode key)
     {
         
-        ready = false;
-        CDleft = HeavyCD;
+        //ready = false;
+        //CDleft = HeavyCD;
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
         //Debug.Log("RELEASED");
@@ -138,8 +138,7 @@ public class LeapSpell : MonoBehaviour, IAbility
         
         if (inHeavy) {
             charging = true;
-            //anim.duration = durationHeavy * 10;
-            anim.speedOverwrite = 0.1f;
+            anim.speedOverwrite = 0.2f;
             charge = minCharge;
 
             return;
@@ -174,6 +173,6 @@ public class LeapSpell : MonoBehaviour, IAbility
 
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+        rb.AddForce(appliedVeclocity*-1, ForceMode.Impulse);
     }
 }
