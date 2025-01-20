@@ -396,6 +396,7 @@
 "Assets/aimDirector.cs"
 "Assets/BetterController.cs"
 "Assets/DashSpell.cs"
+"Assets/FillText.cs"
 "Assets/HELLO GITHUB.cs"
 "Assets/Interfaces.cs"
 "Assets/JumpSpell.cs"
