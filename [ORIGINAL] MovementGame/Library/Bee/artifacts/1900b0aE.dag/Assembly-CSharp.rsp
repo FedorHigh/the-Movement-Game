@@ -405,6 +405,7 @@
 "Assets/PlayerController.cs"
 "Assets/SmoothAnimate.cs"
 "Assets/SplineManager.cs"
+"Assets/UI_Script.cs"
 -langversion:9.0
 /deterministic
 /optimize+

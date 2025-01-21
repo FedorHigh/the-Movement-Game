@@ -5,6 +5,7 @@ using Cinemachine;
 using System.Threading;
 using UnityEngine.Splines;
 using Interfaces;
+using UnityEngine.UIElements;
 
 public class BetterController : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class BetterController : MonoBehaviour
 
     public SplineAnimate anim;
     public IAbility currentAbility;
+
+    public UIDocument doc;
 
     Vector3 rtcrotat;
 

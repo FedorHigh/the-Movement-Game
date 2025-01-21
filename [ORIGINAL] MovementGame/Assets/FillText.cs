@@ -13,6 +13,6 @@ public class FillText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curAbilityText.text = abilityInputManager.abilities[abilityInputManager.currentAbility].GetID().ToString();
+        curAbilityText.text = abilityInputManager.currentAbility.GetID().ToString();
     }
 }

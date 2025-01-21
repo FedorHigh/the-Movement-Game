@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Splines;
+using UnityEngine.UIElements;
 
 namespace Interfaces
 {
     public interface IAbility
     {
+        public float GetCDleft();
+        public float GetCDset();
         bool IsReady();
+        public VisualElement GetIcon();
         int GetID();
         void LightCast(KeyCode key);
         void Cast(KeyCode key);

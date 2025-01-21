@@ -10,7 +10,8 @@ public class AbilityInputManager : MonoBehaviour
     public KeyCode jumpKey, lightKey, heavyKey, altKey, nextKey, prevKey, castKey;
     public Object[] tmp;
     public IAbility[] abilities;
-    public int currentAbility;
+    public int abilityNum;
+    public IAbility currentAbility;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +21,7 @@ public class AbilityInputManager : MonoBehaviour
             abilities[i] = (IAbility) tmp[i];
         }
         //Debug.Log(abilities.Length);
+        currentAbility = abilities[abilityNum];
     }
 
     // Update is called once per frame
@@ -37,25 +39,29 @@ public class AbilityInputManager : MonoBehaviour
 
         if (Input.GetKeyDown(nextKey))
         {
-            currentAbility = (currentAbility + 1) % abilities.Length;
+            abilityNum = (abilityNum + 1) % abilities.Length;
+
+            currentAbility = abilities[abilityNum];
         }
         if (Input.GetKeyDown(prevKey))
         {
-            if(currentAbility == 0) currentAbility = abilities.Length - 1;
-            else currentAbility = currentAbility-1;
+            if(abilityNum == 0) abilityNum = abilities.Length - 1;
+            else abilityNum = abilityNum - 1;
+
+            currentAbility = abilities[abilityNum];
         }
 
-        if (Input.GetKeyDown(castKey) & abilities[currentAbility].IsReady()) {
+        if (Input.GetKeyDown(castKey) & currentAbility.IsReady()) {
             //Debug.Log(abilities[0].ToString());
             //Debug.Log(abilities[1].ToString());
             if (light_) {
-                abilities[currentAbility].LightCast(castKey);
+                currentAbility.LightCast(castKey);
             }
             else if (heavy)
             {
-                abilities[currentAbility].HeavyCast(castKey);
+                currentAbility.HeavyCast(castKey);
             }
-            else abilities[currentAbility].Cast(castKey);
+            else currentAbility.Cast(castKey);
         }
     }
 

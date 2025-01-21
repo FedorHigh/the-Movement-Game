@@ -3,6 +3,7 @@ using Interfaces;
 using UnityEngine.Splines;
 using UnityEngine.Animations;
 using Cinemachine;
+using UnityEngine.UIElements;
 
 
 public class LeapSpell : MonoBehaviour, IAbility
@@ -21,7 +22,7 @@ public class LeapSpell : MonoBehaviour, IAbility
     public bool active;
     public int ID;
     public float BaseCD, LightCD, HeavyCD;
-    public float CDleft;
+    public float CDleft, CDset;
     public bool ready, charging, inHeavy, charged;
     public float charge, minCharge, maxCharge, chargeBoost;
     public KeyCode curKey;
@@ -30,6 +31,9 @@ public class LeapSpell : MonoBehaviour, IAbility
 
     //public ParticleSystem particles;
     public TrailRenderer trail, trailHeavy;
+
+    public VisualElement icon;
+    public VisualElement GetIcon() { return icon; }
 
     public void ReleaseCharge() {
         anim.speedOverwrite = chargeBoost;
@@ -69,6 +73,7 @@ public class LeapSpell : MonoBehaviour, IAbility
     }
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<SmoothAnimate>();
         player = GetComponent<BetterController>();
@@ -78,7 +83,10 @@ public class LeapSpell : MonoBehaviour, IAbility
         constraintHeavy = splineObjHeavy.GetComponent<ParentConstraint>();
         self = GetComponent<LeapSpell>();
         trail.time = duration;
-    
+        CDset = 1;
+        CDleft = 0;
+        icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
+
     }
     public int GetID() { 
         return ID;
@@ -108,6 +116,7 @@ public class LeapSpell : MonoBehaviour, IAbility
 
         ready = false;
         CDleft = BaseCD;
+        CDset = BaseCD;
         curKey = key;
 
         player.dashing = true;
@@ -169,10 +178,21 @@ public class LeapSpell : MonoBehaviour, IAbility
     {
         if(player.dashing | inHeavy)
         CDleft = LightCD;
+        CDset = LightCD;
         ready = false;
 
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
         rb.AddForce(appliedVeclocity*-1, ForceMode.Impulse);
+    }
+
+    public float GetCDleft()
+    {
+        return CDleft;
+    }
+
+    public float GetCDset()
+    {
+        return CDset;
     }
 }

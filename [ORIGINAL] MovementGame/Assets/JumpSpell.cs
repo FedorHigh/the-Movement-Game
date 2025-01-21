@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 using UnityEngine.Animations;
 using Cinemachine;
 using System.Data.SqlTypes;
+using UnityEngine.UIElements;
 
 public class JumpSpell : MonoBehaviour, IAbility
 {
@@ -22,14 +23,15 @@ public class JumpSpell : MonoBehaviour, IAbility
     public int ID;
     public BezierKnot tmpknot;
     public float BaseCD, LightCD, HeavyCD;
-    public float CDleft;
+    public float CDleft, CDset;
     public bool ready;
 
     public KeyCode curKey;
     public float charge, minCharge, maxCharge;
     //public ParticleSystem particles;
+    public VisualElement icon;
+    public VisualElement GetIcon() { return icon; }
 
-   
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +40,7 @@ public class JumpSpell : MonoBehaviour, IAbility
         spline = splineObj.GetComponent<SplineContainer>();
         constraint = splineObj.GetComponent<ParentConstraint>();
         self = GetComponent<JumpSpell>();
+        icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
 
     }
     void Update() {
@@ -66,6 +69,7 @@ public class JumpSpell : MonoBehaviour, IAbility
     public void ReleaseCharge() {
         ready = false;
         CDleft = HeavyCD;
+        CDset = CDleft;
 
         if(player.currentAbility!=null) player.currentAbility.Reset();
         Debug.Log("RELEASED");
@@ -101,6 +105,7 @@ public class JumpSpell : MonoBehaviour, IAbility
 
         ready = false;
         CDleft = BaseCD;
+        CDset = CDleft;
 
         player.dashing = true;
         constraint.enabled = false;
@@ -124,6 +129,7 @@ public class JumpSpell : MonoBehaviour, IAbility
     {
         ready = false;
         CDleft = maxCharge;
+        CDset = CDleft;
 
         curKey = key;
         charging = true;
@@ -137,6 +143,7 @@ public class JumpSpell : MonoBehaviour, IAbility
 
         ready = false;
         CDleft = LightCD;
+        CDset = CDleft;
 
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
@@ -145,4 +152,14 @@ public class JumpSpell : MonoBehaviour, IAbility
 
     public int GetID() { return ID; }
     public bool IsReady() { return ready; }
+
+    public float GetCDleft()
+    {
+        return CDleft;
+    }
+
+    public float GetCDset()
+    {
+        return CDset;
+    }
 }
