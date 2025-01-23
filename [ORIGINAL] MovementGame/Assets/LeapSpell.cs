@@ -85,7 +85,7 @@ public class LeapSpell : MonoBehaviour, IAbility
         trail.time = duration;
         CDset = 1;
         CDleft = 0;
-        icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
+        //icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
 
     }
     public int GetID() { 

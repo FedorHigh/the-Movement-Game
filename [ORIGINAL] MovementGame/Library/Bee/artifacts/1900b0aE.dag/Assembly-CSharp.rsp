@@ -394,6 +394,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.31f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/AbilityInputManager.cs"
 "Assets/aimDirector.cs"
+"Assets/AssociatedVarsSpline.cs"
 "Assets/BetterController.cs"
 "Assets/DashSpell.cs"
 "Assets/FillText.cs"

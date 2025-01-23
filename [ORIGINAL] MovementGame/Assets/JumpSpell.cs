@@ -6,160 +6,53 @@ using Cinemachine;
 using System.Data.SqlTypes;
 using UnityEngine.UIElements;
 
-public class JumpSpell : MonoBehaviour, IAbility
+public class JumpSpell : Ability, IAbility
 {
-    public GameObject splineObj;
-    public SplineContainer spline;
-    public ParentConstraint constraint;
-    public BetterController player;
-    public IAbility self;
-    public Vector3 addedVelocity;
-    public Vector3 savedVelocity;
-    public Vector3 appliedVeclocity;
-    public Rigidbody rb;
-    public SmoothAnimate anim;
-    public float duration, speed, defDist, addDist, chargeBoost;
-    public bool charging;
-    public int ID;
-    public BezierKnot tmpknot;
-    public float BaseCD, LightCD, HeavyCD;
-    public float CDleft, CDset;
-    public bool ready;
+    private BezierKnot tmpknot;
+    public float defDist, addDist;
+    public override void ReleaseCharge() {
 
-    public KeyCode curKey;
-    public float charge, minCharge, maxCharge;
-    //public ParticleSystem particles;
-    public VisualElement icon;
-    public VisualElement GetIcon() { return icon; }
+        DashSpline s = splines[0];
+        tmpknot = s.spline.Spline.ToArray()[1];
+        tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
+        splines[1].spline.Spline.SetKnot(1, tmpknot);
+        splines[1].addedVelocity *= (charge / maxCharge);
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        anim = GetComponent<SmoothAnimate>();
-        player = GetComponent<BetterController>();
-        spline = splineObj.GetComponent<SplineContainer>();
-        constraint = splineObj.GetComponent<ParentConstraint>();
-        self = GetComponent<JumpSpell>();
-        icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
+        //if (player.currentAbility != null) player.currentAbility.Reset();
 
-    }
-    void Update() {
-        if (!ready) { 
-            CDleft -= Time.deltaTime;
-            if (CDleft <= 0) {
-                CDleft = 0;
-                ready = true;
-            }
-        }
-        if (charging) {
-            if (!Input.GetKey(curKey)) {
-                if (charge < minCharge) charge = minCharge;
-                ReleaseCharge();
-                charging = false;
-            }
-
-            charge += Time.deltaTime;
-            if (charge >= maxCharge) {
-                charge = maxCharge;
-                ReleaseCharge();
-                charging = false;
-            }
-        }
-    }
-    public void ReleaseCharge() {
-        ready = false;
-        CDleft = HeavyCD;
-        CDset = CDleft;
-
-        if(player.currentAbility!=null) player.currentAbility.Reset();
-        Debug.Log("RELEASED");
-        //if (player.dashing) return;
-        player.dashing = true;
-        constraint.enabled = false;
-        player.currentAbility = self;
-
-        tmpknot = spline.Spline.ToArray()[1];
-        tmpknot.Position.y = defDist + (charge/maxCharge) * addDist;
-        spline.Spline.SetKnot(1, tmpknot);
-
-        anim.duration = duration;
-        anim.container = spline;
-        anim.play(self);
-        //particles.Play();
-
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity * (charge/maxCharge) * chargeBoost, ForceMode.Impulse);
+        Dash(curKey, HeavyCD, 1);
     }
    
-    public void Reset()
-    {
-        constraint.enabled = true;
-        player.dashing = false;
-        charging = false;
-        player.currentAbility = null;
-    }
     public void Cast(KeyCode key)
     {
         if (player.dashing | !player.grounded) return;
 
-        ready = false;
-        CDleft = BaseCD;
-        CDset = CDleft;
-
-        player.dashing = true;
-        constraint.enabled = false;
-        player.currentAbility = self;
-
-        tmpknot = spline.Spline.ToArray()[1];
-        tmpknot.Position.y = defDist;
-        spline.Spline.SetKnot(1, tmpknot);
-
-        anim.duration = duration;
-        anim.container = spline;
-        anim.play(self);
-        
-
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+        Dash(key, BaseCD, 0);
     }
 
     public void HeavyCast(KeyCode key)
     {
+        if (!player.grounded | player.dashing) return;
+        player.dashing = true;
         ready = false;
         CDleft = maxCharge;
         CDset = CDleft;
 
         curKey = key;
         charging = true;
-        //player.dashing = true;
-        charge = minCharge;
+        charge = 0;
     }
 
     public void LightCast(KeyCode key)
     {
         if (player.dashing) return;
-
         ready = false;
         CDleft = LightCD;
         CDset = CDleft;
 
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+        DashSpline s = splines[0];
+        appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
+        rb.AddForce(appliedVeclocity * lightBoost, ForceMode.Impulse);
     }
 
-    public int GetID() { return ID; }
-    public bool IsReady() { return ready; }
-
-    public float GetCDleft()
-    {
-        return CDleft;
-    }
-
-    public float GetCDset()
-    {
-        return CDset;
-    }
 }
