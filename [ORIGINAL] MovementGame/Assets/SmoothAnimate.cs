@@ -19,8 +19,8 @@ public class SmoothAnimate : MonoBehaviour
     {
         speedOverwrite = 1;
         caller = call;
-        Debug.Log("Cast:");
-        Debug.Log(caller.GetID());
+        //Debug.Log("Cast:");
+        //Debug.Log(caller.GetID());
         anim.Container = container;
         time = 0;
         playing = true;
@@ -31,7 +31,8 @@ public class SmoothAnimate : MonoBehaviour
     {
         time = 0;
         playing = false;
-        if (caller != null) caller.Reset();
+        //Debug.Log(caller.ToString());
+        if (caller != null) caller.Finish();
         else Debug.Log("NULL CALLER");
     }
     void Update()

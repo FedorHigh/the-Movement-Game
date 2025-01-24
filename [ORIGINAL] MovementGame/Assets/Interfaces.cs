@@ -16,6 +16,7 @@ namespace Interfaces
         void Cast(KeyCode key);
         void HeavyCast(KeyCode key);
         void Reset();
+        void Finish();
 
     }
 
@@ -45,7 +46,7 @@ namespace Interfaces
 
 
 
-    public class Ability : MonoBehaviour{
+    public class Ability : MonoBehaviour, IAbility{
         //declaring and returning vars
          public int ID;
         public VisualElement icon;
@@ -85,12 +86,12 @@ namespace Interfaces
 
 
         //setting and reseting vars
-        void Start()
+        public virtual void Start()
         {
             rb = GetComponent<Rigidbody>();
             anim = GetComponent<SmoothAnimate>();
-            player = GetComponent<BetterController>();     
-            self = GetComponent<DashSpell>();
+            player = GetComponent<BetterController>();
+            self = this;
             //icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
             splines = new DashSpline[splineObjs.Length];
             for(int i = 0;i<splines.Length;i++) {
@@ -99,17 +100,24 @@ namespace Interfaces
 
 
         }
-        public void Reset()
+        public virtual void Reset()
         {
+            //Debug.Log("RESET TRAIL " + curSpline.ToString());
             ResetVars();
         }
-        public void ResetVars()
+        public virtual void ResetVars()
         {
-            DashSpline s = splines[curSpline];
-            s.constraint.enabled = true;
+            //DashSpline s = splines[curSpline];
+            //s.constraint.enabled = true;
+            //Debug.Log(s.constraint.enabled.ToString());
             player.dashing = false;
             player.currentAbility = null;
-            s.trail.emitting = false;
+            //s.trail.emitting = false;
+            foreach(DashSpline s in splines){
+                s.constraint.enabled = true;
+                s.trail.emitting = false;
+            }
+
         }
 
 
@@ -117,12 +125,12 @@ namespace Interfaces
         public virtual void ReleaseCharge() {
             Debug.Log("not implemented");
         }
-        public void CancelCharge()
+        public virtual void CancelCharge()
         {
             charge = 0;
             charging = false;
         }
-        public void DoCooldowns() {
+        public virtual void DoCooldowns() {
             if (!ready)
             {
                 CDleft -= Time.deltaTime;
@@ -133,7 +141,7 @@ namespace Interfaces
                 }
             }
         }
-        public void DoCharging() {
+        public virtual void DoCharging() {
             if (charging)
             {
                 if (!Input.GetKey(curKey))
@@ -144,8 +152,8 @@ namespace Interfaces
                     }
                     else
                     {
-                        ReleaseCharge();
                         charging = false;
+                        ReleaseCharge();
                     }
                 }
 
@@ -158,14 +166,12 @@ namespace Interfaces
                 }
             }
         }
-        void Update()
+        public virtual void Update()
         {
             DoCharging();
             DoCooldowns();
         }
-
-
-        public void Dash(KeyCode key, float CD, int splineIndex) {
+        public virtual void Dash(KeyCode key, float CD, int splineIndex) {
             if (player.dashing) return;
 
             curSpline = splineIndex;
@@ -190,9 +196,23 @@ namespace Interfaces
             appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
             rb.AddForce(appliedVeclocity, ForceMode.Impulse);
         }
+        public virtual void Finish() {
+            Reset();
+        }
 
+        public virtual void LightCast(KeyCode key)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        
+        public virtual void Cast(KeyCode key)
+        {
+            throw new System.NotImplementedException();
+        }
 
+        public virtual void HeavyCast(KeyCode key)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

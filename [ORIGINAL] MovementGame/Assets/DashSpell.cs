@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 
 public class DashSpell : Ability, IAbility
 {
-    public void Cast(KeyCode key)
+    public override void Cast(KeyCode key)
     {
         Dash(key, BaseCD, 0);
     }
-    public void HeavyCast(KeyCode key)
+    public override void HeavyCast(KeyCode key)
     {
         ready = false;
         CDleft = HeavyCD;
@@ -27,7 +27,7 @@ public class DashSpell : Ability, IAbility
 
         Dash(curKey, HeavyCD, 1);
     }
-    public void LightCast(KeyCode key)
+    public override void LightCast(KeyCode key)
     {
         ready = false;
         CDleft = LightCD;

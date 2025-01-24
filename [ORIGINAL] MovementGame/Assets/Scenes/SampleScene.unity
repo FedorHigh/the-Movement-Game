@@ -589,6 +589,7 @@ MonoBehaviour:
   trail: {fileID: 1096835588}
   duration: 0.3
   AppliedVeclocity: {x: 0, y: -50, z: 50}
+  debug: 0
 --- !u!1 &139031245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,6 +1075,7 @@ MonoBehaviour:
   trail: {fileID: 1996191001}
   duration: 0.2
   AppliedVeclocity: {x: 0, y: 100, z: 0}
+  debug: 0
 --- !u!1 &385044736
 GameObject:
   m_ObjectHideFlags: 3
@@ -2045,6 +2047,7 @@ MonoBehaviour:
   trail: {fileID: 2008862245}
   duration: 0.2
   AppliedVeclocity: {x: 0, y: 0, z: 100}
+  debug: 0
 --- !u!1 &549743040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2499,6 +2502,7 @@ MonoBehaviour:
   trail: {fileID: 1996191001}
   duration: 0.2
   AppliedVeclocity: {x: 0, y: 200, z: 0}
+  debug: 0
 --- !u!1773428102 &591422513
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -3177,58 +3181,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b5528d1d0e25f4fa1085e91ba86d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineObj: {fileID: 39818439}
-  splineObjHeavy: {fileID: 1801408333}
-  spline: {fileID: 0}
-  splineHeavy: {fileID: 0}
-  constraint: {fileID: 0}
-  constraintHeavy: {fileID: 0}
+  ID: 2
+  splineObjs:
+  - {fileID: 39818439}
+  - {fileID: 1801408333}
+  BaseCD: 3
+  LightCD: 0.5
+  HeavyCD: 5
+  minCharge: 0
+  maxCharge: 1
+  chargeBoost: 2
+  lightBoost: 0
   player: {fileID: 0}
-  addedVelocity: {x: 0, y: -50, z: 50}
   savedVelocity: {x: 0, y: 0, z: 0}
   appliedVeclocity: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
-  duration: 0.3
-  speed: 80
-  durationHeavy: 2
   active: 0
-  ID: 0
-  BaseCD: 3
-  LightCD: 0.5
-  HeavyCD: 5
   CDleft: 0
   CDset: 0
+  charge: 0
   ready: 0
   charging: 0
-  inHeavy: 0
-  charged: 0
-  charge: 0
-  minCharge: 0
-  maxCharge: 1
-  chargeBoost: 5
   curKey: 0
-  knot:
-    Position:
-      x: 0
-      y: 0
-      z: 0
-    TangentIn:
-      x: 0
-      y: 0
-      z: 0
-    TangentOut:
-      x: 0
-      y: 0
-      z: 0
-    Rotation:
-      value:
-        x: 0
-        y: 0
-        z: 0
-        w: 1
-  trail: {fileID: 1096835588}
-  trailHeavy: {fileID: 565988473}
+  curSpline: 0
+  XTrail: {fileID: 565988473}
+  charged: 0
+  inHeavy: 0
 --- !u!114 &728889678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,6 +3473,7 @@ MonoBehaviour:
   trail: {fileID: 2008862245}
   duration: 0.1
   AppliedVeclocity: {x: 0, y: 0, z: 100}
+  debug: 0
 --- !u!1 &743655106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5436,6 +5416,7 @@ MonoBehaviour:
   trail: {fileID: 1096835588}
   duration: 2
   AppliedVeclocity: {x: 0, y: -50, z: 50}
+  debug: 0
 --- !u!1 &1806159803
 GameObject:
   m_ObjectHideFlags: 0
@@ -6341,7 +6322,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3

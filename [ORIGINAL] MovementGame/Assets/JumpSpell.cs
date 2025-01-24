@@ -11,26 +11,32 @@ public class JumpSpell : Ability, IAbility
     private BezierKnot tmpknot;
     public float defDist, addDist;
     public override void ReleaseCharge() {
-
-        DashSpline s = splines[0];
+        if (!player.grounded) {
+            //Invoke("ReleaseCharge", 0.1f);
+            return;
+        }
+        DashSpline s = splines[1];
         tmpknot = s.spline.Spline.ToArray()[1];
         tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
         splines[1].spline.Spline.SetKnot(1, tmpknot);
         splines[1].addedVelocity *= (charge / maxCharge);
+        splines[1].addedVelocity = s.addedVelocity * (charge / maxCharge);
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
 
         Dash(curKey, HeavyCD, 1);
+
+        splines[1].addedVelocity = s.addedVelocity;
     }
    
-    public void Cast(KeyCode key)
+    public override void Cast(KeyCode key)
     {
         if (player.dashing | !player.grounded) return;
 
         Dash(key, BaseCD, 0);
     }
 
-    public void HeavyCast(KeyCode key)
+    public override void HeavyCast(KeyCode key)
     {
         if (!player.grounded | player.dashing) return;
         player.dashing = true;
@@ -43,7 +49,7 @@ public class JumpSpell : Ability, IAbility
         charge = 0;
     }
 
-    public void LightCast(KeyCode key)
+    public override void LightCast(KeyCode key)
     {
         if (player.dashing) return;
         ready = false;

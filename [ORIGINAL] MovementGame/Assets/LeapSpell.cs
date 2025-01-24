@@ -6,193 +6,82 @@ using Cinemachine;
 using UnityEngine.UIElements;
 
 
-public class LeapSpell : MonoBehaviour, IAbility
+public class LeapSpell : Ability, IAbility
 {
-    public GameObject splineObj, splineObjHeavy;
-    public SplineContainer spline, splineHeavy;
-    public ParentConstraint constraint, constraintHeavy;
-    public BetterController player;
-    public IAbility self;
-    public Vector3 addedVelocity;
-    public Vector3 savedVelocity;
-    public Vector3 appliedVeclocity;
-    public Rigidbody rb;
-    public SmoothAnimate anim;
-    public float duration, speed, durationHeavy;
-    public bool active;
-    public int ID;
-    public float BaseCD, LightCD, HeavyCD;
-    public float CDleft, CDset;
-    public bool ready, charging, inHeavy, charged;
-    public float charge, minCharge, maxCharge, chargeBoost;
-    public KeyCode curKey;
-    public BezierKnot knot;
-    public bool IsReady() { return ready; }
-
-    //public ParticleSystem particles;
-    public TrailRenderer trail, trailHeavy;
-
-    public VisualElement icon;
-    public VisualElement GetIcon() { return icon; }
-
-    public void ReleaseCharge() {
+    public TrailRenderer XTrail;
+    public bool charged, inHeavy;
+    public override void ResetVars()
+    {
+        //Debug.Log("RESET LEAP");
+        base.ResetVars();
+        //Debug.Log(splines[0].constraint.enabled.ToString() + " but " + splineObjs[0].GetComponent<ParentConstraint>().enabled.ToString());
+        charged = false;
+        XTrail.emitting = false;
+        inHeavy = false;
+    }
+    public override void ReleaseCharge() {
+        if (charge < maxCharge) {
+            charging = true;
+            return;
+        }
         anim.speedOverwrite = chargeBoost;
-        trail.emitting = false;
-        trailHeavy.emitting = true;
+        splines[1].trail.emitting = false;
+        XTrail.emitting = true;
         charged = true;
-    }
-    void Update()
-    {
 
-        if (!ready)
-        {
-            CDleft -= Time.deltaTime;
-            if (CDleft <= 0)
-            {
-                CDleft = 0;
-                ready = true;
-            }
-        }
-        if (charging)
-        {
-            //if (!Input.GetKey(curKey))
-            //{
-                //if (charge < minCharge) charge = minCharge;
-                //ReleaseCharge();
-                //charging = false;
-            //}
-
-            charge += Time.deltaTime;
-            if (charge >= maxCharge)
-            {
-                charge = maxCharge;
-                ReleaseCharge();
-                charging = false;
-            }
-        }
+        DashSpline s = splines[1];
+        rb.linearVelocity = Vector3.zero;
+        appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
+        rb.AddForce(appliedVeclocity * (chargeBoost-1), ForceMode.Impulse);
     }
-    void Start()
+    public override void Start()
     {
-        
-        rb = GetComponent<Rigidbody>();
-        anim = GetComponent<SmoothAnimate>();
-        player = GetComponent<BetterController>();
-        spline = splineObj.GetComponent<SplineContainer>();
-        splineHeavy = splineObjHeavy.GetComponent<SplineContainer>();
-        constraint = splineObj.GetComponent<ParentConstraint>();
-        constraintHeavy = splineObjHeavy.GetComponent<ParentConstraint>();
-        self = GetComponent<LeapSpell>();
-        trail.time = duration;
-        CDset = 1;
-        CDleft = 0;
-        //icon = player.doc.rootVisualElement.Q<VisualElement>("cooldownBar");
+        base.Start();
+    }
 
-    }
-    public int GetID() { 
-        return ID;
-    }
-    public void Reset()
+    public override void Finish()
     {
+        //Debug.Log("FINISHED LEAP");
+        ResetVars();
         if (charged) {
             Debug.Log("BOOM");
         }
-        ResetVars();
     }
-    public void ResetVars()
+
+    
+
+    public override void Cast(KeyCode key)
     {
-        constraint.enabled = true;
-        constraintHeavy.enabled = true;
-        player.dashing = false;
-        player.currentAbility = null;
-        trail.emitting = false;
-        trailHeavy.emitting = false;
-        inHeavy = false;
-        charged = false;
-        anim.speedOverwrite = 1;
-    }
-    public void Cast(KeyCode key)
-    {
-        if (player.dashing | inHeavy) return;
 
-        ready = false;
-        CDleft = BaseCD;
-        CDset = BaseCD;
-        curKey = key;
-
-        player.dashing = true;
-        constraint.enabled = false;
-        player.currentAbility = self;
-        trail.emitting = true;
-
-        anim.duration = duration;
-        anim.container = spline;
-        anim.play(self);
-        //particles.Play();
-
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+        Dash(key, BaseCD, 0);
     }
     
 
-    public void HeavyCast(KeyCode key)
+    public override void HeavyCast(KeyCode key)
     {
-        
-        //ready = false;
-        //CDleft = HeavyCD;
-
-        //if (player.currentAbility != null) player.currentAbility.Reset();
-        //Debug.Log("RELEASED");
-
-        
-        if (inHeavy) {
+        if (inHeavy & !charged) {
             charging = true;
             anim.speedOverwrite = 0.2f;
-            charge = minCharge;
+            charge = 0;
 
             return;
         }
+
         if (player.dashing) return;
-        curKey = key;
         inHeavy = true;
-        trail.emitting = true;
-        player.dashing = true;
-        constraintHeavy.enabled = false;
-        player.currentAbility = self;
-
-        //tmpknot = spline.Spline.ToArray()[1];
-        //tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
-        //spline.Spline.SetKnot(1, tmpknot);
-
-        anim.duration = durationHeavy;
-        anim.container = splineHeavy;
-        anim.play(self);
-        //particles.Play();
-
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
-        rb.AddForce(appliedVeclocity * (charge / maxCharge) * chargeBoost, ForceMode.Impulse);
+        Dash(key, 0, 1);
     }
 
-    public void LightCast(KeyCode key)
+    public override void LightCast(KeyCode key)
     {
-        if(player.dashing | inHeavy)
-        CDleft = LightCD;
+        if (player.dashing | inHeavy)
+            CDleft = LightCD;
         CDset = LightCD;
         ready = false;
 
+        DashSpline s = splines[0];
         rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = splineObj.transform.right * addedVelocity.x + splineObj.transform.up * addedVelocity.y + splineObj.transform.forward * addedVelocity.z;
+        appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
         rb.AddForce(appliedVeclocity*-1, ForceMode.Impulse);
-    }
-
-    public float GetCDleft()
-    {
-        return CDleft;
-    }
-
-    public float GetCDset()
-    {
-        return CDset;
     }
 }
