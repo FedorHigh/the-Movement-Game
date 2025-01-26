@@ -59,6 +59,9 @@ namespace Interfaces
             ability = a;
             cast = c;
         }
+        public bool Equals(CastInfo other, bool loose = false) {
+            return (ability.GetID() == other.ability.GetID() & (loose | cast == other.cast));
+        }
     }
 
 
@@ -93,6 +96,7 @@ namespace Interfaces
         public KeyCode curKey;
         public DashSpline[] splines;
         public int curSpline;
+        public CastInfo[] combos;
 
 
         public bool IsReady() { return ready; }
@@ -254,7 +258,7 @@ namespace Interfaces
         }
         public virtual void ResolveQueue(CastInfo curAbility, int cast)
         {
-            //Debug.Log("rrr");
+            Debug.Log("resolved " + this.GetID().ToString());
             Dash(curKey, CD[cast], cast);
         }
     }

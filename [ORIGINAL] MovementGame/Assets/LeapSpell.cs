@@ -15,6 +15,11 @@ public class LeapSpell : Ability, IAbility
         //Debug.Log("RESET LEAP");
         base.ResetVars();
         //Debug.Log(splines[0].constraint.enabled.ToString() + " but " + splineObjs[0].GetComponent<ParentConstraint>().enabled.ToString());
+        if (charged | inHeavy) {
+            CDleft = CD[1];
+            CDset = CD[1];
+            ready = false;
+        }
         charged = false;
         XTrail.emitting = false;
         inHeavy = false;
@@ -52,7 +57,6 @@ public class LeapSpell : Ability, IAbility
 
     public override void Cast(KeyCode key)
     {
-
         Dash(key, CD[0], 0);
     }
     
@@ -67,14 +71,15 @@ public class LeapSpell : Ability, IAbility
             return;
         }
 
-        if (player.dashing) return;
+        if (player.dashing) QueueCast(1);
         inHeavy = true;
         Dash(key, 0, 1);
     }
 
     public override void LightCast(KeyCode key)
     {
-        if (player.dashing | inHeavy) return;
+        Debug.Log("pew");
+        if (player.dashing | inHeavy) QueueCast(1);
         CDleft = CD[2];
         CDset = CD[2];
         ready = false;
