@@ -17,6 +17,7 @@ namespace Interfaces
         void HeavyCast(KeyCode key);
         void Reset();
         void Finish();
+        public void ResolveQueue(CastInfo curAbility, int cast);
 
     }
 
@@ -49,7 +50,16 @@ namespace Interfaces
             
         
     }
-    
+
+    public class CastInfo { 
+        public IAbility ability;
+        public int cast;
+        public CastInfo(IAbility a, int c)
+        {
+            ability = a;
+            cast = c;
+        }
+    }
 
 
 
@@ -65,8 +75,8 @@ namespace Interfaces
         [Space(30)]
 
         [Header("Floats")]
-        public float BaseCD;
-        public float LightCD, HeavyCD;
+        public float[] CD;
+        //public float BaseCD, HeavyCD, LightCD;
         public float minCharge, maxCharge, chargeBoost, lightBoost;
         [Space(100)]
 
@@ -118,6 +128,7 @@ namespace Interfaces
             //s.constraint.enabled = true;
             //Debug.Log(s.constraint.enabled.ToString());
             player.dashing = false;
+            player.ResetQueue();
             player.currentAbility = null;
             //s.trail.emitting = false;
             foreach(DashSpline s in splines){
@@ -180,14 +191,16 @@ namespace Interfaces
         }
         public virtual void Dash(KeyCode key, float CD, int splineIndex) {
 
+            curKey = key;
 
-            if (player.dashing) return;
-
-            
+            if (player.dashing) {
+                QueueCast(splineIndex);
+                return;
+            }
 
             curSpline = splineIndex;
             DashSpline s = splines[splineIndex];
-            curKey = key;
+            
 
             ready = false;
             CDleft = CD;
@@ -195,7 +208,7 @@ namespace Interfaces
 
             player.dashing = true;
             s.constraint.enabled = false;
-            player.currentAbility = self;
+            player.currentAbility = new CastInfo(self, splineIndex);
             s.trail.time = s.duration;
             s.trail.emitting = true;
             if (s.prtMid != null) {
@@ -234,6 +247,15 @@ namespace Interfaces
         public virtual void HeavyCast(KeyCode key)
         {
             throw new System.NotImplementedException();
+        }
+
+        public virtual void QueueCast(int cast) { 
+            player.SetQueue(new CastInfo(this, cast));
+        }
+        public virtual void ResolveQueue(CastInfo curAbility, int cast)
+        {
+            //Debug.Log("rrr");
+            Dash(curKey, CD[cast], cast);
         }
     }
 }

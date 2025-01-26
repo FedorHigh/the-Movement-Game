@@ -53,7 +53,7 @@ public class LeapSpell : Ability, IAbility
     public override void Cast(KeyCode key)
     {
 
-        Dash(key, BaseCD, 0);
+        Dash(key, CD[0], 0);
     }
     
 
@@ -74,9 +74,9 @@ public class LeapSpell : Ability, IAbility
 
     public override void LightCast(KeyCode key)
     {
-        if (player.dashing | inHeavy)
-            CDleft = LightCD;
-        CDset = LightCD;
+        if (player.dashing | inHeavy) return;
+        CDleft = CD[2];
+        CDset = CD[2];
         ready = false;
 
         DashSpline s = splines[0];

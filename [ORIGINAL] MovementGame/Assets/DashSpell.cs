@@ -10,12 +10,12 @@ public class DashSpell : Ability, IAbility
 {
     public override void Cast(KeyCode key)
     {
-        Dash(key, BaseCD, 0);
+        Dash(key, CD[0], 0);
     }
     public override void HeavyCast(KeyCode key)
     {
         ready = false;
-        CDleft = HeavyCD;
+        CDleft = CD[1];
         CDset = CDleft;
         curKey = key;
         charge = minCharge;
@@ -23,14 +23,14 @@ public class DashSpell : Ability, IAbility
     }
     public override void ReleaseCharge() {
 
-        if (player.currentAbility != null) player.currentAbility.Reset();
+        if (player.currentAbility != null) player.currentAbility.ability.Reset();
 
-        Dash(curKey, HeavyCD, 1);
+        Dash(curKey, CD[1], 1);
     }
     public override void LightCast(KeyCode key)
     {
         ready = false;
-        CDleft = LightCD;
+        CDleft = CD[2];
         CDset = CDleft;
         //Debug.Log("light cast dash");
 

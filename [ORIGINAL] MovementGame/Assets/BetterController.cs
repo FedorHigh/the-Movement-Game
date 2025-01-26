@@ -26,18 +26,39 @@ public class BetterController : MonoBehaviour
     public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier;
 
     public float jumpHeight, jumpCooldown, airMultiplier;
-    public bool canJump, timedJump, dashing, lockedOn;
+    public bool canJump, timedJump, dashing, lockedOn, queued;
 
     public float groundGap;
     public float tmp, timer;
 
     public SplineAnimate anim;
-    public IAbility currentAbility;
+    public CastInfo currentAbility;
 
     public UIDocument doc;
 
     Vector3 rtcrotat;
+    public CastInfo queuedCast;
+    public float queueWindow;
+    public float queueTimer;
 
+
+
+    public void ResetQueue()
+    {
+        if(queued)queuedCast.ability.ResolveQueue(currentAbility, queuedCast.cast);
+      
+        
+        queued = false;
+        queuedCast = null;
+        Debug.Log("reset!");
+    }
+    public void SetQueue(CastInfo s)
+    {
+        queued = true;
+        queuedCast = s;
+        queueTimer = queueWindow;
+        Debug.Log("set!");
+    }
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -51,8 +72,19 @@ public class BetterController : MonoBehaviour
     void resetJump() {
         canJump = true;
     }
+    private void Update()
+    {
+        if (queued) {
+            queueTimer -= Time.deltaTime;
+            if (queueTimer <= 0) { 
+                queueTimer = 0;
+                ResetQueue();
+            }
+        }
+    }
     void FixedUpdate()
     {
+
         //Debug.Log(rb.linearVelocity);
         
 

@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 forward, right, lookDirection, move;
 
+
+
     private void Start()
     {
         speed = walk;

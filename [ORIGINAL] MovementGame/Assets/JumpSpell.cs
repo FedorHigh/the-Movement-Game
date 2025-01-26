@@ -24,7 +24,7 @@ public class JumpSpell : Ability, IAbility
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
 
-        Dash(curKey, HeavyCD, 1);
+        Dash(curKey, CD[1], 1);
 
         splines[1].addedVelocity = s.addedVelocity;
     }
@@ -33,7 +33,7 @@ public class JumpSpell : Ability, IAbility
     {
         if (player.dashing | !player.grounded) return;
 
-        Dash(key, BaseCD, 0);
+        Dash(key, CD[0], 0);
     }
 
     public override void HeavyCast(KeyCode key)
@@ -53,7 +53,7 @@ public class JumpSpell : Ability, IAbility
     {
         if (player.dashing) return;
         ready = false;
-        CDleft = LightCD;
+        CDleft = CD[2];
         CDset = CDleft;
 
         DashSpline s = splines[0];
