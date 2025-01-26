@@ -28,16 +28,23 @@ namespace Interfaces
         public ParentConstraint constraint;
         public float duration;
         public TrailRenderer trail;
+        public ParticleHandle prtStart, prtEnd, prtMid;
         public Vector3 addedVelocity;
 
         public DashSpline(GameObject s)
         {
             splineObj = s;
+            AssociatedVarsSpline ass = s.GetComponent<AssociatedVarsSpline>();
             spline = s.GetComponent<SplineContainer>();
             constraint = s.GetComponent<ParentConstraint>();
-            duration = s.GetComponent<AssociatedVarsSpline>().duration;
-            trail = s.GetComponent<AssociatedVarsSpline>().trail;
-            addedVelocity = s.GetComponent<AssociatedVarsSpline>().AppliedVeclocity;
+            duration = ass.duration;
+            trail = ass.trail;
+            addedVelocity = ass.AppliedVeclocity;
+            prtStart = ass.prtStart;
+            prtEnd = ass.prtEnd;
+            prtMid = ass.prtMid;
+
+            
         }
             
         
@@ -172,7 +179,11 @@ namespace Interfaces
             DoCooldowns();
         }
         public virtual void Dash(KeyCode key, float CD, int splineIndex) {
+
+
             if (player.dashing) return;
+
+            
 
             curSpline = splineIndex;
             DashSpline s = splines[splineIndex];
@@ -187,6 +198,14 @@ namespace Interfaces
             player.currentAbility = self;
             s.trail.time = s.duration;
             s.trail.emitting = true;
+            if (s.prtMid != null) {
+                s.prtMid.Play();
+            }
+
+            if (s.prtStart != null)
+            {
+                s.prtStart.Play();
+            }
 
             anim.duration = s.duration;
             anim.container = s.spline;
@@ -197,6 +216,8 @@ namespace Interfaces
             rb.AddForce(appliedVeclocity, ForceMode.Impulse);
         }
         public virtual void Finish() {
+            DashSpline s = splines[curSpline];
+            if (s.prtEnd != null) s.prtEnd.Play();
             Reset();
         }
 

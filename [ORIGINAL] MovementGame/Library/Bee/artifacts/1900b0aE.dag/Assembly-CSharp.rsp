@@ -403,6 +403,7 @@
 "Assets/JumpSpell.cs"
 "Assets/LeapSpell.cs"
 "Assets/LockOnManager.cs"
+"Assets/particleHandle.cs"
 "Assets/PlayerController.cs"
 "Assets/SmoothAnimate.cs"
 "Assets/SplineManager.cs"

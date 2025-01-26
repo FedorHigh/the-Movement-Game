@@ -12,9 +12,16 @@ public class AbilityInputManager : MonoBehaviour
     public IAbility[] abilities;
     public int abilityNum;
     public IAbility currentAbility;
+    public string queuedAbility;
+    public bool queued, r = false;
+    public float queueWindow = 1f;
+    public BetterController player;
+    public 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GetComponent<BetterController>();
         //abilities.Length = tmp.Length;
         abilities = new IAbility[tmp.Length];
         for (int i = 0; i < tmp.Length; i++) {
@@ -23,10 +30,24 @@ public class AbilityInputManager : MonoBehaviour
         //Debug.Log(abilities.Length);
         currentAbility = abilities[abilityNum];
     }
+    public void ResetQueue()
+    {
+        queued = false;
+        queuedAbility = null;
+    }
+    public void SetQueue(string s) {
+        queued = true;
+        queuedAbility = s;
+        Invoke("ResetQueue", queueWindow);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (queued) { 
+            
+        }
+
         jumpD = Input.GetKeyDown(jumpKey);
         lightD = Input.GetKeyDown(lightKey);
         heavyD = Input.GetKeyDown(heavyKey);
