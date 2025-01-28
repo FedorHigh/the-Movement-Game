@@ -55,13 +55,13 @@ public class LeapSpell : Ability, IAbility
 
     
 
-    public override void Cast(KeyCode key)
+    public override void Cast()
     {
-        Dash(key, CD[0], 0);
+        Dash(CD[0], 0);
     }
     
 
-    public override void HeavyCast(KeyCode key)
+    public override void HeavyCast()
     {
         if (inHeavy & !charged) {
             charging = true;
@@ -73,12 +73,12 @@ public class LeapSpell : Ability, IAbility
 
         if (player.dashing) QueueCast(1);
         inHeavy = true;
-        Dash(key, 0, 1);
+        Dash(0, 1);
     }
 
-    public override void LightCast(KeyCode key)
+    public override void LightCast()
     {
-        Debug.Log("pew");
+        //Debug.Log("pew");
         if (player.dashing | inHeavy) QueueCast(1);
         CDleft = CD[2];
         CDset = CD[2];

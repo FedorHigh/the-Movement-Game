@@ -8,18 +8,21 @@ using UnityEngine.UIElements;
 
 public class DashSpell : Ability, IAbility
 {
-    public override void Cast(KeyCode key)
+    public override void Cast()
     {
-        Dash(key, CD[0], 0);
+        Dash(CD[0], 0);
     }
-    public override void HeavyCast(KeyCode key)
+    public override void HeavyCast()
     {
-        
+        if (player.dashing)
+        {
+            QueueCast(1);
+            return;
+        }
         //player.dashing = true;
         ready = false;
         CDleft = CD[1];
         CDset = CDleft;
-        curKey = key;
         charge = minCharge;
         charging = true;
     }
@@ -27,23 +30,19 @@ public class DashSpell : Ability, IAbility
 
         player.queued = false;
         player.queuedCast = null;
-        if (player.currentAbility != null) player.currentAbility.ability.Reset();
+        if (player.currentAbility != null) player.abilities[player.currentAbility.ID].Reset();
 
-        Dash(curKey, CD[1], 1);
+        Dash(CD[1], 1);
     }
-    public override void LightCast(KeyCode key)
+    public override void LightCast()
     {
-        if (player.currentAbility != null) player.currentAbility.ability.Reset();
+        if (player.currentAbility != null)
+        {
+            //Debug.Log("RESET " + player.currentAbility.ID.ToString());
+            player.abilities[player.currentAbility.ID].Reset();
+            
+        }
 
-        ready = false;
-        CDleft = CD[2];
-        CDset = CDleft;
-        //Debug.Log("light cast dash");
-        
-        //rb.linearVelocity = Vector3.zero;
-        DashSpline s = splines[0];
-        rb.linearVelocity = Vector3.zero;
-        appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
-        rb.AddForce(appliedVeclocity*lightBoost, ForceMode.Impulse);
+        Dash(CD[2], 2);
     }
 }

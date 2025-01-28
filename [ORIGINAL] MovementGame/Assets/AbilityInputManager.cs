@@ -63,16 +63,16 @@ public class AbilityInputManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(castKey) & currentAbility.IsReady()) {
-            
+            currentAbility.SetKey(castKey);
 
             if (light_) {
-                currentAbility.LightCast(castKey);
+                currentAbility.LightCast();
             }
             else if (heavy)
             {
-                currentAbility.HeavyCast(castKey);
+                currentAbility.HeavyCast();
             }
-            else currentAbility.Cast(castKey);
+            else currentAbility.Cast();
         }
     }
 

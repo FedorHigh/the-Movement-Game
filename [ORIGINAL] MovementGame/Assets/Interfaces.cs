@@ -7,14 +7,15 @@ namespace Interfaces
 {
     public interface IAbility
     {
+        public void SetKey(KeyCode key);
         public float GetCDleft();
         public float GetCDset();
         bool IsReady();
         public VisualElement GetIcon();
         int GetID();
-        void LightCast(KeyCode key);
-        void Cast(KeyCode key);
-        void HeavyCast(KeyCode key);
+        void LightCast();
+        void Cast();
+        void HeavyCast();
         void Reset();
         void Finish();
         public void ResolveQueue(CastInfo curAbility, int cast);
@@ -52,15 +53,15 @@ namespace Interfaces
     }
 
     public class CastInfo { 
-        public IAbility ability;
+        public int ID;
         public int cast;
-        public CastInfo(IAbility a, int c)
+        public CastInfo(int a, int c)
         {
-            ability = a;
+            ID = a;
             cast = c;
         }
         public bool Equals(CastInfo other, bool loose = false) {
-            return (ability.GetID() == other.ability.GetID() & (loose | cast == other.cast));
+            return (ID == other.ID & (loose | cast == other.cast));
         }
     }
 
@@ -193,9 +194,9 @@ namespace Interfaces
             DoCharging();
             DoCooldowns();
         }
-        public virtual void Dash(KeyCode key, float CD, int splineIndex) {
+        public virtual void Dash(float CD, int splineIndex) {
 
-            curKey = key;
+            
 
             if (player.dashing) {
                 QueueCast(splineIndex);
@@ -212,7 +213,7 @@ namespace Interfaces
 
             player.dashing = true;
             s.constraint.enabled = false;
-            player.currentAbility = new CastInfo(self, splineIndex);
+            player.currentAbility = new CastInfo(ID, splineIndex);
             s.trail.time = s.duration;
             s.trail.emitting = true;
             if (s.prtMid != null) {
@@ -238,28 +239,36 @@ namespace Interfaces
             Reset();
         }
 
-        public virtual void LightCast(KeyCode key)
+        public virtual void LightCast()
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual void Cast(KeyCode key)
+        public virtual void Cast()
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual void HeavyCast(KeyCode key)
+        public virtual void HeavyCast()
         {
             throw new System.NotImplementedException();
         }
 
         public virtual void QueueCast(int cast) { 
-            player.SetQueue(new CastInfo(this, cast));
+            player.SetQueue(new CastInfo(ID, cast));
         }
         public virtual void ResolveQueue(CastInfo curAbility, int cast)
         {
-            Debug.Log("resolved " + this.GetID().ToString());
-            Dash(curKey, CD[cast], cast);
+            //Debug.Log("resolved " + this.GetID().ToString());
+            if (cast == 0) Cast();
+            else if (cast == 1) HeavyCast();
+            else LightCast();
+            //Dash(curKey, CD[cast], cast);
+        }
+
+        void IAbility.SetKey(KeyCode key)
+        {
+            curKey = key;
         }
     }
 }

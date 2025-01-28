@@ -41,23 +41,24 @@ public class BetterController : MonoBehaviour
     public float queueWindow;
     public float queueTimer;
 
+    public Ability[] abilities;
 
 
     public void ResetQueue()
     {
-        if(queued)queuedCast.ability.ResolveQueue(currentAbility, queuedCast.cast);
+        if(queued)abilities[queuedCast.ID].ResolveQueue(currentAbility, queuedCast.cast);
       
         
         queued = false;
         queuedCast = null;
-        Debug.Log("reset!");
+        //Debug.Log("reset!");
     }
     public void SetQueue(CastInfo s)
     {
         queued = true;
         queuedCast = s;
         queueTimer = queueWindow;
-        Debug.Log("set!");
+        //Debug.Log("set!");
     }
     void Start()
     {

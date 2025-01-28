@@ -10,11 +10,15 @@ public class JumpSpell : Ability, IAbility
 {
     private BezierKnot tmpknot;
     public float defDist, addDist;
-
+    public override void ResetVars()
+    {
+        base.ResetVars();
+        //Debug.Log("reset jump!");
+    }
     public override void Start()
     {
         base.Start();
-        combos = new CastInfo[1] { new CastInfo(GetComponent<LeapSpell>(), 0) };
+        combos = new CastInfo[1] { new CastInfo(2, 0) };
     }
 
     public override void ResolveQueue(CastInfo curAbility, int cast)
@@ -24,17 +28,20 @@ public class JumpSpell : Ability, IAbility
             if (curAbility.Equals(combos[0]))
             {
                 Debug.Log("Combo works!");
-                Dash(curKey, CD[3], 2);
+                Dash(CD[3], 2);
             }
-            else Dash(curKey, CD[0], 0);
+            else Dash(CD[0], 0);
         }
-        else if (cast == 2) LightCast(curKey);
+        else if (cast == 2) LightCast();
+        else HeavyCast();
         
     }
 
     public override void ReleaseCharge() {
+        //Debug.Log("releasing jump!");
         if (!player.grounded) {
-            //Invoke("ReleaseCharge", 0.1f);
+            Invoke("ReleaseCharge", 0.1f);
+            //Debug.Log("delayed");
             return;
         }
         DashSpline s = splines[1];
@@ -45,33 +52,31 @@ public class JumpSpell : Ability, IAbility
         splines[1].addedVelocity = s.addedVelocity * (charge / maxCharge);
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
-
-        Dash(curKey, CD[1], 1);
+        player.dashing = false;
+        Dash(CD[1], 1);
 
         splines[1].addedVelocity = s.addedVelocity;
     }
    
-    public override void Cast(KeyCode key)
+    public override void Cast()
     {
         if (player.dashing | !player.grounded) QueueCast(0);
 
-        Dash(key, CD[0], 0);
+        Dash(CD[0], 0);
     }
 
-    public override void HeavyCast(KeyCode key)
+    public override void HeavyCast()
     {
+        if (player.dashing) QueueCast(1);
         if (!player.grounded | player.dashing) return;
+        Debug.Log("started charging jump");
         player.dashing = true;
         ready = false;
-        CDleft = maxCharge;
-        CDset = CDleft;
-
-        curKey = key;
         charging = true;
         charge = 0;
     }
 
-    public override void LightCast(KeyCode key)
+    public override void LightCast()
     {
         if (player.dashing) QueueCast(2);
         ready = false;
