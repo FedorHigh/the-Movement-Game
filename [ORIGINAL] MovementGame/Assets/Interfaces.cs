@@ -271,4 +271,45 @@ namespace Interfaces
             curKey = key;
         }
     }
+
+    public class Entity : MonoBehaviour{
+        public float maxHp, moveSpeed;
+        public float hp;
+        public bool followPlayer, lookAtPlayer;
+        public Rigidbody rb;
+        public GameObject playerObj, head;
+        public Vector3 move;
+        //public Bet playerHp;
+        public virtual void Start() {
+            rb = GetComponent<Rigidbody>();
+            
+        }
+
+        public virtual void DoFollowPlayer() { 
+            move = playerObj.transform.position - transform.position;
+            move.y = 0;
+            rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        }
+        public virtual void DoLookAtPlayer() {
+            if (head != null) head.transform.LookAt(playerObj.transform);
+            Vector3 tmp = playerObj.transform.position;
+            tmp.y = transform.position.y;
+            transform.LookAt(tmp);
+        }
+        public virtual void Update() {
+            if (followPlayer) DoFollowPlayer();
+            if (lookAtPlayer) DoLookAtPlayer();
+        }
+        public virtual void Damage(float damage) {
+            hp -= damage;
+            CheckIsAlive();
+        }
+        public virtual void OnDeath() {
+            Destroy(gameObject);
+        }
+        public virtual void CheckIsAlive() {
+            if (hp <= 0) OnDeath();
+        }
+
+    }
 }

@@ -405,6 +405,8 @@
 "Assets/LockOnManager.cs"
 "Assets/particleHandle.cs"
 "Assets/PlayerController.cs"
+"Assets/PlayerHpManager.cs"
+"Assets/SlasherEnemy.cs"
 "Assets/SmoothAnimate.cs"
 "Assets/SplineManager.cs"
 "Assets/UI_Script.cs"
