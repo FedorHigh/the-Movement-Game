@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Splines;
@@ -279,12 +280,21 @@ namespace Interfaces
         public Rigidbody rb;
         public GameObject playerObj, head;
         public Vector3 move;
+        public Dictionary<GameObject, float> resistances;
         //public Bet playerHp;
+        float tmp;
         public virtual void Start() {
             rb = GetComponent<Rigidbody>();
-            
+            resistances = new Dictionary<GameObject, float>();
         }
-
+        public virtual void UpdResistances() {
+            //Debug.Log(resistances.ToString());
+            foreach(GameObject a in resistances.Keys) {
+                //Debug.Log(a.name);
+                resistances[a] -= Time.deltaTime;
+                if (resistances[a] <= 0)resistances.Remove(a);
+            }
+        }
         public virtual void DoFollowPlayer() { 
             move = playerObj.transform.position - transform.position;
             move.y = 0;
@@ -299,6 +309,7 @@ namespace Interfaces
         public virtual void Update() {
             if (followPlayer) DoFollowPlayer();
             if (lookAtPlayer) DoLookAtPlayer();
+            UpdResistances();
         }
         public virtual void Damage(float damage) {
             hp -= damage;
@@ -309,6 +320,14 @@ namespace Interfaces
         }
         public virtual void CheckIsAlive() {
             if (hp <= 0) OnDeath();
+        }
+        public virtual void OnTriggerStay(Collider other) {
+            if (other.gameObject.CompareTag("HurtEntity")) {
+                if (resistances.TryGetValue(other.gameObject, out tmp)) return;
+                damager dmg = other.gameObject.GetComponent<damager>();
+                Damage(dmg.dmg);
+                resistances.Add(other.gameObject, dmg.cooldown);
+            }
         }
 
     }

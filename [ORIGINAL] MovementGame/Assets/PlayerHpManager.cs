@@ -19,9 +19,10 @@ public class PlayerHpManager : MonoBehaviour
     public void CheckIsAlive() {
         if (hp <= 0) OnDeath();
     }
-    public void Damage(float damage) {
+    public void Damage(float damage, float cooldown) {
+        cooldown = cooldown*invincibilityTime;
         if (invincible) return;
-        invTimeLeft = invincibilityTime;
+        invTimeLeft = cooldown;
         invincible = true;
         
         hp -= damage;
@@ -31,7 +32,8 @@ public class PlayerHpManager : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("HurtPlayer")) {
-            Damage(10);
+            damager dmg = other.gameObject.GetComponent<damager>();
+            Damage(dmg.dmg, dmg.cooldown);
         }
     }
 }

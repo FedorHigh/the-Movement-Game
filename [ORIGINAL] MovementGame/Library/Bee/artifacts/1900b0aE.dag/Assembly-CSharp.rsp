@@ -396,6 +396,7 @@
 "Assets/aimDirector.cs"
 "Assets/AssociatedVarsSpline.cs"
 "Assets/BetterController.cs"
+"Assets/damager.cs"
 "Assets/DashSpell.cs"
 "Assets/FillText.cs"
 "Assets/HELLO GITHUB.cs"
