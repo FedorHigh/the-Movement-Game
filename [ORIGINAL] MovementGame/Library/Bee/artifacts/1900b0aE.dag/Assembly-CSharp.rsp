@@ -395,6 +395,7 @@
 "Assets/AbilityInputManager.cs"
 "Assets/aimDirector.cs"
 "Assets/AssociatedVarsSpline.cs"
+"Assets/AttackBox.cs"
 "Assets/BetterController.cs"
 "Assets/damager.cs"
 "Assets/DashSpell.cs"

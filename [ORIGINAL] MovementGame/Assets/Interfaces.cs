@@ -23,7 +23,7 @@ namespace Interfaces
 
     }
 
-
+    
 
     public class DashSpline {
         public GameObject splineObj;
@@ -77,6 +77,7 @@ namespace Interfaces
 
         [Header("Spline settings")]
         public GameObject[] splineObjs;
+        public GameObject[] attackBoxes;
         [Space(30)]
 
         [Header("Floats")]
@@ -99,6 +100,7 @@ namespace Interfaces
         public DashSpline[] splines;
         public int curSpline;
         public CastInfo[] combos;
+        
 
 
         public bool IsReady() { return ready; }
@@ -270,6 +272,15 @@ namespace Interfaces
         void IAbility.SetKey(KeyCode key)
         {
             curKey = key;
+        }
+
+
+
+        public virtual void doAttack(int id, GameObject target, bool follow = false) {
+            GameObject box = Instantiate(attackBoxes[id], target.transform);
+            box.transform.position = target.transform.position;
+            box.transform.rotation = target.transform.rotation;
+            Debug.Log("did attack");
         }
     }
 

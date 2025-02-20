@@ -47,10 +47,12 @@ public class LeapSpell : Ability, IAbility
     public override void Finish()
     {
         //Debug.Log("FINISHED LEAP");
-        ResetVars();
+        
         if (charged) {
             Debug.Log("BOOM");
+            doAttack(1, gameObject);
         }
+        ResetVars();
     }
 
     
@@ -58,6 +60,7 @@ public class LeapSpell : Ability, IAbility
     public override void Cast()
     {
         Dash(CD[0], 0);
+        doAttack(0, gameObject);
     }
     
 
