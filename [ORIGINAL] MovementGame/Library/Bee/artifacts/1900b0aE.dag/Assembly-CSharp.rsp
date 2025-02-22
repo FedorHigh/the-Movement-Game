@@ -397,6 +397,7 @@
 "Assets/AssociatedVarsSpline.cs"
 "Assets/AttackBox.cs"
 "Assets/BetterController.cs"
+"Assets/ConnectEntities.cs"
 "Assets/damager.cs"
 "Assets/DashSpell.cs"
 "Assets/FillText.cs"
@@ -409,8 +410,11 @@
 "Assets/PlayerController.cs"
 "Assets/PlayerHpManager.cs"
 "Assets/SlasherEnemy.cs"
+"Assets/SlashSpell.cs"
 "Assets/SmoothAnimate.cs"
+"Assets/SplineConnector.cs"
 "Assets/SplineManager.cs"
+"Assets/StretchConnector.cs"
 "Assets/UI_Script.cs"
 -langversion:9.0
 /deterministic

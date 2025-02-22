@@ -5,8 +5,8 @@ public class AttackBox : MonoBehaviour
 {
     public float duration, finDuration;
     damager damager;
-    ParentConstraint constraint;
-    public GameObject target;
+    public bool deleteOnTimeout;
+    public string storedTag;
 
     //public AttackBox(float d, GameObject t) {
     //    duration = d;
@@ -14,7 +14,7 @@ public class AttackBox : MonoBehaviour
     //    damager = b.GetComponent<damager>();
     //    constraint = b.GetComponent<ParentConstraint>();
     //}
-    public void Start()
+    public void OnEnable()
     {
         Debug.Log("spawned");
         damager = GetComponent<damager>();
@@ -24,15 +24,25 @@ public class AttackBox : MonoBehaviour
         Invoke("despawn", finDuration);
 
     }
+    public void Start()
+    {
+        //OnEnable();
+    }
     public void endAttack()
     {
         damager.enabled = false;
+        storedTag = tag;
         tag = "Untagged";
     }
     public void despawn()
     {
         Debug.Log("despawned");
-        Destroy(gameObject);
+        if (deleteOnTimeout) Destroy(gameObject);
+        else {
+            damager.enabled = true;
+            tag = storedTag;
+            gameObject.SetActive(false);
+        }
     }
 
 }
