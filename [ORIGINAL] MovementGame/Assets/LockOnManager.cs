@@ -17,7 +17,15 @@ public class LockOnManager : MonoBehaviour
     public string savedYaxis;
 
     ConstraintSource tmpsource;
-    void LockOn() {
+    public void ResetLockOn()
+    {
+        target = null;
+        player.lockedOn = false;
+        protector.SetActive(false);
+        lookaround.Priority = 10;
+        locked.Priority = 1;
+    }
+    void TryLockOn() {
         //target = null;
         Collider[] targets = Physics.OverlapSphere(transform.position + rtc.transform.forward*radius, radius, layer);
         Vector3 dir;
@@ -35,11 +43,7 @@ public class LockOnManager : MonoBehaviour
 
 
         if (tmptrg == target | tmptrg == null){
-            target = null;
-            player.lockedOn = false;
-            protector.SetActive(false);
-            lookaround.Priority = 10;
-            locked.Priority = 1;
+            ResetLockOn();
 
             //lookaround.m_YAxis.m_InputAxisName = savedYaxis;
             //lookaround.m_XAxis.m_InputAxisName = savedXaxis;
@@ -75,9 +79,10 @@ public class LockOnManager : MonoBehaviour
         cameraDistance += Input.GetAxis("Mouse ScrollWheel");
         cameraDistance = Mathf.Clamp(cameraDistance, 0.0f, 2.0f);
         if (Input.GetKeyDown(KeyCode.Q)) {
-            LockOn();
+            TryLockOn();
         }
         if (player.lockedOn) {
+            //if(target == GameObject.Missing)player.lockedOn = false;
             protector.transform.position = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
             rtc.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
             camerapoint.transform.position = transform.position + (( (target.transform.position - transform.position) / 2 ) * cameraDistance);

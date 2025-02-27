@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1baeb41e03f35c943908a8709a94b5ec, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1026,12 +1026,26 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 100
   hp: 100
-  followPlayer: 0
-  lookAtPlayer: 1
+  followTarget: 0
+  lookAtTarget: 0
+  moveForward: 0
   rb: {fileID: 0}
-  playerObj: {fileID: 728889665}
+  TargetObj: {fileID: 0}
   head: {fileID: 0}
+  lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attack: {fileID: 0}
+  CDleft: 0
+  CDset: 0
+  slowSpeed: 0
+  defSpeed: 0
+  threshold: 0
+  attackReady: 0
+  dist: 0
+  dashStrength: 0
 --- !u!54 &174898277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10766,7 +10780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1452833295
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10784,7 +10798,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
   m_Height: 4
@@ -11159,8 +11173,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504647093}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18057741, y: 0, z: 0, w: 0.9835608}
-  m_LocalPosition: {x: 20.589417, y: -17.97, z: 16.308731}
+  m_LocalRotation: {x: -0.05832255, y: 0.7046975, z: 0.05832255, w: 0.70469743}
+  m_LocalPosition: {x: 15.22998, y: -22.100006, z: 31.520004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11620,12 +11634,26 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 100
   hp: 100
-  followPlayer: 0
-  lookAtPlayer: 1
+  followTarget: 0
+  lookAtTarget: 0
+  moveForward: 0
   rb: {fileID: 0}
-  playerObj: {fileID: 728889665}
+  TargetObj: {fileID: 0}
   head: {fileID: 0}
+  lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attack: {fileID: 0}
+  CDleft: 0
+  CDset: 0
+  slowSpeed: 0
+  defSpeed: 0
+  threshold: 0
+  attackReady: 0
+  dist: 0
+  dashStrength: 0
 --- !u!54 &1729177402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18116,12 +18144,26 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 100
   hp: 100
-  followPlayer: 1
-  lookAtPlayer: 1
+  followTarget: 0
+  lookAtTarget: 0
+  moveForward: 0
   rb: {fileID: 0}
-  playerObj: {fileID: 728889665}
+  TargetObj: {fileID: 0}
   head: {fileID: 0}
+  lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attack: {fileID: 0}
+  CDleft: 0
+  CDset: 0
+  slowSpeed: 0
+  defSpeed: 0
+  threshold: 0
+  attackReady: 0
+  dist: 0
+  dashStrength: 0
 --- !u!54 &2008271330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18789,12 +18831,26 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 100
   hp: 100
-  followPlayer: 0
-  lookAtPlayer: 1
+  followTarget: 0
+  lookAtTarget: 0
+  moveForward: 0
   rb: {fileID: 0}
-  playerObj: {fileID: 728889665}
+  TargetObj: {fileID: 0}
   head: {fileID: 0}
+  lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attack: {fileID: 0}
+  CDleft: 0
+  CDset: 0
+  slowSpeed: 0
+  defSpeed: 0
+  threshold: 0
+  attackReady: 0
+  dist: 0
+  dashStrength: 0
 --- !u!54 &2109814515
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18917,7 +18973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2127884877
 MonoBehaviour:
   m_ObjectHideFlags: 0

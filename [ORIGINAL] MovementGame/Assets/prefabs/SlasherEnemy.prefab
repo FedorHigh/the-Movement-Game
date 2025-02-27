@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6435279942922094090}
   - component: {fileID: 777900241928753429}
   - component: {fileID: 3031162657564518462}
+  - component: {fileID: 4512870768495964498}
   m_Layer: 0
   m_Name: attackBox
   m_TagString: HurtPlayer
@@ -29,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983427431257420500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0158968, y: -0.13204043, z: -0.21447122, w: 0.96763355}
-  m_LocalPosition: {x: -0.04, y: -0.04, z: 0.79}
-  m_LocalScale: {x: 0.32117, y: 0.32117, z: 0.108681664}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.04, y: 0.66, z: 2.14}
+  m_LocalScale: {x: 2.3905647, y: 0.17845811, z: 3.0056322}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5484873809312870927}
-  m_LocalEulerAnglesHint: {x: -5.014, y: -14.458, z: -24.358}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &6715526795441314538
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983427431257420500}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1334644534813085151
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1773428102 &777900241928753429
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -121,12 +122,12 @@ ParentConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: -0.04, y: -0.04, z: 0.79}
-  m_RotationAtRest: {x: -5.0141807, y: -14.458001, z: -24.35816}
+  m_TranslationAtRest: {x: -0.04, y: 0.66, z: 2.14}
+  m_RotationAtRest: {x: 0, y: 0, z: 90}
   m_TranslationOffsets:
-  - {x: -0.18336105, y: -0.18336105, z: 3.6213722}
+  - {x: -0.06630325, y: 1.094017, z: 3.547268}
   m_RotationOffsets:
-  - {x: -5.0141783, y: -14.457994, z: -24.358158}
+  - {x: 0, y: 0, z: 90}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -150,8 +151,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553381dd51535d446840fbadfc3449a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
+  dmg: 20
   cooldown: 1
+--- !u!114 &4512870768495964498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983427431257420500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef36dd812269e67499148b692f5d9580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.3
+  finDuration: 1
+  deleteOnTimeout: 0
+  storedTag: 
 --- !u!1 &4887223707800603463
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,9 +360,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5655136473985275606}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7060892, z: -0, w: 0.7081229}
+  m_LocalRotation: {x: 0, y: -0.7060879, z: 0, w: 0.7081243}
   m_LocalPosition: {x: 38.24, y: -22.4, z: 38.75}
-  m_LocalScale: {x: 4.584017, y: 4.584017, z: 4.584017}
+  m_LocalScale: {x: 1.6576021, y: 1.6576021, z: 1.6576021}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52387756736506865}
@@ -508,9 +525,23 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 100
   hp: 100
-  followPlayer: 1
-  lookAtPlayer: 1
+  followTarget: 0
+  lookAtTarget: 1
+  moveForward: 1
   rb: {fileID: 0}
-  playerObj: {fileID: 0}
+  TargetObj: {fileID: 0}
   head: {fileID: 0}
+  lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attack: {fileID: 1983427431257420500}
+  CDleft: 0
+  CDset: 3
+  slowSpeed: 20
+  defSpeed: 100
+  threshold: 7
+  attackReady: 1
+  dist: 0
+  dashStrength: 0

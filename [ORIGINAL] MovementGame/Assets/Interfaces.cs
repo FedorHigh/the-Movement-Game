@@ -287,13 +287,18 @@ namespace Interfaces
     public class Entity : MonoBehaviour{
         public float maxHp, moveSpeed;
         public float hp;
-        public bool followPlayer, lookAtPlayer;
+        public bool followTarget, lookAtTarget, moveForward;
         public Rigidbody rb;
-        public GameObject playerObj, head;
+        public GameObject TargetObj, head, lockOnPoint;
         public Vector3 move;
         public Dictionary<GameObject, float> resistances;
-        //public Bet playerHp;
+        public LayerMask targetLayer;
+        //public Bet TargetHp;
         float tmp;
+        public virtual void locateAnyTarget(float radius) {
+            Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
+            TargetObj = targets[0].gameObject;
+        }
         public virtual void Start() {
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, float>();
@@ -306,20 +311,24 @@ namespace Interfaces
                 if (resistances[a] <= 0)resistances.Remove(a);
             }
         }
-        public virtual void DoFollowPlayer() { 
-            move = playerObj.transform.position - transform.position;
+        public virtual void DoFollowTarget() { 
+            move = TargetObj.transform.position - transform.position;
             move.y = 0;
             rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
         }
-        public virtual void DoLookAtPlayer() {
-            if (head != null) head.transform.LookAt(playerObj.transform);
-            Vector3 tmp = playerObj.transform.position;
+        public virtual void DoMoveForward() {
+            rb.AddForce(transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        }
+        public virtual void DoLookAtTarget() {
+            if (head != null) head.transform.LookAt(TargetObj.transform);
+            Vector3 tmp = TargetObj.transform.position;
             tmp.y = transform.position.y;
             transform.LookAt(tmp);
         }
         public virtual void Update() {
-            if (followPlayer) DoFollowPlayer();
-            if (lookAtPlayer) DoLookAtPlayer();
+            if (followTarget) DoFollowTarget();
+            if (lookAtTarget) DoLookAtTarget();
+            if (moveForward) DoMoveForward();
             UpdResistances();
         }
         public virtual void Damage(float damage) {
@@ -327,6 +336,11 @@ namespace Interfaces
             CheckIsAlive();
         }
         public virtual void OnDeath() {
+            LockOnManager tmpComp;
+            if (TargetObj.TryGetComponent<LockOnManager>(out tmpComp))
+            {
+                if (tmpComp.target == lockOnPoint) tmpComp.ResetLockOn();
+            }
             Destroy(gameObject);
         }
         public virtual void CheckIsAlive() {

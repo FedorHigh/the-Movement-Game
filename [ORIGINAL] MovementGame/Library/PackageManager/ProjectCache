@@ -1,37 +1,33 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: "C:/Users/propr/OneDrive/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B/GitHub/the-Movement-Game/[ORIGINAL]
-      MovementGame/Packages/manifest.json"
+    m_FilePath: C:/Users/user/Documents/GitHub/the-Movement-Game/[ORIGINAL] MovementGame/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638723860655265637
-    m_Hash: 3122785126
+      ticks: 638759782006033751
+    m_Hash: 933927516
   m_LockFileStatus:
-    m_FilePath: "C:/Users/propr/OneDrive/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B/GitHub/the-Movement-Game/[ORIGINAL]
-      MovementGame/Packages/packages-lock.json"
+    m_FilePath: C:/Users/user/Documents/GitHub/the-Movement-Game/[ORIGINAL] MovementGame/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638723860655285646
-    m_Hash: 1243082186
+      ticks: 638759782235516000
+    m_Hash: 3064224688
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: "C:/Users/propr/OneDrive/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B/GitHub/the-Movement-Game/[ORIGINAL]
-  MovementGame/Packages"
-m_EditorVersion: 6000.0.31f1 (a206c360e2a8)
+m_ProjectPath: C:/Users/user/Documents/GitHub/the-Movement-Game/[ORIGINAL] MovementGame/Packages
+m_EditorVersion: 6000.0.39f1 (15ea7ed0b100)
 m_ResolvedPackages:
-- packageId: com.unity.ai.navigation@2.0.5
+- packageId: com.unity.ai.navigation@2.0.6
   testable: 0
   isDirectDependency: 1
-  version: 2.0.5
+  version: 2.0.6
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ai.navigation"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ai.navigation@c74b2724ed42
   assetPath: Packages/com.unity.ai.navigation
   name: com.unity.ai.navigation
   displayName: AI Navigation
@@ -64,9 +60,10 @@ m_ResolvedPackages:
     - 2.0.3
     - 2.0.4
     - 2.0.5
+    - 2.0.6
     compatible:
-    - 2.0.5
-    recommended: 2.0.5
+    - 2.0.6
+    recommended: 2.0.6
     deprecated: []
   dependencies:
   - name: com.unity.modules.ai
@@ -103,18 +100,18 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638675282916940000
+  datePublishedTicks: 638744428199200000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ai.navigation.git
-    revision: 110941630e19b3574f9f81fd6fe3c28e867a9321
+    revision: 40d59de7f59b90e8da1a6176e78784a85f3e7f80
     path: 
   unityLifecycle:
-    version: 2.0.5
+    version: 2.0.6
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -124,23 +121,29 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"### Fixed\n* NavMesh Link would not update when switching
-    from the **Not Walkable** area type to any other area type in the inspector.
-    (NAVB-87)\n* A few documentation paragraphs and links were not accurate."}'
+  upmReserved: '{"changelog":"### Added\n* New **OffMesh Link Converter** tool in
+    the **Window** > **AI** > **Navigation Updater** window to help you automatically
+    replace **OffMesh Links** with **NavMesh Links** in the scenes and prefabs of
+    your project.\n\n### Fixed\n* Fixed a regression that caused controls in the
+    navigation scene view overlay popup to display on top of one another when foldouts
+    were open. (Requires Unity 6000.0.22f1 or newer)\n* The AI Navigation overlay
+    was rarely needed upon the initial installation of the package. Now it is hidden
+    by default and you can enable it through the [Overlay Menu](https://docs.unity3d.com/Manual/display-and-hide-overlay.html).\n*
+    Fixed a regression that caused the Editor to allocate unnecessary memory on some
+    platforms, when the project contained package test files."}'
   assetStore:
     productId: 
-  fingerprint: 9f76b145f0a8dd734ff2a4877f7f7edb83b7f62c
+  fingerprint: c74b2724ed42c1aa0380e294156d7f54a7ae2ec6
   editorCompatibility:
     compatibilityLevel: 0
-    minimumPackageVersion: 2.0.5
+    minimumPackageVersion: 2.0.6
     minimumUnityVersion: 2023.2.0a18
 - packageId: com.unity.cinemachine@2.10.3
   testable: 0
   isDirectDependency: 1
   version: 2.10.3
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.cinemachine"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.cinemachine@dcc61ebd6655
   assetPath: Packages/com.unity.cinemachine
   name: com.unity.cinemachine
   displayName: Cinemachine
@@ -238,6 +241,7 @@ m_ResolvedPackages:
     - 3.1.0
     - 3.1.1
     - 3.1.2
+    - 3.1.3
     compatible:
     - 2.10.3
     - 3.0.0-pre.3
@@ -251,14 +255,15 @@ m_ResolvedPackages:
     - 3.1.0
     - 3.1.1
     - 3.1.2
-    recommended: 3.1.2
+    - 3.1.3
+    recommended: 3.1.3
     deprecated: []
   dependencies:
   - name: com.unity.test-framework
     version: 1.1.31
   resolvedDependencies:
   - name: com.unity.test-framework
-    version: 1.4.5
+    version: 1.4.6
   - name: com.unity.ext.nunit
     version: 2.0.5
   - name: com.unity.modules.imgui
@@ -298,7 +303,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638666077203430000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.cinemachine@2.10/manual/index.html
@@ -328,13 +333,12 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 2.10.3
     minimumUnityVersion: 2019.4.0a1
-- packageId: com.unity.collab-proxy@2.5.2
+- packageId: com.unity.collab-proxy@2.6.0
   testable: 0
   isDirectDependency: 1
-  version: 2.5.2
+  version: 2.6.0
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.collab-proxy"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.collab-proxy@001b54a8988a
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -426,10 +430,11 @@ m_ResolvedPackages:
     - 2.5.1
     - 2.5.2
     - 2.6.0
+    - 2.7.1
     compatible:
-    - 2.5.2
     - 2.6.0
-    recommended: 2.5.2
+    - 2.7.1
+    recommended: 2.6.0
     deprecated: []
   dependencies: []
   resolvedDependencies: []
@@ -448,6 +453,7 @@ m_ResolvedPackages:
   - teams
   - version
   - vcs
+  - uvcs
   registry:
     id: main
     name: 
@@ -458,18 +464,18 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638630364536670000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.5/manual/index.html
+  datePublishedTicks: 638684801569990000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.6/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: c402e6396d3ea20ecb2d59eac908e7e0a30cd7e6
+    revision: b7effc6b40a40af218ae30084906471699330ac9
     path: 
   unityLifecycle:
-    version: 2.5.2
+    version: 2.6.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -479,22 +485,50 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"### Fixed\n\n- Fix token renewal issue: Can''t obtain
-    a new token (Message: Invalid Refresh Token., Code: 132.104)"}'
+  upmReserved: "{\"changelog\":\"### Added\\n\\n- Added the ability to merge a branch
+    or a changeset, using a new context menu actions\\n- Added file conflict & dir
+    conflict context menu actions to the merge view\\n- Added diff and merge settings
+    in Project Settings -> Version Control -> Unity Version Control Settings\\n-
+    Added merge options dialog to the merge view\\n- Added copy path & history context
+    menu actions in all menus where they apply\\n- Added an menu entry to 'Open in
+    Unity Cloud' showing the repository in the Unity Dashboard\\n\\n### Changed\\n\\n-
+    Updated the minimum supported version to Unity 2021.3.0f1\\n- Removed support
+    for migrating old Collaborate workspaces to Unity Version Control\\n- Hide from
+    the public documentation all internal APIs that were previously visible by mistake\\n-
+    Optimized switching operations to only triggers the Package Manager to reinstall
+    packages when needed\\n- Optimized incoming changes to only reload the Package
+    Manager when needed (Gluon/partial workspace only for now)\\n- Automatically
+    add UnityDirMonSyncFile rule for existing ignore.conf to avoid triggering unnecessary
+    finding changes operation\\n- Improved the \u201Csearch\u201D edit box so it
+    can resize when there is not enough space in the toolbar\\n- Replaced the \\\"D\\\"
+    DevOps icon by the branching icon used in the Hub\\n- Replaced the logo of Unity
+    in the Sign in to Unity VCS window\\n\\n### Fixed\\n\\n- Fixed files getting
+    checked out even though they are in hidden_changes.conf\\n- Fixed manual login
+    to Cloud that didn't work with an Enterprise installation\\n- Fixed resolve conflicts
+    not informing about lack of UVCS installation\\n- Fixed the Invite users to cloud
+    organization when using an Enterprise installation\\n- Fixed new child branch
+    not created from HEAD after update\\n- Fixed the learn more (here) link that
+    showed the hex color value in Unity 6\\n- Fixed link to invite members in Unity
+    Cloud.\\n- Fixed a crash in the create workspace window when unable to resolve
+    a @unity organization\\n- Fixed incoming changes view that was not kept as selected
+    after resolving some conflicts\\n- Fixed workspace name that was not refreshed
+    after repository manual creation or selection\\n- Added a warning message to
+    inform users about mismatching cloud project.\\n- Removed from the Create Workspace
+    window the Local server that was present with no installation of UVCS\\n- Replaced
+    hardcoded urls pointing to plasticscm.com\"}"
   assetStore:
     productId: 
-  fingerprint: da7e55b87e08569f31766e7cabc37bc033c9c7f9
+  fingerprint: 001b54a8988a14785c8e209d6c788bb15f9e58cf
   editorCompatibility:
     compatibilityLevel: 0
-    minimumPackageVersion: 2.5.2
-    minimumUnityVersion: 2020.3.48f1
+    minimumPackageVersion: 2.6.0
+    minimumUnityVersion: 2021.3.0f1
 - packageId: com.unity.ide.rider@3.0.31
   testable: 0
   isDirectDependency: 1
   version: 3.0.31
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ide.rider"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ide.rider@7921be93db40
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -503,7 +537,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: assets
+  type: 
   description: The JetBrains Rider Editor package provides an integration for using
     the JetBrains Rider IDE as a code editor for Unity. It adds support for generating
     .csproj files for code completion and auto-discovery of installations.
@@ -576,7 +610,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638548308080000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.rider@3.0/manual/index.html
@@ -613,8 +647,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.22
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ide.visualstudio"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ide.visualstudio@8140e851d83e
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -623,7 +656,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: assets
+  type: 
   description: Code editor integration for supporting Visual Studio as code editor
     for unity. Adds support for generating csproj files for intellisense purposes,
     auto discovery of installations, etc.
@@ -663,7 +696,7 @@ m_ResolvedPackages:
     version: 1.1.9
   resolvedDependencies:
   - name: com.unity.test-framework
-    version: 1.4.5
+    version: 1.4.6
   - name: com.unity.ext.nunit
     version: 2.0.5
   - name: com.unity.modules.imgui
@@ -681,7 +714,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638326061910000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.visualstudio@2.0/manual/index.html
@@ -720,8 +753,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.2.5
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ide.vscode"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ide.vscode@82e68656b7bd
   assetPath: Packages/com.unity.ide.vscode
   name: com.unity.ide.vscode
   displayName: Visual Studio Code Editor
@@ -814,8 +846,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.multiplayer.center"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.multiplayer.center@f3fb577b3546
   assetPath: Packages/com.unity.multiplayer.center
   name: com.unity.multiplayer.center
   displayName: Multiplayer Center
@@ -895,18 +926,17 @@ m_ResolvedPackages:
   upmReserved: 
   assetStore:
     productId: 
-  fingerprint: f502d8ac613fa076192423e73892fbd89eb4049b
+  fingerprint: f3fb577b3546594b97b8cc34307cd621f60f1c73
   editorCompatibility:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 6000.0.0a1
-- packageId: com.unity.splines@2.6.1
+- packageId: com.unity.splines@2.7.2
   testable: 0
   isDirectDependency: 1
-  version: 2.6.1
+  version: 2.7.2
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.splines"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.splines@d3e1e500c9a0
   assetPath: Packages/com.unity.splines
   name: com.unity.splines
   displayName: Splines
@@ -943,29 +973,19 @@ m_ResolvedPackages:
     - 2.7.1
     - 2.7.2
     compatible:
-    - 2.6.1
-    - 2.7.1
     - 2.7.2
-    recommended: 2.6.1
+    recommended: 2.7.2
     deprecated: []
   dependencies:
-  - name: com.unity.ugui
-    version: 1.0.0
-  - name: com.unity.mathematics
-    version: 1.2.1
   - name: com.unity.settings-manager
     version: 1.0.3
-  resolvedDependencies:
-  - name: com.unity.ugui
-    version: 2.0.0
-  - name: com.unity.modules.ui
-    version: 1.0.0
-  - name: com.unity.modules.imgui
-    version: 1.0.0
   - name: com.unity.mathematics
-    version: 1.3.2
+    version: 1.2.1
+  resolvedDependencies:
   - name: com.unity.settings-manager
     version: 2.0.1
+  - name: com.unity.mathematics
+    version: 1.3.2
   keywords:
   - spline
   - curve
@@ -980,18 +1000,18 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638522292040000000
+  datePublishedTicks: 638678084074740000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.splines.git
-    revision: f77ddc46ebeef1a8dca1264827b93dbec50d3772
+    revision: f8048bc97f9cc23fe3db45eceb767e6ab97f37f5
     path: 
   unityLifecycle:
-    version: 2.6.1
+    version: 2.7.2
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -1001,32 +1021,36 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"### Bug Fixes\n\n- [SPLB-275] Fixed a bug where the
-    `SplineContainer` component would throw warning when entering playmode.\n- [SPLB-266]
-    Fixed a bug where instantiating a `SplineExtrude` component at runtime would
-    throw errors.\n- [SPLB-269] Fixed a bug where instantiating a `SplineAnimate`
-    component at runtime would throw errors.\n- [SPLB-260] Fixed a bug where playing
-    a `SplineAnimate` from a start method would not work.\n- [SPLB-267] Fixed a bug
-    where undoing a spline insertion in a container would throw errors from the `SplineInstantiate`
-    component.\n- [SPLB-261] Fixed a bug where the knot placement tool would not
-    work when multiple scene views were opened.\n- [SPLB-253] Fixed a bug where using
-    the knot placement tool in 2D mode would not work if the grids are turned off.\n-
-    [SPLB-258] Fixed a bug where destroying a component would throw errors in the
-    console."}'
+  upmReserved: '{"changelog":"### Bug Fixes\n- [SPLB-315] Fixed a bug where the `DrawSplineTool`
+    icon was missing in the tools overlay.  \n- [STO-3434] Fixed a bug where the
+    `DrawSplineTool` would prevent the use of the view tool.\n- [STO-3435] Fixed
+    a bug where the `DrawSplineTool` would not display the tool settings anymore.
+    \n- [SPLB-296] Fixed a bug where a log message would appear in the console when
+    2 knots are at the same position with 0-length tangents.\n- [SPLB-304] Fixed
+    a bug where an exception would be thrown when using `SplineInstantiate` with
+    linear distance instantiate method and multiple splines. \n- Fixed some failures
+    related to the inline API documentation.\n- [SPLB-302] Fixed a bug where an exception
+    would be thrown when adding a knot to a closed spline from inspector.\n- [SPLB-311]
+    Fixed a bug where `SplineAnimate` component would not function properly with
+    non-uniform scale transforms.\n- Fixed compilation errors in builds\n- [SPLB-310]
+    Fixed mesh extrude not being saved when a change is applied to a mesh asset.
+    \n- [SPLB-303] Fixed a bug where spline section foldout labels (shape extrude,
+    geometry, advanced) did not unfold the sections when clicked.\n- [SPLB-294] Fixed
+    a bug where adding new splines by using the `SplineContainer` inspector would
+    dirty all open scenes."}'
   assetStore:
     productId: 
-  fingerprint: 930eaf55e68be9f5d58f63035b2a96d9c3c3e695
+  fingerprint: d3e1e500c9a0fa3a1e812117108982dd612c2e27
   editorCompatibility:
     compatibilityLevel: 0
-    minimumPackageVersion: 2.6.1
+    minimumPackageVersion: 2.7.2
     minimumUnityVersion: 2022.3.0a1
-- packageId: com.unity.test-framework@1.4.5
+- packageId: com.unity.test-framework@1.4.6
   testable: 0
   isDirectDependency: 1
-  version: 1.4.5
+  version: 1.4.6
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.test-framework"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.test-framework@5ac417e07314
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -1035,7 +1059,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Unity Test Framework
-  type: assets
+  type: 
   description: Test framework for running Edit mode and Play mode tests in Unity.
   errors: []
   versions:
@@ -1089,17 +1113,18 @@ m_ResolvedPackages:
     - 1.4.3
     - 1.4.4
     - 1.4.5
+    - 1.4.6
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
     - 2.0.1-pre.18
     compatible:
-    - 1.4.5
+    - 1.4.6
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
     - 2.0.1-pre.18
-    recommended: 1.4.5
+    recommended: 1.4.6
     deprecated: []
   dependencies:
   - name: com.unity.ext.nunit
@@ -1128,18 +1153,18 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638575054880000000
+  datePublishedTicks: 638743524358990000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.test-framework@1.4/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.com/Unity-Technologies/com.unity.test-framework.git
-    revision: e50747c90fb18ab9f4f350b60d0fcdcae19bdebc
+    revision: 9c6028f63a9b875e714b65de151b74e170152d49
     path: 
   unityLifecycle:
-    version: 1.4.5
+    version: 1.4.6
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -1149,48 +1174,35 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"- Fixed an issue where batchmode test runs would never
-    finish if a test yielded WaitForEndOfFrame (DSTR-1009).\n- Fixed an issue where
-    the location prompt was required when using the Install all tests in ''build''
-    folder option during test builds.\n- Canceling a PlayMode test run now correctly
-    restores the scene setup, instead of leaving the editor in the test scene.\n-
-    Fixed an issue where UnitySetUp did not fail when nested coroutines threw an
-    exception (DSTR-1007).\n- When selecting multiple tests and running them, the
-    test runner now correctly updates the details of the first selected test (UTF-602).\n-
-    The interaction mode and application idle time settings is now being changes
-    when running tests, resulting in faster test runs if not already in use (applies
-    to 2020.3 and later) (DSTR-690).\n- Fixed an issue where some NUnit attributes
-    caused errors and stopped async test runs (DSTR-1040).\n- Added support for the
-    MaxTime attribute on async and UnityTest methods (DSTR-1040).\n- Fixed a memory
-    leak issue where a large number of domain reloads within the same test could
-    crash the editor (DSTR-1023).\n- Changed to use a progress bar inside the test
-    runner window when running tests. This ensures that the progress bar is not fighting
-    to display when e.g. compiling scripts and also makes it easier to cancel a run.
-    This progress bar is displayed for all types of runs (EditMode, PlayMode and
-    Player). (UTF-596).\n- Fixed an issue where ignored tests with an attributes
-    did not display the ignore reason in the test runner UI.\n- Having multiple tests
-    with the same unique id no longer gives a error with ''An item with the same
-    key has already been added'', but instead logs an warning about the duplicate
-    id.\n- The result icons for test suites should no longer flicker when running
-    tests.\n- Ensured that test results ignored in the editor but run on a player
-    are not overwritten with ignore status when shown in the UI (DSTR-1042).\n- Fixed
-    an issue where the RunStarted event was not invoked correctly during a test run
-    (DSTR-1046).\n- Fixed an issue where TestStarted and TestFinished events were
-    repeated for ignored test fixtures after a domain reload (DSTR-986)."}'
+  upmReserved: '{"changelog":"- Fixed an issue where the architecture flag would
+    not be parsed for the StandaloneOSX platform.\n- Fixed an issue where the test
+    results ui and progress bar would not update before a user input, such as mouse
+    movement, was detected (UTF-609).\n- Fixed an issue where root of the test tree
+    was marked as NotRun, when all the tests were run and at least one test is ignore.\n-
+    Ensure that an error is raised and the test run is stopped if a playmode test
+    method exits playmode (DSTR-1091). \n- Async editmode tests are no longer throw
+    error when yielding a different value than null (DSTR-1066)\n- Fixed an issue
+    where the \"C# Test Script\" button was always disabled in One Column view in
+    Project tab. (DSTR-1083)\n- Async and UnityTest can now use ParametrizedIgnore
+    attribute. (DSTR-1068)\n- Corrected Timeout to only apply to the test method
+    and not the teardown methods, ensuring that TearDown is always run if a test
+    case times out (DSTR-1077).\n- Added a queue size indicator in the player side
+    test result ui. This can be used to track the progress of sending back result
+    data to the editor.\n- Parent node of the test tree is now updated after all
+    children finish running and have a result."}'
   assetStore:
     productId: 
-  fingerprint: 0a21eb82d95cd331643a1e0ce4e8e9a5f18954c8
+  fingerprint: 5ac417e07314c8f6afba8109738c32b82d391e68
   editorCompatibility:
     compatibilityLevel: 0
-    minimumPackageVersion: 1.4.5
-    minimumUnityVersion: 2019.4.0a10
+    minimumPackageVersion: 1.4.6
+    minimumUnityVersion: 2019.4.1f1
 - packageId: com.unity.timeline@1.8.7
   testable: 0
   isDirectDependency: 1
   version: 1.8.7
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.timeline"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.timeline@c58b4ee65782
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -1199,7 +1211,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: assets
+  type: 
   description: Use Unity Timeline to create cinematic content, game-play sequences,
     audio sequences, and complex particle effects.
   errors: []
@@ -1291,23 +1303,25 @@ m_ResolvedPackages:
     - 1.8.5
     - 1.8.6
     - 1.8.7
+    - 1.8.8
     compatible:
     - 1.8.7
-    recommended: 1.8.7
+    - 1.8.8
+    recommended: 1.8.8
     deprecated: []
   dependencies:
-  - name: com.unity.modules.audio
-    version: 1.0.0
   - name: com.unity.modules.director
     version: 1.0.0
   - name: com.unity.modules.animation
     version: 1.0.0
+  - name: com.unity.modules.audio
+    version: 1.0.0
   - name: com.unity.modules.particlesystem
     version: 1.0.0
   resolvedDependencies:
-  - name: com.unity.modules.audio
-    version: 1.0.0
   - name: com.unity.modules.director
+    version: 1.0.0
+  - name: com.unity.modules.audio
     version: 1.0.0
   - name: com.unity.modules.animation
     version: 1.0.0
@@ -1329,7 +1343,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638524833900000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/index.html
@@ -1373,8 +1387,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ugui"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ugui@03407c6d8751
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -1456,7 +1469,7 @@ m_ResolvedPackages:
   upmReserved: 
   assetStore:
     productId: 
-  fingerprint: fd5da3b4bec8d043b01c30177bd62059c5fa36d0
+  fingerprint: 03407c6d875144b0a8ffdc0af3e0d5cccfa5a4ae
   editorCompatibility:
     compatibilityLevel: 0
     minimumPackageVersion: 2.0.0
@@ -1466,8 +1479,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.accessibility"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.accessibility
   assetPath: Packages/com.unity.modules.accessibility
   name: com.unity.modules.accessibility
   displayName: Accessibility
@@ -1534,8 +1546,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.ai"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ai
   assetPath: Packages/com.unity.modules.ai
   name: com.unity.modules.ai
   displayName: AI
@@ -1602,8 +1613,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.androidjni"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.androidjni
   assetPath: Packages/com.unity.modules.androidjni
   name: com.unity.modules.androidjni
   displayName: Android JNI
@@ -1669,8 +1679,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.animation"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.animation
   assetPath: Packages/com.unity.modules.animation
   name: com.unity.modules.animation
   displayName: Animation
@@ -1737,8 +1746,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.assetbundle"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.assetbundle
   assetPath: Packages/com.unity.modules.assetbundle
   name: com.unity.modules.assetbundle
   displayName: Asset Bundle
@@ -1805,8 +1813,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.audio"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.audio
   assetPath: Packages/com.unity.modules.audio
   name: com.unity.modules.audio
   displayName: Audio
@@ -1873,8 +1880,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.cloth"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.cloth
   assetPath: Packages/com.unity.modules.cloth
   name: com.unity.modules.cloth
   displayName: Cloth
@@ -1945,8 +1951,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.director"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.director
   assetPath: Packages/com.unity.modules.director
   name: com.unity.modules.director
   displayName: Director
@@ -2021,8 +2026,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.imageconversion"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imageconversion
   assetPath: Packages/com.unity.modules.imageconversion
   name: com.unity.modules.imageconversion
   displayName: Image Conversion
@@ -2089,8 +2093,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.imgui"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imgui
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -2157,8 +2160,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.jsonserialize"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.jsonserialize
   assetPath: Packages/com.unity.modules.jsonserialize
   name: com.unity.modules.jsonserialize
   displayName: JSONSerialize
@@ -2225,8 +2227,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.particlesystem"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.particlesystem
   assetPath: Packages/com.unity.modules.particlesystem
   name: com.unity.modules.particlesystem
   displayName: Particle System
@@ -2293,8 +2294,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.physics"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
@@ -2361,8 +2361,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.physics2d"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics2d
   assetPath: Packages/com.unity.modules.physics2d
   name: com.unity.modules.physics2d
   displayName: Physics 2D
@@ -2429,8 +2428,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.screencapture"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.screencapture
   assetPath: Packages/com.unity.modules.screencapture
   name: com.unity.modules.screencapture
   displayName: Screen Capture
@@ -2501,8 +2499,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.terrain"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrain
   assetPath: Packages/com.unity.modules.terrain
   name: com.unity.modules.terrain
   displayName: Terrain
@@ -2569,8 +2566,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.terrainphysics"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrainphysics
   assetPath: Packages/com.unity.modules.terrainphysics
   name: com.unity.modules.terrainphysics
   displayName: Terrain Physics
@@ -2645,8 +2641,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.tilemap"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.tilemap
   assetPath: Packages/com.unity.modules.tilemap
   name: com.unity.modules.tilemap
   displayName: Tilemap
@@ -2716,8 +2711,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.ui"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ui
   assetPath: Packages/com.unity.modules.ui
   name: com.unity.modules.ui
   displayName: UI
@@ -2784,8 +2778,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.uielements"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.uielements
   assetPath: Packages/com.unity.modules.uielements
   name: com.unity.modules.uielements
   displayName: UIElements
@@ -2868,8 +2861,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.umbra"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.umbra
   assetPath: Packages/com.unity.modules.umbra
   name: com.unity.modules.umbra
   displayName: Umbra
@@ -2936,8 +2928,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unityanalytics"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unityanalytics
   assetPath: Packages/com.unity.modules.unityanalytics
   name: com.unity.modules.unityanalytics
   displayName: Unity Analytics
@@ -3011,8 +3002,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unitywebrequest"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequest
   assetPath: Packages/com.unity.modules.unitywebrequest
   name: com.unity.modules.unitywebrequest
   displayName: Unity Web Request
@@ -3079,8 +3069,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unitywebrequestassetbundle"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestassetbundle
   assetPath: Packages/com.unity.modules.unitywebrequestassetbundle
   name: com.unity.modules.unitywebrequestassetbundle
   displayName: Unity Web Request Asset Bundle
@@ -3155,8 +3144,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unitywebrequestaudio"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestaudio
   assetPath: Packages/com.unity.modules.unitywebrequestaudio
   name: com.unity.modules.unitywebrequestaudio
   displayName: Unity Web Request Audio
@@ -3231,8 +3219,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unitywebrequesttexture"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequesttexture
   assetPath: Packages/com.unity.modules.unitywebrequesttexture
   name: com.unity.modules.unitywebrequesttexture
   displayName: Unity Web Request Texture
@@ -3307,8 +3294,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.unitywebrequestwww"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestwww
   assetPath: Packages/com.unity.modules.unitywebrequestwww
   name: com.unity.modules.unitywebrequestwww
   displayName: Unity Web Request WWW
@@ -3399,8 +3385,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.vehicles"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vehicles
   assetPath: Packages/com.unity.modules.vehicles
   name: com.unity.modules.vehicles
   displayName: Vehicles
@@ -3471,8 +3456,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.video"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.video
   assetPath: Packages/com.unity.modules.video
   name: com.unity.modules.video
   displayName: Video
@@ -3551,8 +3535,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.vr"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vr
   assetPath: Packages/com.unity.modules.vr
   name: com.unity.modules.vr
   displayName: VR
@@ -3633,8 +3616,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.wind"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.wind
   assetPath: Packages/com.unity.modules.wind
   name: com.unity.modules.wind
   displayName: Wind
@@ -3701,8 +3683,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.xr"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.xr
   assetPath: Packages/com.unity.modules.xr
   name: com.unity.modules.xr
   displayName: XR
@@ -3781,8 +3762,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.subsystems"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.subsystems
   assetPath: Packages/com.unity.modules.subsystems
   name: com.unity.modules.subsystems
   displayName: Subsystems
@@ -3853,8 +3833,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.modules.hierarchycore"
+  resolvedPath: C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.hierarchycore
   assetPath: Packages/com.unity.modules.hierarchycore
   name: com.unity.modules.hierarchycore
   displayName: Hierarchy Core
@@ -3921,8 +3900,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.5
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.ext.nunit"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.ext.nunit@60ef35ffd3cd
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
@@ -3931,7 +3909,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Libraries
-  type: assets
+  type: 
   description: A custom version of NUnit used by Unity Test Framework. Based on NUnit
     version 3.5 and works with all platforms, il2cpp and Mono AOT.
   errors: []
@@ -3967,7 +3945,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638236642220000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ext.nunit@2.0/manual/index.html
@@ -3996,13 +3974,86 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 2.0.5
     minimumUnityVersion: 2019.4.0a1
+- packageId: com.unity.settings-manager@2.0.1
+  testable: 0
+  isDirectDependency: 0
+  version: 2.0.1
+  source: 1
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.settings-manager@56a930affa1e
+  assetPath: Packages/com.unity.settings-manager
+  name: com.unity.settings-manager
+  displayName: Settings Manager
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: A framework for making any serializable field a setting, complete
+    with a pre-built settings interface.
+  errors: []
+  versions:
+    all:
+    - 0.1.0-preview.4
+    - 0.1.0-preview.8
+    - 1.0.0
+    - 1.0.1
+    - 1.0.2
+    - 1.0.3
+    - 2.0.0
+    - 2.0.1
+    compatible:
+    - 2.0.1
+    recommended: 2.0.1
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 637744099390000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.com/Unity-Technologies/com.unity.settings-manager.git
+    revision: 9b7c12d04ef880168151c127fd6b37b5931197dc
+    path: 
+  unityLifecycle:
+    version: 2.0.1
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: 
+  assetStore:
+    productId: 
+  fingerprint: 56a930affa1e4462d3595b5c19a1c2a4bf2015d2
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 2.0.1
+    minimumUnityVersion: 2018.4.0a1
 - packageId: com.unity.mathematics@1.3.2
   testable: 0
   isDirectDependency: 0
   version: 1.3.2
   source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.mathematics"
+  resolvedPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL] MovementGame\Library\PackageCache\com.unity.mathematics@8017b507cc74
   assetPath: Packages/com.unity.mathematics
   name: com.unity.mathematics
   displayName: Mathematics
@@ -4011,7 +4062,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: assets
+  type: 
   description: Unity's C# SIMD math library providing vector types and math functions
     with a shader like syntax.
   errors: []
@@ -4054,7 +4105,7 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
   datePublishedTicks: 638409134840000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html
@@ -4086,79 +4137,4 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.3.2
     minimumUnityVersion: 2021.3.0a1
-- packageId: com.unity.settings-manager@2.0.1
-  testable: 0
-  isDirectDependency: 0
-  version: 2.0.1
-  source: 1
-  resolvedPath: "C:\\Users\\propr\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\the-Movement-Game\\[ORIGINAL]
-    MovementGame\\Library\\PackageCache\\com.unity.settings-manager"
-  assetPath: Packages/com.unity.settings-manager
-  name: com.unity.settings-manager
-  displayName: Settings Manager
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: asset
-  description: A framework for making any serializable field a setting, complete
-    with a pre-built settings interface.
-  errors: []
-  versions:
-    all:
-    - 0.1.0-preview.4
-    - 0.1.0-preview.8
-    - 1.0.0
-    - 1.0.1
-    - 1.0.2
-    - 1.0.3
-    - 2.0.0
-    - 2.0.1
-    compatible:
-    - 2.0.1
-    recommended: 2.0.1
-    deprecated: []
-  dependencies: []
-  resolvedDependencies: []
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 637744099390000000
-  documentationUrl: 
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.com/Unity-Technologies/com.unity.settings-manager.git
-    revision: 9b7c12d04ef880168151c127fd6b37b5931197dc
-    path: 
-  unityLifecycle:
-    version: 2.0.1
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 56a930affa1e4462d3595b5c19a1c2a4bf2015d2
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 2.0.1
-    minimumUnityVersion: 2018.4.0a1
-m_BuiltInPackagesHash: 6f2402311d0e4d4e35607ca968b42a9258561b2a
+m_BuiltInPackagesHash: 0031b9ac4f335bf62e122297073e12e552291172
