@@ -402,6 +402,7 @@
 "Assets/damager.cs"
 "Assets/DasherEnemy.cs"
 "Assets/DashSpell.cs"
+"Assets/detectTarget.cs"
 "Assets/Explosive.cs"
 "Assets/FillText.cs"
 "Assets/HELLO GITHUB.cs"
@@ -410,6 +411,7 @@
 "Assets/LeapSpell.cs"
 "Assets/LobberEnemy.cs"
 "Assets/LockOnManager.cs"
+"Assets/MethodTrigger.cs"
 "Assets/particleHandle.cs"
 "Assets/PlayerController.cs"
 "Assets/PlayerHpManager.cs"
@@ -420,7 +422,9 @@
 "Assets/SplineConnector.cs"
 "Assets/SplineManager.cs"
 "Assets/StretchConnector.cs"
+"Assets/targetSetter.cs"
 "Assets/UI_Script.cs"
+"Assets/WanderAround.cs"
 -langversion:9.0
 /deterministic
 /optimize+

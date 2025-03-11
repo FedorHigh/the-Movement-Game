@@ -17,10 +17,10 @@ public class UI_Script : MonoBehaviour
 
     private void Update()
     {
-        ability = manager.currentAbility;
+        //ability = manager.currentAbility;
         //Debug.Log(ability.GetCDleft());
         //Debug.Log(ability.GetCDset());
-        curValue = ability.GetCDleft() / ability.GetCDset();
-        cooldownBar.value = curValue;
+        //curValue = ability.GetCDleft() / ability.GetCDset();
+        //cooldownBar.value = curValue;
     }
 }

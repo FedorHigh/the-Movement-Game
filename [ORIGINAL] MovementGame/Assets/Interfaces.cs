@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Animations;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
@@ -293,15 +294,24 @@ namespace Interfaces
         public Vector3 move;
         public Dictionary<GameObject, float> resistances;
         public LayerMask targetLayer;
+        public NavMeshAgent agent;
+        public GameObject detector;
         //public Bet TargetHp;
         float tmp;
         public virtual void locateAnyTarget(float radius) {
             Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
             TargetObj = targets[0].gameObject;
         }
+        public virtual void OnLocateTarget(GameObject target) {
+            TargetObj = target;
+            detector.SetActive(false);
+            agent.speed = moveSpeed;
+        }
+
         public virtual void Start() {
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, float>();
+            agent = GetComponent<NavMeshAgent>();
         }
         public virtual void UpdResistances() {
             //Debug.Log(resistances.ToString());
@@ -311,10 +321,12 @@ namespace Interfaces
                 if (resistances[a] <= 0)resistances.Remove(a);
             }
         }
-        public virtual void DoFollowTarget() { 
-            move = TargetObj.transform.position - transform.position;
-            move.y = 0;
-            rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        public virtual void DoFollowTarget() {
+            //if (agent.enabled) agent.destination = trg.transform.position;
+            //move = TargetObj.transform.position - transform.position;
+            //move.y = 0;
+            //rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            if(agent.enabled)agent.SetDestination(TargetObj.transform.position);
         }
         public virtual void DoMoveForward() {
             rb.AddForce(transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
