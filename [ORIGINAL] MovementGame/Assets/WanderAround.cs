@@ -20,6 +20,7 @@ public class WanderAround : MonoBehaviour
         wander();
     }
     public void wander() {
+        if (!enabled) return;
         Debug.Log("Wandering...");
         Vector3 vec = new Vector3(Random.value, 0, Random.value).normalized * (distance * Random.value);
         agent.speed = speed;

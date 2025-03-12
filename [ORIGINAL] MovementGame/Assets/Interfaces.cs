@@ -301,11 +301,14 @@ namespace Interfaces
         public virtual void locateAnyTarget(float radius) {
             Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
             TargetObj = targets[0].gameObject;
+            OnLocateTarget(TargetObj);
         }
         public virtual void OnLocateTarget(GameObject target) {
             TargetObj = target;
             detector.SetActive(false);
             agent.speed = moveSpeed;
+            WanderAround tmp;
+            if (TryGetComponent<WanderAround>(out tmp)) tmp.enabled = false;
         }
 
         public virtual void Start() {

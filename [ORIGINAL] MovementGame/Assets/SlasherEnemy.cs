@@ -55,7 +55,7 @@ public class SlasherEnemy : Entity
     {
         base.OnLocateTarget(target);
 		Debug.Log("SSSSSSSSSSEEEEEEYOUUUUUUUUUUUU");
-		GetComponent<WanderAround>().enabled = false;
+		//GetComponent<WanderAround>().enabled = false;
 		followTarget = true;
         agent.speed = defSpeed;
     }

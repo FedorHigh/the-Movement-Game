@@ -416,6 +416,7 @@
 "Assets/PlayerController.cs"
 "Assets/PlayerHpManager.cs"
 "Assets/proximityDetonate.cs"
+"Assets/RangedReposition.cs"
 "Assets/SlasherEnemy.cs"
 "Assets/SlashSpell.cs"
 "Assets/SmoothAnimate.cs"
