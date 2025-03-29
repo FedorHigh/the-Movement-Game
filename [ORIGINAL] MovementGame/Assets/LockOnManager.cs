@@ -78,7 +78,7 @@ public class LockOnManager : MonoBehaviour
     {
         cameraDistance += Input.GetAxis("Mouse ScrollWheel");
         cameraDistance = Mathf.Clamp(cameraDistance, 0.0f, 2.0f);
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Mouse2)) {
             TryLockOn();
         }
         if (player.lockedOn) {
