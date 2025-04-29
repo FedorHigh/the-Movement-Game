@@ -24,7 +24,17 @@ namespace Interfaces
 
     }
 
-    
+    public interface IAction {
+        public double GetCDleft();
+
+        public bool GetReady();
+
+        public void StartAction();
+
+        public void Cancel();
+
+
+    }
 
     public class DashSpline {
         public GameObject splineObj;
@@ -67,7 +77,7 @@ namespace Interfaces
         }
     }
 
-
+    
 
     public class Ability : MonoBehaviour, IAbility{
         //declaring and returning vars
@@ -285,6 +295,103 @@ namespace Interfaces
         }
     }
 
+    public class Action : MonoBehaviour
+    {
+        public float CDset, duration;
+        float CDleft;
+        public bool ready, waiting, enableWait = true;
+        public Entity host;
+        public string endMethod = "", readyMethod = "";
+        public virtual void Start()
+        {
+            host = GetComponent<Entity>();
+            ready = true;
+            waiting = false;
+        }
+        public virtual void Update() {
+            //DoCooldown();
+        }
+        public virtual void ResetReady()
+        {
+            if (readyMethod != "")
+            {
+                host.Invoke(readyMethod, 0f);
+            }
+            ready = true;
+            if (waiting) {
+                waiting = false;
+                StartAction();
+            }
+        }
+        public virtual void DoCooldown() {
+            if (!ready)
+            {
+                CDleft -= Time.deltaTime;
+                if (CDleft <= 0)
+                {
+                    CDleft = CDset;
+                    ready = true;
+                }
+            }
+        }
+        public virtual void StartCooldown() {
+            /*
+            if (!ready)
+            {
+                CDleft -= Time.deltaTime;
+                if (CDleft <= 0) {
+                    CDleft = CDset;
+                    ready = true;
+                }
+            }
+            */
+            ready = false;
+            Invoke("ResetReady", (float)CDset);
+        }
+        public virtual void Cancel()
+        {
+            CancelInvoke("StartActionRepeating");
+            CancelInvoke("StartAction");
+            waiting = false;
+        }
+
+        public virtual double GetCDset()
+        {
+            return CDset;
+        }
+
+        public virtual bool GetReady()
+        {
+            return ready;
+        }
+
+        public virtual bool StartAction()
+        {
+            if (!ready) {
+                if(enableWait) waiting = true;
+                Debug.Log("cancelled");
+                return false;
+            }
+            //Debug.Log("performed" + ready.ToString());
+            StartCooldown();
+            if(duration >= 0)ScheduleEnd();
+            return true;
+        }
+
+        public virtual void StartActionRepeating() {
+            StartAction();
+            Invoke("StartActionRepeating", (float)(duration+CDset));
+        }
+        public virtual void ScheduleEnd() {
+            Invoke("EndAction", (float) duration);
+        }
+        public virtual void EndAction() {
+            if (endMethod != "") {
+                host.Invoke(endMethod, 0f);
+            }
+            StartCooldown();
+        }
+    }
     public class Entity : MonoBehaviour{
         public float maxHp, moveSpeed;
         public float hp;
@@ -296,6 +403,7 @@ namespace Interfaces
         public LayerMask targetLayer;
         public NavMeshAgent agent;
         public GameObject detector;
+        public WanderAround wander;
         //public Bet TargetHp;
         float tmp;
         public virtual void locateAnyTarget(float radius) {
@@ -307,14 +415,16 @@ namespace Interfaces
             TargetObj = target;
             detector.SetActive(false);
             agent.speed = moveSpeed;
-            WanderAround tmp;
-            if (TryGetComponent<WanderAround>(out tmp)) tmp.enabled = false;
+            //WanderAround tmp;
+            //if (TryGetComponent<WanderAround>(out tmp)) tmp.enabled = false;
+            wander.Cancel();
         }
 
         public virtual void Start() {
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, float>();
             agent = GetComponent<NavMeshAgent>();
+            TryGetComponent<WanderAround>(out wander);
         }
         public virtual void UpdResistances() {
             //Debug.Log(resistances.ToString());
@@ -324,6 +434,7 @@ namespace Interfaces
                 if (resistances[a] <= 0)resistances.Remove(a);
             }
         }
+        
         public virtual void DoFollowTarget() {
             //if (agent.enabled) agent.destination = trg.transform.position;
             //move = TargetObj.transform.position - transform.position;
@@ -331,6 +442,7 @@ namespace Interfaces
             //rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
             if(agent.enabled)agent.SetDestination(TargetObj.transform.position);
         }
+        
         public virtual void DoMoveForward() {
             rb.AddForce(transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
         }
@@ -340,6 +452,7 @@ namespace Interfaces
             tmp.y = transform.position.y;
             transform.LookAt(tmp);
         }
+        
         public virtual void Update() {
             if (followTarget) DoFollowTarget();
             if (lookAtTarget) DoLookAtTarget();
@@ -370,5 +483,25 @@ namespace Interfaces
             }
         }
 
+    }
+
+    public class StateEntity : Entity {
+        public string[] states;
+        public int state;
+        public string stateStr;
+        public void SetState(int s) {
+            state = s;
+            stateStr = states[state];
+        }
+        public override void Start()
+        {
+            base.Start();
+            SetState(state);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if(stateStr!="") Invoke(stateStr, 0);
+        }
     }
 }
