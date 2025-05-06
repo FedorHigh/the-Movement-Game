@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class AttackAction : Action
 {
     public GameObject attack;
-    public float slowSpeed, defSpeed, threshold;
+    public float slowSpeed, defSpeed, threshold, delay;
     public bool slowDown, dash;
     public float dist, dashStrength;
     public MethodTrigger trigger;
@@ -36,18 +36,21 @@ public class AttackAction : Action
     {
         if (ready) StartAction();
     }
+    public void DoAttack() {
+        attack.SetActive(true);
+    }
     public override bool StartAction()
     {
         if (!base.StartAction())
         {
             return false;
         }
-
         if (slowDown) agent.enabled = false;
         if (dash) {
             rb.isKinematic = false;
             rb.AddForce(transform.forward * dashStrength * rb.mass, ForceMode.Impulse);
         }
+
         Invoke("resetMovement", CDset * 0.5f);
 
         ready = false;
@@ -55,7 +58,7 @@ public class AttackAction : Action
 
         
         Invoke("resetReady", CDset);
-        attack.SetActive(true);
+        Invoke("DoAttack", delay);
         //moveSpeed = 0;
         //lookAtTarget = false;
 

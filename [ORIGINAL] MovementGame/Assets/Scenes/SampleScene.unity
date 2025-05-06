@@ -484,6 +484,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 0}
   wander: {fileID: 0}
+  states: []
+  state: 0
+  stateStr: 
   attack: {fileID: 0}
 --- !u!54 &174898277
 Rigidbody:
@@ -1965,6 +1968,10 @@ PrefabInstance:
       propertyPath: CDset
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 52328202762809851, guid: b3f0c28ebca3b2742a266201ddd27531, type: 3}
+      propertyPath: ready
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 369040279643567146, guid: b3f0c28ebca3b2742a266201ddd27531, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
       value: 0.21548843
@@ -2039,11 +2046,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383617760374652136, guid: b3f0c28ebca3b2742a266201ddd27531, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8615460574090487537, guid: b3f0c28ebca3b2742a266201ddd27531, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
       value: 0.21548843
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807802601096404403, guid: b3f0c28ebca3b2742a266201ddd27531, type: 3}
+      propertyPath: ready
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2853,9 +2864,10 @@ MonoBehaviour:
   endMethod: 
   readyMethod: 
   attack: {fileID: 551016028}
-  slowSpeed: 0
-  defSpeed: 20
+  slowSpeed: 5
+  defSpeed: 15
   threshold: 0
+  delay: 0.5
   slowDown: 1
   dash: 0
   dist: 0
@@ -2863,6 +2875,17 @@ MonoBehaviour:
   trigger: {fileID: 208309310}
   agent: {fileID: 0}
   rb: {fileID: 0}
+--- !u!114 &1517544366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 323208142520781698, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+  m_PrefabInstance: {fileID: 1529316144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517544356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b0d11380300284ebbe258aa05b460c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1529316144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2871,6 +2894,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 323208142520781698, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: CDset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 323208142520781698, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: ready
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 323208142520781698, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 323208142520781698, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: distance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 777900241928753429, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
       value: -0.06630421
@@ -2878,6 +2917,34 @@ PrefabInstance:
     - target: {fileID: 777900241928753429, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
       value: 3.5472736
+      objectReference: {fileID: 0}
+    - target: {fileID: 864808860408910721, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 1517544365}
+    - target: {fileID: 864808860408910721, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: wander
+      value: 
+      objectReference: {fileID: 1517544366}
+    - target: {fileID: 2024919203282080156, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9628656
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024919203282080156, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1704887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490413711154765291, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.24352916
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490413711154765291, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490413711154765291, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 5484873809312870927, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2923,13 +2990,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlasherEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5655136473985275606, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837062711897269220, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
+      propertyPath: m_TranslationAtRest.z
+      value: 1.23
+      objectReference: {fileID: 0}
     - target: {fileID: 6837062711897269220, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6837062711897269220, guid: 024dbe7a83c4be840ad05db5635e6256, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
-      value: 3.1494446
+      value: 2.0388517
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3444,6 +3519,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 0}
   wander: {fileID: 0}
+  states: []
+  state: 0
+  stateStr: 
   attack: {fileID: 0}
 --- !u!54 &1729177402
 Rigidbody:
@@ -4518,6 +4596,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 0}
   wander: {fileID: 0}
+  states: []
+  state: 0
+  stateStr: 
   attack: {fileID: 0}
 --- !u!54 &2008271330
 Rigidbody:
@@ -4926,6 +5007,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 0}
   wander: {fileID: 0}
+  states: []
+  state: 0
+  stateStr: 
   attack: {fileID: 0}
 --- !u!54 &2109814515
 Rigidbody:

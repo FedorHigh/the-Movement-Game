@@ -2,7 +2,7 @@ using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SlasherEnemy : Entity
+public class SlasherEnemy : StateEntity
 {
 	public AttackAction attack;
     //private float defSpeed;
@@ -16,6 +16,7 @@ public class SlasherEnemy : Entity
     {
         base.Start();
         attack = GetComponent<AttackAction>();
+        wander.StartActionRepeating();
     }
     public void TryAttack() {
         attack.TryAttack();

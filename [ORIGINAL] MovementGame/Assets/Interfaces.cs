@@ -299,7 +299,7 @@ namespace Interfaces
     {
         public float CDset, duration;
         float CDleft;
-        public bool ready, waiting, enableWait = true;
+        public bool ready = true, waiting, enableWait = true;
         public Entity host;
         public string endMethod = "", readyMethod = "";
         public virtual void Start()
@@ -313,11 +313,11 @@ namespace Interfaces
         }
         public virtual void ResetReady()
         {
+            ready = true;
             if (readyMethod != "")
             {
                 host.Invoke(readyMethod, 0f);
             }
-            ready = true;
             if (waiting) {
                 waiting = false;
                 StartAction();
@@ -335,16 +335,6 @@ namespace Interfaces
             }
         }
         public virtual void StartCooldown() {
-            /*
-            if (!ready)
-            {
-                CDleft -= Time.deltaTime;
-                if (CDleft <= 0) {
-                    CDleft = CDset;
-                    ready = true;
-                }
-            }
-            */
             ready = false;
             Invoke("ResetReady", (float)CDset);
         }
@@ -367,11 +357,13 @@ namespace Interfaces
 
         public virtual bool StartAction()
         {
+            
             if (!ready) {
                 if(enableWait) waiting = true;
                 Debug.Log("cancelled");
                 return false;
             }
+            ready = false;
             //Debug.Log("performed" + ready.ToString());
             StartCooldown();
             if(duration >= 0)ScheduleEnd();
@@ -425,6 +417,7 @@ namespace Interfaces
             resistances = new Dictionary<GameObject, float>();
             agent = GetComponent<NavMeshAgent>();
             TryGetComponent<WanderAround>(out wander);
+            
         }
         public virtual void UpdResistances() {
             //Debug.Log(resistances.ToString());
