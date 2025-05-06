@@ -404,6 +404,7 @@
 "Assets/AssociatedVarsSpline.cs"
 "Assets/AttackBox.cs"
 "Assets/ballisticTest.cs"
+"Assets/BaseEntity.cs"
 "Assets/BetterController.cs"
 "Assets/ConnectEntities.cs"
 "Assets/damager.cs"
@@ -433,6 +434,7 @@
 "Assets/targetSetter.cs"
 "Assets/UI_Script.cs"
 "Assets/WanderAround.cs"
+"Assets/weakpoint.cs"
 "Assets/WormEnemy.cs"
 -langversion:9.0
 /deterministic

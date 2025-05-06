@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -297,7 +298,7 @@ namespace Interfaces
         public NavMeshAgent agent;
         public GameObject detector;
         //public Bet TargetHp;
-        float tmp;
+        public float tmp;
         public virtual void locateAnyTarget(float radius) {
             Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
             TargetObj = targets[0].gameObject;
@@ -368,6 +369,10 @@ namespace Interfaces
                 Damage(dmg.dmg);
                 resistances.Add(other.gameObject, dmg.cooldown);
             }
+        }
+        public virtual IEnumerator OnWeakpointHit(float dmg) { 
+            yield return null;
+            Debug.Log("Weakpoint hit for " + dmg.ToString() + " damage");
         }
 
     }

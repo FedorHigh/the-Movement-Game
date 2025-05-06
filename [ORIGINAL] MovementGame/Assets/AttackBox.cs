@@ -16,7 +16,7 @@ public class AttackBox : MonoBehaviour
     //}
     public void OnEnable()
     {
-        Debug.Log("spawned");
+        //Debug.Log("spawned");
         damager = GetComponent<damager>();
         //constraint = GetComponent<ParentConstraint>();
 
@@ -36,7 +36,7 @@ public class AttackBox : MonoBehaviour
     }
     public void despawn()
     {
-        Debug.Log("despawned");
+        //Debug.Log("despawned");
         if (deleteOnTimeout) Destroy(gameObject);
         else {
             damager.enabled = true;

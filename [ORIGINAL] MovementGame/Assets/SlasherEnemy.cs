@@ -54,7 +54,7 @@ public class SlasherEnemy : Entity
     public override void OnLocateTarget(GameObject target)
     {
         base.OnLocateTarget(target);
-		Debug.Log("SSSSSSSSSSEEEEEEYOUUUUUUUUUUUU");
+		//Debug.Log("SSSSSSSSSSEEEEEEYOUUUUUUUUUUUU");
 		//GetComponent<WanderAround>().enabled = false;
 		followTarget = true;
         agent.speed = defSpeed;
