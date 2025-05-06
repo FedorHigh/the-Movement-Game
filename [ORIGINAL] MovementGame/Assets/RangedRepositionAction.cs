@@ -1,8 +1,9 @@
 using Interfaces;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedReposition : MonoBehaviour
+public class RangedRepositionAction : Action
 {
     public Entity entity;
     public GameObject target;
@@ -11,9 +12,11 @@ public class RangedReposition : MonoBehaviour
     public Vector3 shift;
     bool reverse;
     Vector3 vec;
-    public void Reposition() {
+    public override bool StartAction() {
+        if(!base.StartAction()) return false;
+        entity = host;
         agent = GetComponent<NavMeshAgent>();
-        TryGetComponent<Entity>(out entity);
+        //TryGetComponent<Entity>(out entity);
         target = entity.TargetObj;
 
         transform.LookAt(target.transform);
@@ -33,5 +36,6 @@ public class RangedReposition : MonoBehaviour
         vec += (transform.position);
         agent.SetDestination(vec);
         //Debug.Log(vec);
+        return true;
     }
 }
