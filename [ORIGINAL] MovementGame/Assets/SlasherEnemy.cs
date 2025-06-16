@@ -1,11 +1,12 @@
-using Interfaces;
+using CustomClasses;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class SlasherEnemy : StateEntity
 {
-	public AttackAction attack;
-    //private float defSpeed;
+	public Action attack;
+    public float defSpeed;
+    public MethodTrigger trigger;
 
     public override void Update(){
 		base.Update();
@@ -15,17 +16,26 @@ public class SlasherEnemy : StateEntity
     public override void Start()
     {
         base.Start();
-        attack = GetComponent<AttackAction>();
+        //attack = GetComponent<AttackAction>();
         wander.StartActionRepeating();
     }
     public void TryAttack() {
-        attack.TryAttack();
+        Debug.Log("triggered");
+        attack.StartAction();
+    }
+    public void CheckTrigger() {
+        if (trigger.inTrigger)
+        {
+            Debug.Log("Retriggered");
+            attack.StartAction();
+        }
     }
     public override void OnLocateTarget(GameObject target)
     {
         base.OnLocateTarget(target);
-		followTarget = true;
-        agent.speed = attack.defSpeed;
+		//followTarget = true;
+        agent.speed = defSpeed;
+        GetComponent<StateMachine>().Trigger(0);
     }
 
 }

@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
         #region Camera Limitation Calculator
         //Camera limitation variables
         const float MIN_Y = -60.0f;

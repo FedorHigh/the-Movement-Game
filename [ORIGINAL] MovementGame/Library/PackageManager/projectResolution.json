@@ -99,6 +99,16 @@
       "source": "builtin",
       "testable": false
     },
+    "com.unity.postprocessing@3.4.0": {
+      "name": "com.unity.postprocessing",
+      "displayName": "Post Processing",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.postprocessing@026b2a0827a4",
+      "fingerprint": "026b2a0827a438e3079df62a60ca03d54961393d",
+      "editorCompatibility": "2019.4.19f1",
+      "version": "3.4.0",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.splines@2.7.2": {
       "name": "com.unity.splines",
       "displayName": "Splines",
@@ -136,6 +146,16 @@
       "fingerprint": "03407c6d875144b0a8ffdc0af3e0d5cccfa5a4ae",
       "editorCompatibility": "2019.2.0a1",
       "version": "2.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.visualeffectgraph@17.0.3": {
+      "name": "com.unity.visualeffectgraph",
+      "displayName": "Visual Effect Graph",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.visualeffectgraph@69d444715da0",
+      "fingerprint": "69d444715da092341c2d2cb74efbf73ceb5b08c5",
+      "editorCompatibility": "6000.0.0a1",
+      "version": "17.0.3",
       "source": "builtin",
       "testable": false
     },
@@ -411,6 +431,26 @@
       "source": "builtin",
       "testable": false
     },
+    "com.unity.shadergraph@17.0.3": {
+      "name": "com.unity.shadergraph",
+      "displayName": "Shader Graph",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.shadergraph@afc42d8f5d23",
+      "fingerprint": "afc42d8f5d23516679001415ac5921fc5626e87e",
+      "editorCompatibility": "6000.0.0a1",
+      "version": "17.0.3",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.render-pipelines.core@17.0.3": {
+      "name": "com.unity.render-pipelines.core",
+      "displayName": "Core RP Library",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.render-pipelines.core@38fdc9b96878",
+      "fingerprint": "38fdc9b96878a2e6f6c44f4e2f8a9e68f7b5ce46",
+      "editorCompatibility": "6000.0.0a1",
+      "version": "17.0.3",
+      "source": "builtin",
+      "testable": false
+    },
     "com.unity.ext.nunit@2.0.5": {
       "name": "com.unity.ext.nunit",
       "displayName": "Custom NUnit",
@@ -448,6 +488,56 @@
       "fingerprint": "7a907cf5a4591e4e25f4203e3be84f240058c34d",
       "editorCompatibility": "2020.3.0a1",
       "version": "1.8.19",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.collections@2.5.1": {
+      "name": "com.unity.collections",
+      "displayName": "Collections",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.collections@56bff8827a7e",
+      "fingerprint": "56bff8827a7ef6d44fcee4f36e558a74da89c1a0",
+      "editorCompatibility": "2022.3.11f1",
+      "version": "2.5.1",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.rendering.light-transport@1.0.1": {
+      "name": "com.unity.rendering.light-transport",
+      "displayName": "Unity Light Transport Library",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.rendering.light-transport@307bc27a498f",
+      "fingerprint": "307bc27a498fc9cd409bbd426c85d8dc7f140bc1",
+      "editorCompatibility": "2023.3.0b1",
+      "version": "1.0.1",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.searcher@4.9.3": {
+      "name": "com.unity.searcher",
+      "displayName": "Searcher",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.searcher@1e17ce91558d",
+      "fingerprint": "1e17ce91558d1d9127554adc03d275f39a7466a2",
+      "editorCompatibility": "2019.1.0a1",
+      "version": "4.9.3",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.nuget.mono-cecil@1.11.4": {
+      "name": "com.unity.nuget.mono-cecil",
+      "displayName": "Mono Cecil",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.nuget.mono-cecil@d6f9955a5d5f",
+      "fingerprint": "d6f9955a5d5f84d45442ff1ad0fb694cc6e2fd62",
+      "editorCompatibility": "2018.4.0a1",
+      "version": "1.11.4",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.test-framework.performance@3.0.3": {
+      "name": "com.unity.test-framework.performance",
+      "displayName": "Performance testing API",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.test-framework.performance@fb0dc592af8b",
+      "fingerprint": "fb0dc592af8b524f1a06c50d7caf95552f1bcd2f",
+      "editorCompatibility": "2020.3.0a1",
+      "version": "3.0.3",
       "source": "registry",
       "testable": false
     }

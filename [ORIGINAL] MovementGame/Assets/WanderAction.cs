@@ -1,4 +1,4 @@
-using Interfaces;
+using CustomClasses;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,17 +19,21 @@ public class WanderAround : Action
         if(center==null) center = transform;
         cntr = center.position;
         cntr.y = transform.position.y;
+        //agent = GetComponent<NavMeshAgent>();
         //wander();
     }
-    public override bool StartAction() {
+    public override void StartAction() {
         //if (!enabled) return;
-        //Debug.Log("Wandering...");
-        if (!base.StartAction()) return false;
+        Debug.Log("Wandering...");
+        if (!base.PrepareToStart()) return;
+        //base.StartAction();
         Vector3 vec = new Vector3(Random.value, 0, Random.value).normalized * (distance * Random.value);
+
+        agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
         agent.destination = (cntr) + vec;
         //Debug.Log((cntr) + vec);
-        return true;
+        //return true;
         
     }
 }

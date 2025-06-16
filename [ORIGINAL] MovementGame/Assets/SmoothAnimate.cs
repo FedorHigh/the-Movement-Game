@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Splines;
-using Interfaces;
+using CustomClasses;
 public class SmoothAnimate : MonoBehaviour
 {
     public SplineAnimate anim;

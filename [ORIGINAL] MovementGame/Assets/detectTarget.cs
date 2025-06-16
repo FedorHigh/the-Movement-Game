@@ -1,4 +1,4 @@
-using Interfaces;
+using CustomClasses;
 using UnityEngine;
 
 public class detectTarget : MonoBehaviour

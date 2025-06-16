@@ -1,5 +1,5 @@
 using UnityEngine;
-using Interfaces;
+using CustomClasses;
 using UnityEngine.Splines;
 using UnityEngine.Animations;
 using Cinemachine;

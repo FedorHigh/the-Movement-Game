@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1039871113564302176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.8999991}
-  m_LocalScale: {x: 0.12346, y: 1, z: 0.33893734}
+  m_LocalPosition: {x: -0, y: 0, z: 1.23}
+  m_LocalScale: {x: 0.12346, y: 1, z: 0.24352916}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5484873809312870927}
@@ -123,10 +123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee652cf648f81642a9bb9fd09008407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterMethod: TryAttack
-  exitMethod: 
-  toTrigger: {fileID: 864808860408910721}
+  toTrigger: {fileID: 6595999855382358698}
   inTrigger: 0
+  enterId: 1
+  exitId: -1
 --- !u!1773428102 &6837062711897269220
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -137,10 +137,10 @@ ParentConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: 1.8999991}
+  m_TranslationAtRest: {x: 0, y: 0, z: 1.23}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: 0, z: 3.1494408}
+  - {x: 0, y: 0, z: 2.0388508}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -186,7 +186,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000029802319, y: -0.000000029802319, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.04000008, y: 0.6599998, z: 2.1400018}
-  m_LocalScale: {x: 2.3905644, y: 0.17845808, z: 3.0056322}
+  m_LocalScale: {x: 2.9628656, y: 1.1704887, z: 3.0056322}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5484873809312870927}
@@ -279,7 +279,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.04000008, y: 0.6599998, z: 2.1400018}
   m_RotationAtRest: {x: 0, y: 0, z: 90}
   m_TranslationOffsets:
-  - {x: -0.06630421, y: 1.094017, z: 3.5472717}
+  - {x: -0.06630421, y: 1.094017, z: 3.5472727}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 90}
   m_AffectTranslationX: 1
@@ -662,6 +662,12 @@ GameObject:
   - component: {fileID: 864808860408910721}
   - component: {fileID: 7192057558518726274}
   - component: {fileID: 323208142520781698}
+  - component: {fileID: 4812020301895754101}
+  - component: {fileID: 6181058777528920161}
+  - component: {fileID: 6595999855382358698}
+  - component: {fileID: 3679460859399412031}
+  - component: {fileID: 2845266782243985391}
+  - component: {fileID: 8497672708921036461}
   m_Layer: 0
   m_Name: SlasherEnemy
   m_TagString: Untagged
@@ -820,15 +826,13 @@ MonoBehaviour:
     m_Bits: 128
   agent: {fileID: 0}
   detector: {fileID: 4315249125219887895}
-  attack: {fileID: 1983427431257420500}
-  CDleft: 0
-  CDset: 3
-  slowSpeed: 2
+  wander: {fileID: 323208142520781698}
+  tmp: 0
+  states: []
+  state: 0
+  stateStr: 
+  attack: {fileID: 6181058777528920161}
   defSpeed: 10
-  threshold: 7
-  attackReady: 1
-  dist: 0
-  dashStrength: 0
   trigger: {fileID: 2542232776004083914}
 --- !u!195 &7192057558518726274
 NavMeshAgent:
@@ -840,11 +844,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5000001
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 1200
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -864,10 +868,164 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b0d11380300284ebbe258aa05b460c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CDset: 5
+  duration: 0
+  ready: 1
+  waiting: 0
+  enableWait: 1
+  enableChaining: 0
+  host: {fileID: 0}
+  endMethod: 
+  readyMethod: 
+  chainAction: {fileID: 0}
+  chainDelay: 0
+  chainActive: 1
+  chainOnStart: 0
   target: {fileID: 864808860408910721}
   agent: {fileID: 0}
-  distance: 25
+  distance: 50
   delay: 3
   speed: 10
   waitForStop: 1
   center: {fileID: 0}
+--- !u!114 &4812020301895754101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351dd73baeb0f8f40bdf66fb214ac26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CDset: 0
+  duration: 3
+  ready: 1
+  waiting: 0
+  enableWait: 0
+  enableChaining: 0
+  host: {fileID: 0}
+  endMethod: 
+  readyMethod: 
+  chainAction: {fileID: 0}
+  chainDelay: 0
+  chainActive: 0
+  chainOnStart: 0
+  attack: {fileID: 1983427431257420500}
+  slowSpeed: 5
+  defSpeed: 15
+  threshold: 0
+  delay: 0.5
+  slowDown: 1
+  dash: 0
+  dist: 0
+  dashStrength: 0
+  trigger: {fileID: 2542232776004083914}
+  agent: {fileID: 0}
+  rb: {fileID: 0}
+--- !u!114 &6181058777528920161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecae144577f8724abb94c8c2148bf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CDset: 3
+  duration: 3
+  ready: 1
+  waiting: 0
+  enableWait: 0
+  enableChaining: 1
+  host: {fileID: 0}
+  endMethod: CheckTrigger
+  readyMethod: CheckTrigger
+  chainAction: {fileID: 4812020301895754101}
+  chainDelay: 0
+  chainActive: 1
+  chainOnStart: 1
+  agent: {fileID: 0}
+  rb: {fileID: 0}
+  firstSpeed: 0
+  secondSpeed: 5
+  defSpeed: 10
+  threshold: 1.5
+--- !u!114 &6595999855382358698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4505b1114551ed34cadd176f8cc5eded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 3679460859399412031}
+  - {fileID: 2845266782243985391}
+  - {fileID: 8497672708921036461}
+  triggers:
+  - detection orb
+  - attack trigger
+  - attack end trigger
+  curState: 0
+  inputTable:
+  - 1--
+  - -2-
+  - --1
+--- !u!114 &3679460859399412031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4410b2e7be760d41a040ea3b97829df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+--- !u!114 &2845266782243985391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c9e7368c92a5b429c3ea5b5906c1fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+  agent: {fileID: 0}
+  host: {fileID: 0}
+--- !u!114 &8497672708921036461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655136473985275606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55c79aeca17cee4c92af03b2aff5050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+  action: {fileID: 6181058777528920161}
+  duration: 1.5
+  triggerMethod: AttackEndTrigger
+  inherit: 0
