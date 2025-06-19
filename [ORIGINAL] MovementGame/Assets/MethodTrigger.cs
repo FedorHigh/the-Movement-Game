@@ -7,7 +7,7 @@ public class MethodTrigger : MonoBehaviour
     //public MonoBehaviour toTrigger;
     public StateMachine toTrigger;
     public bool inTrigger;
-    public int enterId, exitId;
+    public int enterId = -1, exitId = -1;
 
     private void OnTriggerEnter()
     {

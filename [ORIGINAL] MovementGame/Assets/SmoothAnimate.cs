@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using CustomClasses;
+using UnityEngine.Animations;
 public class SmoothAnimate : MonoBehaviour
 {
     public SplineAnimate anim;
     public SplineContainer container;
+    public ParentConstraint constraint;
+    public Transform toMove;
     public float time, speed, duration, speedOverwrite;
     public bool playing;
     IAbility caller;
@@ -21,6 +24,7 @@ public class SmoothAnimate : MonoBehaviour
         caller = call;
         //Debug.Log("Cast:");
         //Debug.Log(caller.GetID());
+        if(constraint != null) constraint.enabled = false;
         anim.Container = container;
         time = 0;
         playing = true;
@@ -29,11 +33,13 @@ public class SmoothAnimate : MonoBehaviour
     }
     public void Reset()
     {
-        time = 0;
         playing = false;
+        time = 0;
+        if (constraint != null) constraint.enabled = true;
+        if(toMove != null) toMove.position = transform.position;
         //Debug.Log(caller.ToString());
         if (caller != null) caller.Finish();
-        else Debug.Log("NULL CALLER");
+        //else Debug.Log("NULL CALLER");
     }
     void Update()
     {
@@ -41,7 +47,7 @@ public class SmoothAnimate : MonoBehaviour
             time += Time.deltaTime*speedOverwrite;
             if (time >= duration) { 
                 time = duration;
-                anim.ElapsedTime = time;
+                anim.ElapsedTime = time-0.00001f;
                 Reset();
             }
             else anim.ElapsedTime = time;

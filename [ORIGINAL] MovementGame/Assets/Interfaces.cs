@@ -315,7 +315,7 @@ namespace CustomClasses
         }
         public virtual void Start()
         {
-            host = GetComponent<Entity>();
+            if(host==null) host = GetComponent<Entity>();
             ready = true;
             waiting = false;
         }
@@ -491,6 +491,7 @@ namespace CustomClasses
         }
         public virtual void OnTriggerStay(Collider other) {
             if (other.gameObject.CompareTag("HurtEntity")) {
+                //Debug.Log("ow");
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 damager dmg = other.gameObject.GetComponent<damager>();
                 Damage(dmg.dmg);
@@ -507,8 +508,8 @@ namespace CustomClasses
     public class State : MonoBehaviour {
         public StateMachine parent;
         public bool active;
-        public virtual void Start() { 
-            parent = GetComponent<StateMachine>();
+        public virtual void Start() {
+            if (parent == null) parent = GetComponent<StateMachine>();
         }
         public virtual void Enter(string info = "") { 
             active = true;
@@ -591,14 +592,17 @@ namespace CustomClasses
             }
             states[0].Enter();
         }
-        public void Trigger(int id)
+        public virtual void Trigger(int id)
         {
-            Debug.Log("triggered on state " + curState.ToString() + " trigger " + id.ToString());
+            Debug.Log("TRIGGERED on state " + curState.ToString() + " trigger " + id.ToString());
+            //if (id == 3) return;
             if (table[curState][id]!=curState) Switch(table[curState][id]);
         }
-        public void Switch(int target){
+        public virtual void Switch(int target){
             Debug.Log("switched state from " + curState.ToString()+ " to " + target.ToString());
+            
             states[curState].Exit();
+            //if (curState == 2) return;
             states[target].Enter();
             curState = target;
         }

@@ -125,7 +125,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.04, y: 0.03, z: 1.92}
   m_RotationAtRest: {x: 0, y: 0, z: 90}
   m_TranslationOffsets:
-  - {x: -0.06630421, y: 0.049728394, z: 3.1825974}
+  - {x: -0.06630325, y: 0.049728394, z: 3.1825972}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 90}
   m_AffectTranslationX: 1
@@ -546,7 +546,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 0, z: 6.53}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: 0, z: 10.824146}
+  - {x: 0.0000019073486, y: 0, z: 10.824146}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   active: 0
   action: {fileID: 4074119181212109740}
   duration: 1.5
-  triggerMethod: AttackEndTrigger
+  triggerId: 2
   inherit: 0
 --- !u!114 &1874826210159356767
 MonoBehaviour:

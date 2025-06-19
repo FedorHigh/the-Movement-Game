@@ -11,7 +11,7 @@ public class ActionState : State
     public override void Start()
     {
         base.Start();
-        if (inherit) { 
+        if (inherit && action!=null) { 
             duration = action.duration;
             //triggerMethod = action.name + "EndTrigger";
         }
@@ -22,12 +22,13 @@ public class ActionState : State
         if(action != null) action.StartAction();
         Invoke("bsExit", duration);
     }
-    public void bsExit() { Exit(); }
+    public void bsExit() {
+        if (action != null) action.Cancel();
+        if(triggerId>-1) parent.Trigger(triggerId);
+    }
     public override void Exit(string info = "")
     {
         base.Exit(info);
-        action.Cancel();
-        parent.Trigger(triggerId);
     }
 
 

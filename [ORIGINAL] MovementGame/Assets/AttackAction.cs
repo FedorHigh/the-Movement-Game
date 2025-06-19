@@ -7,23 +7,18 @@ using UnityEngine.AI;
 public class AttackAction : CustomClasses.Action
 {
     public GameObject attack;
-    public float slowSpeed, defSpeed, threshold, delay;
-    public bool slowDown, dash;
-    public float dist, dashStrength;
+    public float delay;
     public MethodTrigger trigger;
-    public NavMeshAgent agent;
-    public Rigidbody rb;
 
     public override void Start()
     {
         base.Start();
-        agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
+        if(attack == null ) attack = gameObject;
     }
     
     public override void ResetReady()
     {
-        if (trigger.inTrigger) waiting = true;
+        if (trigger != null && trigger.inTrigger) waiting = true;
         base.ResetReady();
         
     }

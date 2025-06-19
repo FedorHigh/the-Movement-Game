@@ -3,9 +3,9 @@ using UnityEngine.Animations;
 
 public class AttackBox : MonoBehaviour
 {
-    public float duration, finDuration;
+    public float duration = 0.3f, finDuration = 1;
     damager damager;
-    public bool deleteOnTimeout;
+    public bool deleteOnTimeout = true;
     public string storedTag;
 
     //public AttackBox(float d, GameObject t) {

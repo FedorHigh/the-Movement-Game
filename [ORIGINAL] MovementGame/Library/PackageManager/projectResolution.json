@@ -89,6 +89,16 @@
       "source": "registry",
       "testable": false
     },
+    "com.unity.memoryprofiler@1.1.6": {
+      "name": "com.unity.memoryprofiler",
+      "displayName": "Memory Profiler",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.memoryprofiler@a81a96b9c9bd",
+      "fingerprint": "a81a96b9c9bda24f5fea9e558aab1914fe252dc0",
+      "editorCompatibility": "2022.3.0a1",
+      "version": "1.1.6",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
@@ -498,6 +508,26 @@
       "fingerprint": "56bff8827a7ef6d44fcee4f36e558a74da89c1a0",
       "editorCompatibility": "2022.3.11f1",
       "version": "2.5.1",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.profiling.core@1.0.2": {
+      "name": "com.unity.profiling.core",
+      "displayName": "Unity Profiling Core API",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.profiling.core@aac7b93912bc",
+      "fingerprint": "aac7b93912bc5df5fe06b04ff1b758493cdc2346",
+      "editorCompatibility": "2020.1.0a1",
+      "version": "1.0.2",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.editorcoroutines@1.0.0": {
+      "name": "com.unity.editorcoroutines",
+      "displayName": "Editor Coroutines",
+      "resolvedPath": "C:\\Users\\Roman\\Documents\\GitHub\\the-Movement-Game\\[ORIGINAL] MovementGame\\Library\\PackageCache\\com.unity.editorcoroutines@7d48783e7b8c",
+      "fingerprint": "7d48783e7b8cfcee5f8ef9ba787ed0d9dad4ebca",
+      "editorCompatibility": "2018.1.0a1",
+      "version": "1.0.0",
       "source": "registry",
       "testable": false
     },
