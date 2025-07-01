@@ -5,13 +5,14 @@ public class FirstBossStateMachine : StateMachine
 {
 
     public Transform player;
-    public float threshold, attackCD, leftCD;
+    public float attackCD, leftCD;
     public bool countDown;
+    public MethodTrigger trigga;
     
     public override void Trigger(int id)
     {
         if (id == 0 && curState == 0) {
-            if ((player.position - transform.position).magnitude > threshold)
+            if (!trigga.inTrigger)
             {
                 Switch(2);
             }
