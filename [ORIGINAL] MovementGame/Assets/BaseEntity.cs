@@ -1,5 +1,5 @@
 using UnityEngine;
-using Interfaces;
+using CustomClasses;
 
 public class BaseEntity : Entity
 {

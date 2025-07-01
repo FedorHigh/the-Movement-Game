@@ -1,5 +1,5 @@
 using UnityEngine;
-using Interfaces;
+using CustomClasses;
 using System.ComponentModel;
 public class WormEnemy : Entity
 {

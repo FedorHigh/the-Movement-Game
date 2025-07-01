@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
 
-namespace Interfaces
+namespace CustomClasses
 {
     public interface IAbility
     {
@@ -296,16 +296,26 @@ namespace Interfaces
         }
     }
 
+    
     public class Action : MonoBehaviour
     {
         public float CDset, duration;
         float CDleft;
-        public bool ready = true, waiting, enableWait = true;
+        public bool ready = true, waiting = false, enableWait = true, enableChaining = false;
         public Entity host;
         public string endMethod = "", readyMethod = "";
+        public Action chainAction;
+        public float chainDelay;
+        public bool chainActive = true, chainOnStart = false;
+
+        public virtual void Chain() {
+            if (chainActive) {
+                chainAction.Invoke("StartAction", chainDelay);
+            }
+        }
         public virtual void Start()
         {
-            host = GetComponent<Entity>();
+            if(host==null) host = GetComponent<Entity>();
             ready = true;
             waiting = false;
         }
@@ -319,7 +329,7 @@ namespace Interfaces
             {
                 host.Invoke(readyMethod, 0f);
             }
-            if (waiting) {
+            if (waiting && enableWait) {
                 waiting = false;
                 StartAction();
             }
@@ -341,8 +351,10 @@ namespace Interfaces
         }
         public virtual void Cancel()
         {
+            Debug.Log("action cancelled");
             CancelInvoke("StartActionRepeating");
             CancelInvoke("StartAction");
+            //CancelInvoke();
             waiting = false;
         }
 
@@ -356,33 +368,42 @@ namespace Interfaces
             return ready;
         }
 
-        public virtual bool StartAction()
+        public virtual bool PrepareToStart()
         {
-            
-            if (!ready) {
-                if(enableWait) waiting = true;
-                Debug.Log("cancelled");
+            if (!ready)
+            {
+                if (enableWait) waiting = true;
+                //Debug.Log("Action not ready");
                 return false;
             }
             ready = false;
-            //Debug.Log("performed" + ready.ToString());
             StartCooldown();
-            if(duration >= 0)ScheduleEnd();
+            Invoke("EndAction", (float)duration);
+            if (chainOnStart) Chain();
+            //else if (enableChaining) Chain();
             return true;
+        }
+        public virtual void StartAction()
+        {
+            
         }
 
         public virtual void StartActionRepeating() {
+            //if (period == -1) period = CDset;
+            Debug.Log("repeated action");
+            //Cancel();
             StartAction();
-            Invoke("StartActionRepeating", (float)(duration+CDset));
+            Invoke("StartActionRepeating", CDset);
         }
         public virtual void ScheduleEnd() {
-            Invoke("EndAction", (float) duration);
+            //
         }
         public virtual void EndAction() {
+            if(enableChaining && !chainOnStart) Chain();
             if (endMethod != "") {
                 host.Invoke(endMethod, 0f);
             }
-            StartCooldown();
+            //StartCooldown();
         }
     }
     public class Entity : MonoBehaviour{
@@ -407,10 +428,10 @@ namespace Interfaces
         public virtual void OnLocateTarget(GameObject target) {
             TargetObj = target;
             detector.SetActive(false);
-            agent.speed = moveSpeed;
+            //agent.speed = moveSpeed;
             //WanderAround tmp;
             //if (TryGetComponent<WanderAround>(out tmp)) tmp.enabled = false;
-            wander.Cancel();
+            //wander.Cancel();
         }
 
         public virtual void Start() {
@@ -434,7 +455,7 @@ namespace Interfaces
             //move = TargetObj.transform.position - transform.position;
             //move.y = 0;
             //rb.AddForce(move.normalized * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
-            if(agent.enabled)agent.SetDestination(TargetObj.transform.position);
+            //if(agent.enabled)agent.SetDestination(TargetObj.transform.position);
         }
         
         public virtual void DoMoveForward() {
@@ -448,9 +469,9 @@ namespace Interfaces
         }
         
         public virtual void Update() {
-            if (followTarget) DoFollowTarget();
-            if (lookAtTarget) DoLookAtTarget();
-            if (moveForward) DoMoveForward();
+            //if (followTarget) DoFollowTarget();
+            //if (lookAtTarget) DoLookAtTarget();
+            //if (moveForward) DoMoveForward();
             UpdResistances();
         }
         public virtual void Damage(float damage) {
@@ -470,6 +491,7 @@ namespace Interfaces
         }
         public virtual void OnTriggerStay(Collider other) {
             if (other.gameObject.CompareTag("HurtEntity")) {
+                //Debug.Log("ow");
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 damager dmg = other.gameObject.GetComponent<damager>();
                 Damage(dmg.dmg);
@@ -483,13 +505,116 @@ namespace Interfaces
 
     }
 
+    public class State : MonoBehaviour {
+        public StateMachine parent;
+        public bool active;
+        public virtual void Start() {
+            if (parent == null) parent = GetComponent<StateMachine>();
+        }
+        public virtual void Enter(string info = "") { 
+            active = true;
+        }
+        public virtual void Exit(string info = "") { 
+            active = false;
+        }
+    }
+
+    public class StatesTable
+    {
+        List<State> states;
+        List<List<int>> table;
+        List<string> triggers;
+        
+
+        public virtual void Init() { 
+            int n = states.Count;
+            int t = triggers.Count;
+            table = new List<List<int>>(n);
+            for (int i = 0; i < n; i++) {
+                List<int> l = new List<int>(t);
+                for (int j = 0; j < t; j++)
+                {
+                    l[j] = i;
+                }
+                table[i] = l;
+            }
+        }
+    }
+
+    public class StateMachine : MonoBehaviour {
+        public StatesTable statesTable;
+        public int[][] table;
+        public State[] states;
+        public string[] triggers;
+        public int curState = 0;
+        public string[] inputTable;
+        public virtual void Start()
+        {
+            //table = statesTable.table;
+            //states = statesTable.states;
+            int n = states.Length;
+            int t = triggers.Length;
+            
+            table = new int[10][];
+
+            for (int i = 0; i < n; i++)
+            {
+                int[] l = new int[t];
+                Debug.Log(l.Length);
+                for (int j = 0; j < t; j++)
+                {
+                    Debug.Log(j);
+                    l[j] = i;
+                }
+                table[i] = l;
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                //List<int> l = new List<int>(t);
+                for (int j = 0; j < t; j++)
+                {
+                    if (inputTable[i][j] != '-') table[i][j] = inputTable[i][j]-'0';
+                }
+                //table[i] = l;
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                //List<int> l = new List<int>(t);
+                string s = "";
+                for (int j = 0; j < t; j++)
+                {
+                    s += (table[i][j]).ToString();
+                }
+                Debug.Log(s);
+                //table[i] = l;
+            }
+            states[0].Enter();
+        }
+        public virtual void Trigger(int id)
+        {
+            Debug.Log("TRIGGERED on state " + curState.ToString() + " trigger " + id.ToString());
+            //if (id == 3) return;
+            if (table[curState][id]!=curState) Switch(table[curState][id]);
+        }
+        public virtual void Switch(int target){
+            Debug.Log("switched state from " + curState.ToString()+ " to " + target.ToString());
+            
+            states[curState].Exit();
+            //if (curState == 2) return;
+            states[target].Enter();
+            curState = target;
+        }
+    }
+
     public class StateEntity : Entity {
         public string[] states;
         public int state;
         public string stateStr;
         public void SetState(int s) {
-            state = s;
-            stateStr = states[state];
+            //state = s;
+            //stateStr = states[state];
         }
         public override void Start()
         {

@@ -1,15 +1,17 @@
 using UnityEngine;
-using Interfaces;
+using CustomClasses;
 
-public class ThrowProjectileAction : Interfaces.Action 
+public class ThrowProjectileAction : CustomClasses.Action 
 {
     public float g, dist, speed, time, horizontalDist, tmpspeed, cooldown, gravMultiplier, prediction, inaccuracy, repositionCD;
     public GameObject projectile, TargetObj;
     public Vector3 groundTarget, velocity, targetPrediction;
 
-    public override bool StartAction() {
+    public override void StartAction() {
+        Debug.Log("threw!");
         g = Physics.gravity.y * -1 * gravMultiplier;
-        if (!base.StartAction()) return false;
+        if (!base.PrepareToStart()) return;
+        //base.StartAction();
         
         GameObject obj = Instantiate(projectile);
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
@@ -34,6 +36,6 @@ public class ThrowProjectileAction : Interfaces.Action
         velocity += obj.transform.forward * horizontalDist / (time * 2);
 
         obj.GetComponent<Rigidbody>().linearVelocity = velocity;
-        return true;
+        //return true;
     }
 }

@@ -75,3 +75,11 @@ The following packages were updated:
   com.unity.collab-proxy from version 2.5.2 to 2.6.0
   com.unity.splines from version 2.6.1 to 2.7.2
   com.unity.test-framework from version 1.4.5 to 1.4.6
+
+=== Wed May 21 20:32:29 2025
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.postprocessing@3.4.0

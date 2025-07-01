@@ -1,4 +1,4 @@
-using Interfaces;
+using CustomClasses;
 using UnityEngine;
 
 public class detectTarget : MonoBehaviour
@@ -20,8 +20,8 @@ public class detectTarget : MonoBehaviour
         Physics.Raycast(tmpray, out tmp, 100000f, raycastLayer, QueryTriggerInteraction.Ignore);
         Debug.DrawRay(transform.position, other.transform.position - transform.position);
         //Collider tmpobj = tmp.collider;
-        //Debug.Log(tmpobj.ToString());
-       // Debug.Log(tmp.collider.gameObject.name);
+       // Debug.Log(tmpobj.ToString());
+      //  Debug.Log(tmp.collider.gameObject.name);
         if (tmp.collider.gameObject.layer==targetLayer || !LOS_required) {
             Debug.Log("detected");
             toSet.OnLocateTarget(tmp.collider.gameObject);

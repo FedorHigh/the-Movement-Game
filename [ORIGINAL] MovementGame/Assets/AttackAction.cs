@@ -1,67 +1,46 @@
-using Interfaces;
+using CustomClasses;
+using System.Diagnostics;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackAction : Action
+public class AttackAction : CustomClasses.Action
 {
     public GameObject attack;
-    public float slowSpeed, defSpeed, threshold, delay;
-    public bool slowDown, dash;
-    public float dist, dashStrength;
+    public float delay;
     public MethodTrigger trigger;
-    public NavMeshAgent agent;
-    public Rigidbody rb;
 
     public override void Start()
     {
         base.Start();
-        agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
+        if(attack == null ) attack = gameObject;
     }
-    public void resetMovement()
-    {
-        if (slowDown) agent.speed = slowSpeed;
-        else agent.speed = defSpeed;
-        agent.enabled = true;
-        rb.isKinematic = true;
-    }
+    
     public override void ResetReady()
     {
-        if (trigger.inTrigger) waiting = true;
-        agent.speed = defSpeed;
+        if (trigger != null && trigger.inTrigger) waiting = true;
         base.ResetReady();
         
     }
-    public void TryAttack()
-    {
-        if (ready) StartAction();
-    }
     public void DoAttack() {
+        UnityEngine.Debug.Log("did attack");
         attack.SetActive(true);
     }
-    public override bool StartAction()
+    public override void StartAction()
     {
-        if (!base.StartAction())
+        UnityEngine.Debug.Log("tried attack");
+        //StackTrace st = new StackTrace(true);
+       // UnityEngine.Debug.Log(st.GetFrame(1).GetMethod().Name);
+        if (!base.PrepareToStart())
         {
-            return false;
+            return;
         }
-        if (slowDown) agent.enabled = false;
-        if (dash) {
-            rb.isKinematic = false;
-            rb.AddForce(transform.forward * dashStrength * rb.mass, ForceMode.Impulse);
-        }
-
-        Invoke("resetMovement", CDset * 0.5f);
+        base.StartAction();
 
         ready = false;
 
-
-        
-        Invoke("resetReady", CDset);
         Invoke("DoAttack", delay);
-        //moveSpeed = 0;
-        //lookAtTarget = false;
 
-        return true;
+        //return true;
     }
 }

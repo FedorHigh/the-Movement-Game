@@ -1,4 +1,4 @@
-using Interfaces;
+using CustomClasses;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,8 +12,8 @@ public class RangedRepositionAction : Action
     public Vector3 shift;
     bool reverse;
     Vector3 vec;
-    public override bool StartAction() {
-        if(!base.StartAction()) return false;
+    public override void StartAction() {
+        if(!base.PrepareToStart()) return;
         entity = host;
         agent = GetComponent<NavMeshAgent>();
         //TryGetComponent<Entity>(out entity);
@@ -36,6 +36,6 @@ public class RangedRepositionAction : Action
         vec += (transform.position);
         agent.SetDestination(vec);
         //Debug.Log(vec);
-        return true;
+        //return true;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using System.Threading;
 using UnityEngine.Splines;
-using Interfaces;
+using CustomClasses;
 using UnityEngine.UIElements;
 
 public class BetterController : MonoBehaviour
