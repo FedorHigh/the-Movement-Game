@@ -1,4 +1,5 @@
 using CustomClasses;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -9,10 +10,11 @@ public class JumpAction : Action
     public Animator animator;
     public SmoothAnimate animate;
     public string trigger = "jump";
-    public float delay2, delay3, length;
+    public float delay2, delay3, length, animDur = 2f;
     public Quaternion init, target;
     public float time = 0;
-    public bool turning = false;
+    public bool turning = false, teleportGuide = true;
+    public SplineContainer container;
 
     public override void Start()
     {
@@ -38,17 +40,17 @@ public class JumpAction : Action
     {
         if(!PrepareToStart()) return;
 
-        //Debug.Log("REPOSITIONED SPLINE");
+        
         animator.ResetTrigger(trigger);
         animator.SetTrigger(trigger);
-        guide.transform.position = transform.position;
+        if(teleportGuide)guide.transform.position = transform.position;
 
 
         Invoke("Action2", delay2);
         Invoke("Action3", delay3);
+        Debug.Log("REPOSITIONED SPLINE");
 
 
-        
     }
     public void Action2() {
         //obj.transform.LookAt(guide.transform.position);
@@ -62,15 +64,21 @@ public class JumpAction : Action
     public void Action3() {
         float tmp = s.constraint.GetSource(0).sourceTransform.position.y;
 
+        Debug.Log("played jump!");
         BezierKnot end = s.spline.Spline.ToArray()[2];
         end.Position = 1*(guide.transform.position - transform.position);
         end.Position.y = transform.position.y - tmp;
         s.spline.Spline.SetKnot(2, end);
 
+        Debug.Log("played jump!");
         BezierKnot mid = s.spline.Spline.ToArray()[1];
         mid.Position = 1*(guide.transform.position - transform.position) / 2;
         mid.Position.y = transform.position.y + 15 - tmp;
         s.spline.Spline.SetKnot(1, mid);
+        animate.container = container;
+
+        Debug.Log("played jump!");
+        animate.duration = animDur;
         animate.play();
         Instantiate(box1, obj.transform.position, obj.transform.rotation);
     }
