@@ -4,6 +4,7 @@ public class PlayerHpManager : MonoBehaviour
 {
     public float hp, maxHp, invincibilityTime, invTimeLeft;
     public bool invincible = false;
+    public BetterController player;
     private void Update()
     {
         if (invincible) { 
@@ -19,9 +20,23 @@ public class PlayerHpManager : MonoBehaviour
     public void CheckIsAlive() {
         if (hp <= 0) OnDeath();
     }
-    public void Damage(float damage, float cooldown) {
-        cooldown = cooldown*invincibilityTime;
+    public void Damage(damager dmg, Collider other) {
+
         if (invincible) return;
+
+
+        if (dmg.push)
+        {
+            Vector3 push = (transform.position - other.gameObject.transform.position).normalized;
+            push.y = 0;
+            if (push.magnitude == 0) push = new Vector3(1, 0, 1).normalized;
+            Debug.Log("AAAAAAAAA" + push.ToString());
+            player.rb.AddForce(push * dmg.force, ForceMode.Impulse);
+        }
+        float cooldown = dmg.cooldown;
+        float damage = dmg.dmg;
+
+        cooldown = cooldown * invincibilityTime;
         invTimeLeft = cooldown;
         invincible = true;
         
@@ -31,9 +46,12 @@ public class PlayerHpManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+
+        
         if (other.CompareTag("HurtPlayer")) {
             damager dmg = other.gameObject.GetComponent<damager>();
-            Damage(dmg.dmg, dmg.cooldown);
+            
+            Damage(dmg, other);
         }
     }
 }

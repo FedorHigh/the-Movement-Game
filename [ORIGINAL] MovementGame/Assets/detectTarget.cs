@@ -19,9 +19,9 @@ public class detectTarget : MonoBehaviour
         Ray tmpray = new Ray(transform.position, other.transform.position - transform.position);
         Physics.Raycast(tmpray, out tmp, 100000f, raycastLayer, QueryTriggerInteraction.Ignore);
         Debug.DrawRay(transform.position, other.transform.position - transform.position);
-        //Collider obj = tmp.collider;
-        //Debug.Log(obj.ToString());
-       // Debug.Log(tmp.collider.gameObject.name);
+        //Collider tmpobj = tmp.collider;
+       // Debug.Log(tmpobj.ToString());
+      //  Debug.Log(tmp.collider.gameObject.name);
         if (tmp.collider.gameObject.layer==targetLayer || !LOS_required) {
             Debug.Log("detected");
             toSet.OnLocateTarget(tmp.collider.gameObject);
