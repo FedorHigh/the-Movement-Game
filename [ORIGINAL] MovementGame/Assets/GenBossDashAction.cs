@@ -22,7 +22,9 @@ public class GenBossDashAction : CustomClasses.Action
         base.StartAction();
 
         init = transform.rotation;
-        target = Quaternion.LookRotation(guide.transform.position - transform.position, Vector3.up);
+        Vector3 tmp = guide.transform.position - transform.position;
+        tmp.y = 0;
+        target = Quaternion.LookRotation(tmp, Vector3.up);
         time = 0;
         turning = true;
         animator.ResetTrigger(trigger);

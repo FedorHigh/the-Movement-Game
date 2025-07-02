@@ -11267,6 +11267,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1106027296}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1106027300}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1106027299}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1106027298}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1106027297}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1106027301}
   m_SourcePrefab: {fileID: 100100000, guid: 335e21725c7a6e84f8aa7b4a3f250740, type: 3}
 --- !u!4 &1106027283 stripped
 Transform:
@@ -11334,7 +11349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDset: 0
-  duration: 3
+  duration: 2
   ready: 1
   waiting: 0
   enableWait: 0
@@ -11418,10 +11433,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   active: 0
+  connected: {fileID: 0}
   action: {fileID: 1106027287}
   duration: 0
+  repetitionDelay: 0.2
   triggerId: 1
   inherit: 1
+  repetitions: 1
 --- !u!114 &1106027290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11436,10 +11454,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   active: 0
+  connected: {fileID: 0}
   action: {fileID: 1106027288}
   duration: 0
+  repetitionDelay: 0.2
   triggerId: 1
   inherit: 1
+  repetitions: 1
 --- !u!114 &1106027291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11454,10 +11475,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   active: 0
+  connected: {fileID: 0}
   action: {fileID: 0}
   duration: 0
+  repetitionDelay: 0.2
   triggerId: -1
   inherit: 0
+  repetitions: 1
 --- !u!114 &1106027292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11474,6 +11498,8 @@ MonoBehaviour:
   - {fileID: 1106027291}
   - {fileID: 1106027290}
   - {fileID: 1106027289}
+  - {fileID: 1106027299}
+  - {fileID: 1106027298}
   triggers:
   - attack start
   - attack end
@@ -11481,6 +11507,8 @@ MonoBehaviour:
   inputTable:
   - --
   - -0
+  - -0
+  - --
   - -0
   player: {fileID: 7652277869638307350}
   attackCD: 3
@@ -11501,12 +11529,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   moveSpeed: 0
-  hp: 100
+  hp: 10
   followTarget: 0
   lookAtTarget: 0
   moveForward: 0
   rb: {fileID: 0}
-  TargetObj: {fileID: 0}
+  TargetObj: {fileID: 7652277869638307337}
   head: {fileID: 0}
   lockOnPoint: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
@@ -11590,6 +11618,126 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1106027297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106027284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba65785d10bd3cc489d396c6f39d4a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CDset: 0
+  duration: 0
+  ready: 0
+  waiting: 0
+  enableWait: 0
+  enableChaining: 0
+  host: {fileID: 0}
+  endMethod: 
+  readyMethod: 
+  chainAction: {fileID: 0}
+  chainDelay: 0
+  chainActive: 1
+  chainOnStart: 0
+  g: 9.8
+  dist: 20
+  speed: 100
+  time: 2
+  horizontalDist: 0
+  tmpspeed: 0
+  cooldown: 0
+  gravMultiplier: 5
+  prediction: 0
+  inaccuracy: 0
+  repositionCD: 0
+  projectile: {fileID: 7402108525014322648, guid: c6d4ebdbbb6c4504fa1995a319577d0e, type: 3}
+  TargetObj: {fileID: 7652277869638307337}
+  groundTarget: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  targetPrediction: {x: 0, y: 0, z: 0}
+--- !u!114 &1106027298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106027284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55c79aeca17cee4c92af03b2aff5050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+  connected: {fileID: 0}
+  action: {fileID: 1106027297}
+  duration: 3
+  repetitionDelay: 1
+  triggerId: 1
+  inherit: 0
+  repetitions: 3
+--- !u!114 &1106027299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106027284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b176f10f2c5318c4aa73d3b29159f914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+  connected: {fileID: 1106027301}
+  center: {x: 0, y: 0, z: 0}
+  target: {x: 0, y: 0, z: 0}
+  radius: 100
+  dist: 30
+  time: 5
+  threshold: 1
+--- !u!114 &1106027300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106027284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553381dd51535d446840fbadfc3449a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 10
+  cooldown: 1
+  force: 100
+  push: 1
+--- !u!114 &1106027301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106027284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55c79aeca17cee4c92af03b2aff5050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  active: 0
+  connected: {fileID: 0}
+  action: {fileID: 1106027297}
+  duration: 6
+  repetitionDelay: 2
+  triggerId: 0
+  inherit: 0
+  repetitions: 3
 --- !u!1 &1211214848
 GameObject:
   m_ObjectHideFlags: 0

@@ -469,6 +469,7 @@
 "Assets/SmoothAnimate.cs"
 "Assets/SplineConnector.cs"
 "Assets/SplineManager.cs"
+"Assets/StrafingState.cs"
 "Assets/StretchConnector.cs"
 "Assets/targetSetter.cs"
 "Assets/ThrowProjectileAction.cs"

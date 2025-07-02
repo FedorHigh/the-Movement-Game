@@ -508,14 +508,17 @@ namespace CustomClasses
     public class State : MonoBehaviour {
         public StateMachine parent;
         public bool active;
+        public State connected;
         public virtual void Start() {
             if (parent == null) parent = GetComponent<StateMachine>();
         }
         public virtual void Enter(string info = "") { 
             active = true;
+            if (connected != null) connected.Enter();
         }
         public virtual void Exit(string info = "") { 
             active = false;
+            if (connected != null) connected.Exit();
         }
     }
 
