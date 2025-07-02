@@ -8,9 +8,11 @@ using UnityEngine.UIElements;
 
 public class DashSpell : Ability, IAbility
 {
+    public GameObject box;
     public override void Cast()
     {
         Dash(CD[0], 0);
+        box.SetActive(true);
     }
     public override void HeavyCast()
     {

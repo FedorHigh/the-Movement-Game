@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 820.8
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 132
+  controlID: 105
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 133
+  controlID: 106
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -500,10 +500,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 96}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 8cadffff
+      m_ExpandedIDs: aef9ffff50faffffc6faffffd4faffff7c9a0000c29a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1107,9 +1107,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -269.86932, y: -657.33716, z: -711.79095}
+    m_Target: {x: -14.956035, y: -76.17292, z: 14.211296}
     speed: 2
-    m_Value: {x: -269.86932, y: -657.33716, z: -711.79095}
+    m_Value: {x: -14.956035, y: -76.17292, z: 14.211296}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1155,13 +1155,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.063577704, y: 0.9252032, z: -0.33175513, w: -0.17567316}
+    m_Target: {x: 0.35445264, y: -0.5986614, z: 0.3329848, w: 0.637275}
     speed: 2
-    m_Value: {x: -0.06354703, y: 0.9247568, z: -0.33159506, w: -0.1755884}
+    m_Value: {x: -0.35445264, y: 0.5986614, z: -0.3329848, w: -0.637275}
   m_Size:
-    m_Target: 537.6581
+    m_Target: 108.62669
     speed: 2
-    m_Value: 537.6581
+    m_Value: 108.62669
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1179,8 +1179,8 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.035671256, y: -0.9598976, z: 0.2379559, w: -0.1439007}
-  m_LastSceneViewOrtho: 1
+  m_LastSceneViewRotation: {x: 0.11193364, y: -0.8359201, z: -0.18427636, w: -0.50572634}
+  m_LastSceneViewOrtho: 0
   m_Viewpoint:
     m_SceneView: {fileID: 17}
     m_CameraOverscanSettings:
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/AttackBoxes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/AttackBoxes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\user\Documents\GitHub\the-Movement-Game\[ORIGINAL]
     MovementGame
@@ -1385,9 +1385,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 65.20001}
-    m_SelectedIDs: 7cd60000
-    m_LastClickedID: 54908
-    m_ExpandedIDs: 00000000fca30000
+    m_SelectedIDs: b8a50000
+    m_LastClickedID: 42424
+    m_ExpandedIDs: 000000004ca40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1416,7 +1416,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fca30000
+    m_ExpandedIDs: 000000004ca40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003caf00008a8600007e0a010036a20000b69b000000000000fc5c0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2422,7 +2422,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 266.39996
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
