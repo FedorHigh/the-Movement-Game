@@ -124,8 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 30
   cooldown: 2
-  force: 0
-  push: 0
+  force: 1
+  push: 1
+  pushForce: {x: 0, y: 0, z: 0}
 --- !u!114 &3968040766869210375
 MonoBehaviour:
   m_ObjectHideFlags: 0

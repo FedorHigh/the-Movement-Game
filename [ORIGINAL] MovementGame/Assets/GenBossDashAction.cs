@@ -9,7 +9,7 @@ public class GenBossDashAction : CustomClasses.Action
 {
     public SmoothAnimate animate;
     public Animator animator;
-    public float time = 0, length, delay, animDur = 0.5f;
+    public float time = 0, length, delay, delay2 = 0.5f, animDur = 0.5f;
     public bool turning;
     public GameObject obj, guide, box1, box2;
     public Quaternion init, target;
@@ -30,6 +30,7 @@ public class GenBossDashAction : CustomClasses.Action
         animator.ResetTrigger(trigger);
         animator.SetTrigger(trigger);
         Invoke("Dash", delay);
+        Invoke("Explode", delay2);
     }
 
     public void Dash() {
@@ -38,13 +39,10 @@ public class GenBossDashAction : CustomClasses.Action
         animate.play();
         box1.SetActive(true);
     }
-
-    public override void EndAction() {
-
+    public void Explode() {
         Instantiate(box2, transform.position, transform.rotation);
-
-        base.EndAction();
     }
+
 
     public override void Update()
     {

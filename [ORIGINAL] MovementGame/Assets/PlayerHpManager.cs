@@ -20,30 +20,40 @@ public class PlayerHpManager : MonoBehaviour
     public void CheckIsAlive() {
         if (hp <= 0) OnDeath();
     }
+    public void Stagger(Vector3 fromDir, float force) {
+        Vector3 direction = transform.position - fromDir;
+        if (direction.magnitude == 0) direction = transform.forward * -1;
+        player.rb.AddForce((direction.normalized * 50 * force) + (transform.up * 25 * force), ForceMode.Impulse);
+    }
     public void Damage(damager dmg, Collider other) {
 
         if (invincible) return;
 
-
+        /*
         if (dmg.push)
         {
             Vector3 push = (transform.position - other.gameObject.transform.position).normalized;
             push.y = 0;
             if (push.magnitude == 0) push = new Vector3(1, 0, 1).normalized;
-            Debug.Log("AAAAAAAAA" + push.ToString());
+            //Debug.Log("AAAAAAAAA" + push.ToString());
             player.rb.AddForce(push * dmg.force, ForceMode.Impulse);
         }
+        */
         float cooldown = dmg.cooldown;
         float damage = dmg.dmg;
 
-        cooldown = cooldown * invincibilityTime;
-        invTimeLeft = cooldown;
+        //cooldown = cooldown * invincibilityTime;
+        //invTimeLeft = cooldown;
+        invTimeLeft = invincibilityTime;
         invincible = true;
-        
+        Stagger(other.transform.position, dmg.force);
         hp -= damage;
         CheckIsAlive();
     }
-
+    public void Start()
+    {
+        player = GetComponent<BetterController>();
+    }
     private void OnTriggerStay(Collider other)
     {
 
