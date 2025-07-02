@@ -19,6 +19,7 @@ public class FirstBossStateMachine : StateMachine
     {
         if (target == 0 && entity.hp <= (entity.maxHp * 0.5))
         {
+            Debug.Log("2nd phase");
             target = 3;
             attackCD = 6;
             leftCD = 6;

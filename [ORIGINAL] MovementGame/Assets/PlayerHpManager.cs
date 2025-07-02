@@ -5,6 +5,7 @@ public class PlayerHpManager : MonoBehaviour
     public float hp, maxHp, invincibilityTime, invTimeLeft;
     public bool invincible = false;
     public BetterController player;
+    public LevelManager manager;
     private void Update()
     {
         if (invincible) { 
@@ -15,7 +16,9 @@ public class PlayerHpManager : MonoBehaviour
         }
     }
     public void OnDeath() {
-        Debug.Log("Man im dead!");
+        //Debug.Log("Man im dead!");
+        manager.OnPlayerDeath();
+        //Destroy(gameObject);
     }
     public void CheckIsAlive() {
         if (hp <= 0) OnDeath();

@@ -514,11 +514,23 @@ namespace CustomClasses
         }
         public virtual void Enter(string info = "") { 
             active = true;
-            if (connected != null) connected.Enter();
+            Debug.Log("entered");
+            if (connected != null)
+            {
+                
+                connected.Enter();
+                Debug.Log("connected");
+            }
         }
         public virtual void Exit(string info = "") { 
             active = false;
-            if (connected != null) connected.Exit();
+            Debug.Log("exited");
+            if (connected != null)
+            {
+                
+                connected.Exit();
+                Debug.Log("connected");
+            }
         }
     }
 
