@@ -12,7 +12,9 @@ public class JumpSpell : Ability, IAbility
     public float defDist, addDist;
     public override void ResetVars()
     {
+        player.slowFall = true;
         base.ResetVars();
+        
         //Debug.Log("reset jump!");
     }
     public override void Start()
@@ -44,6 +46,9 @@ public class JumpSpell : Ability, IAbility
             //Debug.Log("delayed");
             return;
         }
+
+        player.slowFall = true;
+        Instantiate(attackBoxes[1], transform.position, transform.rotation);
         DashSpline s = splines[1];
         tmpknot = s.spline.Spline.ToArray()[1];
         tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
@@ -61,6 +66,9 @@ public class JumpSpell : Ability, IAbility
     public override void Cast()
     {
         if (player.dashing | !player.grounded) QueueCast(0);
+        player.slowFall = true;
+
+        Instantiate(attackBoxes[0], transform.position, transform.rotation);
 
         Dash(CD[0], 0);
     }

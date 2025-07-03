@@ -6,6 +6,7 @@ public class FirstBossStateMachine : StateMachine
 
     public Transform player;
     public float attackCD, leftCD;
+    float prevHP;
     public bool countDown;
     public MethodTrigger trigga;
     Entity entity;
@@ -13,6 +14,7 @@ public class FirstBossStateMachine : StateMachine
     public override void Start()
     {
         entity = GetComponent<Entity>();
+        prevHP = entity.hp;
         base.Start();
     }
     public override void Switch(int target)
@@ -49,6 +51,7 @@ public class FirstBossStateMachine : StateMachine
     }
     public void Update()
     {
+        
         if (countDown) {
             leftCD -= Time.deltaTime;
             if (leftCD <= 0) {

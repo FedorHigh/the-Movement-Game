@@ -23,10 +23,10 @@ public class BetterController : MonoBehaviour
     public bool grounded;
     public float groundDrag;
     public float airDrag, gravityScale;
-    public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier;
+    public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier, slowFallMultiplier = 2;
 
     public float jumpHeight, jumpCooldown, airMultiplier;
-    public bool canJump, timedJump, dashing, lockedOn, queued;
+    public bool canJump, timedJump, dashing, lockedOn, queued, slowFall;
 
     public float groundGap;
     public float tmp, timer;
@@ -94,6 +94,7 @@ public class BetterController : MonoBehaviour
         if (grounded)
         {
             rb.linearDamping = groundDrag;
+            slowFall = false;
             if (!Input.GetKey(KeyCode.Space))
             {
                 timedJump = true;
@@ -147,11 +148,14 @@ public class BetterController : MonoBehaviour
             timedJump = false;
             
         }
-        else if (!Input.GetKey(KeyCode.Space) && rb.linearVelocity.y > 0 & !dashing) {
+        else if (!Input.GetKey(KeyCode.Space) && rb.linearVelocity.y > 0 && !dashing && !slowFall) {
             rb.AddForce(rtc.transform.up * Time.deltaTime * -100 * gravityScale * (dropdownMultiplier - 1), ForceMode.Acceleration);
         }
         if (rb.linearVelocity.y < 0 && !grounded & !dashing) {
             rb.AddForce(rtc.transform.up * Time.deltaTime * -100 * gravityScale * (fallMultiplier - 1), ForceMode.Acceleration);
+        }
+        if (rb.linearVelocity.y > 0 && !dashing && !slowFall) { 
+            //rb.AddForce(rtc.transform.up * Time.deltaTime * 100 * gravityScale * (slowFallMultiplier - 1), ForceMode.Acceleration);
         }
 
         //Movement
