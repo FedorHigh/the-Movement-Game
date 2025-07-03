@@ -11,12 +11,14 @@ public class MethodTrigger : MonoBehaviour
 
     private void OnTriggerEnter()
     {
-        if(enterId > -1) toTrigger.Trigger(enterId);
         inTrigger = true;
+        if (enterId > -1) toTrigger.Trigger(enterId);
+        
     }
     private void OnTriggerExit()
     {
-        if (exitId > -1) toTrigger.Trigger(exitId);
         inTrigger = false;
+        if (exitId > -1) toTrigger.Trigger(exitId);
+        
     }
 }

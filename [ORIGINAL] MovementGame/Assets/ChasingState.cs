@@ -22,6 +22,6 @@ public class ChasingState : State
     public override void Exit(string info = "")
     {
         base.Exit(info);
-        //agent.destination = transform.position;
+        agent.destination = transform.position;
     }
 }

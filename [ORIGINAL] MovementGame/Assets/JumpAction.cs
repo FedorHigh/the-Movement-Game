@@ -84,7 +84,10 @@ public class JumpAction : Action
     }
     public override void EndAction()
     {
+        Debug.Log("still standing");
         Instantiate(box2, obj.transform.position, obj.transform.rotation);
+        Debug.Log("still standing");
         base.EndAction();
+        Debug.Log("still standing");
     }
 }
