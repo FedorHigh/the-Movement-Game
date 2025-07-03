@@ -18,7 +18,7 @@ public class IceBossStateMachine : StateMachine
     public MethodTrigger trigga;
     public override void Switch(int target)
     {
-        if (target == 0 && entity.hp <= (entity.hp*0.5f))
+        if (target == 0 && entity.hp <= (entity.hp*0.2f))
         {
             target = 3;
         }
