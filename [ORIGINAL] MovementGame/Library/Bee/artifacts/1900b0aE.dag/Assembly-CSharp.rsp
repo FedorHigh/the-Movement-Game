@@ -437,6 +437,7 @@
 "Assets/BossEntity.cs"
 "Assets/ChasingState.cs"
 "Assets/ConnectEntities.cs"
+"Assets/DamageIndicator.cs"
 "Assets/damager.cs"
 "Assets/DashAction.cs"
 "Assets/DasherEnemy.cs"

@@ -476,6 +476,7 @@ namespace CustomClasses
         }
         public virtual void Damage(float damage) {
             hp -= damage;
+            GetComponent<DamageIndicator>().FlashRed();
             CheckIsAlive();
         }
         public virtual void OnDeath() {

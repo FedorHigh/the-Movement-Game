@@ -51,6 +51,7 @@ public class PlayerHpManager : MonoBehaviour
         invincible = true;
         Stagger(other.transform.position, dmg.force);
         hp -= damage;
+        GetComponent<DamageIndicator>().FlashRed();
         CheckIsAlive();
     }
     public void Start()
