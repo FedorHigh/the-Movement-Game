@@ -460,6 +460,7 @@
 "Assets/MenuScripts/ExitGame.cs"
 "Assets/MenuScripts/Start_Game.cs"
 "Assets/MenuScripts/ToMenu.cs"
+"Assets/MenuScripts/ToSettings.cs"
 "Assets/MethodTrigger.cs"
 "Assets/MovementEasingAction.cs"
 "Assets/NavMeshFollow.cs"
