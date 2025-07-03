@@ -5648,6 +5648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd365c10fbde584d8df15068994cdcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Lose: {fileID: 0}
+  Winp: {fileID: 0}
 --- !u!4 &630328623
 Transform:
   m_ObjectHideFlags: 0
@@ -37178,6 +37180,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4385735675497055061, guid: b6d12132f9dcaed4794ee302761c79bb, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 630328622}
     - target: {fileID: 4642763450666454752, guid: b6d12132f9dcaed4794ee302761c79bb, type: 3}
       propertyPath: cam
       value: 
