@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class PlayerHpManager : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
-    public float hp, maxHp, invincibilityTime, invTimeLeft;
+    [SerializeField] private Slider rallyhpBar;
+    public float hp, maxHp,rallyhp, invincibilityTime, invTimeLeft, depletionSpeed = 4, rallyEfficiency = 0.7f;
     public bool invincible = false;
     public BetterController player;
     public LevelManager manager;
@@ -16,6 +17,19 @@ public class PlayerHpManager : MonoBehaviour
                 invincible = false;
             }
         }
+        if (rallyhp > hp)
+        {
+            rallyhp -= Time.deltaTime*depletionSpeed;
+            UpdateRallyHealthBar();
+        }
+        
+        
+    }
+    public void OnSuccesfulHit(float damage = 0) {
+        hp = Mathf.Min(hp + damage, rallyhp);
+        if(hp>rallyhp)rallyhp = hp;
+        UpdateHealthBar();
+        UpdateRallyHealthBar();
     }
     public void OnDeath() {
         //Debug.Log("Man im dead!");
@@ -53,6 +67,7 @@ public class PlayerHpManager : MonoBehaviour
         invincible = true;
         Stagger(other.transform.position, dmg.force);
         hp -= damage;
+        rallyhp -= damage * (1 - rallyEfficiency);
         UpdateHealthBar();
         GetComponent<DamageIndicator>().FlashRed();
         CheckIsAlive();
@@ -61,9 +76,14 @@ public class PlayerHpManager : MonoBehaviour
     {
         healthBar.value = hp/maxHp;
     }
+    public void UpdateRallyHealthBar()
+    {
+        rallyhpBar.value = rallyhp / maxHp;
+    }
     public void Start()
     {
         player = GetComponent<BetterController>();
+        rallyhp = hp;
     }
     private void OnTriggerStay(Collider other)
     {

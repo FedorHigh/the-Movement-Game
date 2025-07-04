@@ -478,6 +478,11 @@ namespace CustomClasses
             UpdResistances();
         }
         public virtual void Damage(float damage) {
+            PlayerHpManager playerHp;
+            if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp)) {
+                playerHp.OnSuccesfulHit(damage);
+            }
+
             hp -= damage;
             GetComponent<DamageIndicator>().FlashRed();
             CheckIsAlive();
