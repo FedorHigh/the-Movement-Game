@@ -12,7 +12,7 @@ public class DashSpell : Ability, IAbility
     public override void Cast()
     {
         Dash(CD[0], 0);
-        box.SetActive(true);
+        attackBoxes[0].SetActive(true);
     }
     public override void HeavyCast()
     {
@@ -29,11 +29,16 @@ public class DashSpell : Ability, IAbility
         charging = true;
     }
     public override void ReleaseCharge() {
-
+        if (charge < maxCharge)
+        {
+            charging = true;
+            return;
+        }
         player.queued = false;
         player.queuedCast = null;
         if (player.currentAbility != null) player.abilities[player.currentAbility.ID].Reset();
 
+        attackBoxes[1].SetActive(true);
         Dash(CD[1], 1);
     }
     public override void LightCast()

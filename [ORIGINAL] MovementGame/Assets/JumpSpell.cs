@@ -41,6 +41,11 @@ public class JumpSpell : Ability, IAbility
 
     public override void ReleaseCharge() {
         //Debug.Log("releasing jump!");
+        if (charge < maxCharge)
+        {
+            charging = true;
+            return;
+        }
         if (!player.grounded) {
             Invoke("ReleaseCharge", 0.1f);
             //Debug.Log("delayed");
@@ -75,7 +80,11 @@ public class JumpSpell : Ability, IAbility
 
     public override void HeavyCast()
     {
-        if (player.dashing) QueueCast(1);
+        if (player.dashing)
+        {
+            QueueCast(1);
+            return;
+        }
         if (!player.grounded | player.dashing) return;
         Debug.Log("started charging jump");
         player.dashing = true;

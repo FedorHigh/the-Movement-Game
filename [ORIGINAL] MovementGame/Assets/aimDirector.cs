@@ -42,7 +42,7 @@ public class aimDirector : MonoBehaviour
             }
             else
             {
-                marker.transform.position = cameraPoint.position;
+                marker.transform.position = cameraPoint.position + (cameraPoint.position - cnm.position).normalized*10;
             }
         } 
 

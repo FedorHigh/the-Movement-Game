@@ -74,7 +74,10 @@ public class LeapSpell : Ability, IAbility
             return;
         }
 
-        if (player.dashing) QueueCast(1);
+        if (player.dashing)
+        {
+            QueueCast(1);
+        }
         inHeavy = true;
         Dash(0, 1);
     }

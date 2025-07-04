@@ -150,6 +150,7 @@ namespace CustomClasses
             player.dashing = false;
             player.ResetQueue();
             player.currentAbility = null;
+            anim.playing = false;
             //s.trail.emitting = false;
             foreach(DashSpline s in splines){
                 s.constraint.enabled = true;

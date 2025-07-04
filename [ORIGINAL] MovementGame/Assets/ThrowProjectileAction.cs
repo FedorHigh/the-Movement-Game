@@ -29,7 +29,7 @@ public class ThrowProjectileAction : CustomClasses.Action
 
         targetPrediction = TargetObj.transform.position + (TargetObj.GetComponent<Rigidbody>().linearVelocity * time * prediction);
 
-        groundTarget = new Vector3(targetPrediction.x + (Random.value - 0.5f) * 2 * inaccuracy, obj.transform.position.y, targetPrediction.z + (Random.value - 0.5f) * 2 * inaccuracy);
+        groundTarget = new Vector3(targetPrediction.x + (Random.value - 0.5f) * 2 * inaccuracy, TargetObj.transform.position.y, targetPrediction.z + (Random.value - 0.5f) * 2 * inaccuracy);
         obj.transform.LookAt(groundTarget);
 
         horizontalDist = (groundTarget - obj.transform.position).magnitude;

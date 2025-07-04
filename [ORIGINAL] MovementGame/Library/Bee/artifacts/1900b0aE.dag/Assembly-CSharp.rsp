@@ -447,6 +447,7 @@
 "Assets/Explosive.cs"
 "Assets/FillText.cs"
 "Assets/FirstBossStateMachine.cs"
+"Assets/FunctionTrigger.cs"
 "Assets/GenBossDashAction.cs"
 "Assets/GrasshopperBoss.cs"
 "Assets/GrasshopperStateMachine.cs"

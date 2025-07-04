@@ -18,7 +18,7 @@ public class IceBossStateMachine : StateMachine
     public MethodTrigger trigga;
     public override void Switch(int target)
     {
-        if (target == 0 && entity.hp <= (entity.hp*0.2f))
+        if (target == 0 && entity.hp <= (entity.maxHp*0.2f))
         {
             target = 3;
         }
@@ -48,10 +48,15 @@ public class IceBossStateMachine : StateMachine
     public void Update() {
         //if (entity.hp < prevHP && curState == 4)
         //{
-            //Debug.LogError("interrupted!");
-            //prevHP = entity.hp;
-            //Switch(3);
+        //Debug.LogError("interrupted!");
+        //prevHP = entity.hp;
+        //Switch(3);
         //}
+        if (curState == 0 && entity.hp <= (entity.maxHp * 0.2f))
+        {
+            Debug.Log("phase 2!");
+            Switch(3);
+        }
         prevHP = entity.hp;
         if (ticking) {
             time += Time.deltaTime;

@@ -43,6 +43,8 @@ public class BetterController : MonoBehaviour
 
     public Ability[] abilities;
 
+    AbilityInputManager manager;
+
 
     public void ResetQueue()
     {
@@ -66,6 +68,7 @@ public class BetterController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         anim = GetComponent<SplineAnimate>();
+        manager = GetComponent<AbilityInputManager>();
 
         cnm = cam.GetComponent<CinemachineFreeLook>();
     }
@@ -211,5 +214,9 @@ public class BetterController : MonoBehaviour
         //Debug.Log(anim.IsPlaying);
     }
 
-
+    public void AbortDash() {
+        if (currentAbility == null) return;
+        Debug.Log(currentAbility.ID.ToString() + " reset");
+        manager.abilities[currentAbility.ID].Reset();
+    }
 }
