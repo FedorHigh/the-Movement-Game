@@ -11,14 +11,14 @@ public class IceBossStateMachine : StateMachine
     // p2 attacking with laser
 
     public float slashCD = 2f, spinCD = 5f;
-    public float time = 0, spinTime = 0;
+    public float time = 0, spinTime = 0, phaseThreshold = 0.4f;
     public float prevHP;
     Entity entity;
     public bool ticking = true, slashReady = false, spinReady = false;
     public MethodTrigger trigga;
     public override void Switch(int target)
     {
-        if (target == 0 && entity.hp <= (entity.maxHp*0.2f))
+        if (target == 0 && entity.hp <= (entity.maxHp* phaseThreshold))
         {
             target = 3;
         }
@@ -52,7 +52,7 @@ public class IceBossStateMachine : StateMachine
         //prevHP = entity.hp;
         //Switch(3);
         //}
-        if (curState == 0 && entity.hp <= (entity.maxHp * 0.2f))
+        if (curState == 0 && entity.hp <= (entity.maxHp * phaseThreshold))
         {
             Debug.Log("phase 2!");
             Switch(3);

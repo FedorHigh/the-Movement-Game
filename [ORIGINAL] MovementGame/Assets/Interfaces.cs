@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations;
@@ -278,7 +279,7 @@ namespace CustomClasses
             //Debug.Log("resolved " + this.GetID().ToString());
             if (cast == 0) Cast();
             else if (cast == 1) HeavyCast();
-            else LightCast();
+            //else LightCast();
             //Dash(curKey, CD[cast], cast);
         }
 
@@ -297,7 +298,22 @@ namespace CustomClasses
         }
     }
 
-    
+    public class Resistance : MonoBehaviour {
+        public GameObject source;
+        public float duration;
+        public Entity host;
+        public void Init(GameObject src, float dur, Entity hst)
+        {
+            source = src;
+            duration = dur;
+            host = hst;
+            Invoke("Remove", dur);
+        }
+        public void Remove()
+        {
+            host.RemoveResistance(source);
+        }
+    }
     public class Action : MonoBehaviour
     {
         public float CDset, duration;
@@ -414,13 +430,22 @@ namespace CustomClasses
         public Rigidbody rb;
         public GameObject TargetObj, head, lockOnPoint;
         public Vector3 move;
-        public Dictionary<GameObject, float> resistances;
+        public Dictionary<GameObject, Resistance> resistances;
         public LayerMask targetLayer;
         public NavMeshAgent agent;
         public GameObject detector;
         public WanderAround wander;
         //public Bet TargetHp;
         public float tmp;
+        public void RemoveResistance(GameObject source)
+        {
+            Resistance tmp;
+            if (resistances.TryGetValue(source, out tmp))
+            {
+                resistances.Remove(source);
+                //Debug.Log("removed resistance from " + source.name);
+            }
+        }
         public virtual void locateAnyTarget(float radius) {
             Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
             TargetObj = targets[0].gameObject;
@@ -437,19 +462,12 @@ namespace CustomClasses
 
         public virtual void Start() {
             rb = GetComponent<Rigidbody>();
-            resistances = new Dictionary<GameObject, float>();
+            resistances = new Dictionary<GameObject, Resistance>();
             agent = GetComponent<NavMeshAgent>();
             TryGetComponent<WanderAround>(out wander);
             
         }
-        public virtual void UpdResistances() {
-            //Debug.Log(resistances.ToString());
-            foreach(GameObject a in resistances.Keys) {
-                //Debug.Log(a.name);
-                resistances[a] -= Time.deltaTime;
-                if (resistances[a] <= 0)resistances.Remove(a);
-            }
-        }
+        
         
         public virtual void DoFollowTarget() {
             //if (agent.enabled) agent.destination = trg.transform.position;
@@ -473,7 +491,7 @@ namespace CustomClasses
             //if (followTarget) DoFollowTarget();
             //if (lookAtTarget) DoLookAtTarget();
             //if (moveForward) DoMoveForward();
-            UpdResistances();
+            //UpdResistances();
         }
         public virtual void Damage(float damage) {
             hp -= damage;
@@ -494,10 +512,13 @@ namespace CustomClasses
         public virtual void OnTriggerStay(Collider other) {
             if (other.gameObject.CompareTag("HurtEntity")) {
                 //Debug.Log("ow");
+                Resistance tmp;
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 damager dmg = other.gameObject.GetComponent<damager>();
                 Damage(dmg.dmg);
-                resistances.Add(other.gameObject, dmg.cooldown);
+                Resistance tmpres = gameObject.AddComponent<Resistance>();
+                tmpres.Init(other.gameObject, dmg.cooldown, this);
+                resistances.Add(other.gameObject, tmpres);
             }
         }
         public virtual IEnumerator OnWeakpointHit(float dmg) { 

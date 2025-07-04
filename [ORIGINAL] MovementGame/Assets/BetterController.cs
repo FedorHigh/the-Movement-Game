@@ -40,6 +40,7 @@ public class BetterController : MonoBehaviour
     public CastInfo queuedCast;
     public float queueWindow;
     public float queueTimer;
+    public bool lastDashing;
 
     public Ability[] abilities;
 
@@ -48,7 +49,11 @@ public class BetterController : MonoBehaviour
 
     public void ResetQueue()
     {
-        if(queued)abilities[queuedCast.ID].ResolveQueue(currentAbility, queuedCast.cast);
+        if (queued)
+        {
+            Debug.Log("qd " + queuedCast.ID + " " + currentAbility.ID.ToString() + " " + currentAbility.cast + " " + queuedCast.cast);
+            abilities[queuedCast.ID].ResolveQueue(currentAbility, queuedCast.cast);
+        }
       
         
         queued = false;
@@ -64,7 +69,7 @@ public class BetterController : MonoBehaviour
     }
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         anim = GetComponent<SplineAnimate>();
@@ -89,6 +94,10 @@ public class BetterController : MonoBehaviour
     void FixedUpdate()
     {
 
+        if (dashing != lastDashing) {
+            Debug.Log("changed dashing to " + dashing);
+        }
+        lastDashing = dashing;
         //Debug.Log(rb.linearVelocity);
         
 

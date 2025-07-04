@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     {
         // Set Time.timeScale to 0 to pause gameplay
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         // Make PauseMenu panel visible (activate its gameObject)
         PanelPause.gameObject.SetActive(true);
     }
@@ -35,6 +36,7 @@ public class LevelManager : MonoBehaviour
     {
         // Set Time.timeScale back to 1 to resume gameplay
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         // Hide PauseMenu panel (deactivate its gameObject)
         PanelPause.gameObject.SetActive(false);
     }

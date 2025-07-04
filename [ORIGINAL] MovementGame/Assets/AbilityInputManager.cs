@@ -48,11 +48,12 @@ public class AbilityInputManager : MonoBehaviour
     }
 
     void DoCast(IAbility toCast, KeyCode key) {
+        if (player.dashing) return;
         toCast.SetKey(key);
 
         if (light_ && false)
         {
-            toCast.LightCast();
+            //toCast.LightCast();
         }
         else if (heavy)
         {

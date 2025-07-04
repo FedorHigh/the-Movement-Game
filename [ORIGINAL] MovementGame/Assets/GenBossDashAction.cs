@@ -19,8 +19,9 @@ public class GenBossDashAction : CustomClasses.Action
     public override void StartAction()
     {
         if (!base.PrepareToStart()) return;
-        base.StartAction();
+        //base.StartAction();
 
+        if (length <= 0.1f) length = 0.1f;
         init = transform.rotation;
         Vector3 tmp = guide.transform.position - transform.position;
         tmp.y = 0;

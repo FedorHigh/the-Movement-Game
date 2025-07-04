@@ -5,6 +5,7 @@ using UnityEngine.Animations;
 using Cinemachine;
 using System.Data.SqlTypes;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 public class JumpSpell : Ability, IAbility
 {
@@ -15,7 +16,7 @@ public class JumpSpell : Ability, IAbility
         player.slowFall = true;
         base.ResetVars();
         
-        //Debug.Log("reset jump!");
+        Debug.Log("reset jump! dashing is "+player.dashing);
     }
     public override void Start()
     {
@@ -32,9 +33,9 @@ public class JumpSpell : Ability, IAbility
                 Debug.Log("Combo works!");
                 Dash(CD[3], 2);
             }
-            else Dash(CD[0], 0);
+            else Cast();
         }
-        else if (cast == 2) LightCast();
+        //else if (cast == 2) LightCast();
         else HeavyCast();
         
     }
@@ -70,7 +71,11 @@ public class JumpSpell : Ability, IAbility
    
     public override void Cast()
     {
-        if (player.dashing | !player.grounded) QueueCast(0);
+        if (player.dashing | !player.grounded)
+        {
+            QueueCast(0);
+            return;
+        }
         player.slowFall = true;
 
         Instantiate(attackBoxes[0], transform.position, transform.rotation);
@@ -95,7 +100,13 @@ public class JumpSpell : Ability, IAbility
 
     public override void LightCast()
     {
-        if (player.dashing) QueueCast(2);
+        Debug.Log("not implemented");
+        return;
+        if (player.dashing)
+        {
+            QueueCast(2);
+            return;
+        }
         ready = false;
         CDleft = CD[2];
         CDset = CDleft;

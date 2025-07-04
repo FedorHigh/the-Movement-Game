@@ -39,8 +39,9 @@ public class JumpAction : Action
     public override void StartAction()
     {
         if(!PrepareToStart()) return;
+        if (length <= 0.1f) length = 0.1f;
 
-        
+
         animator.ResetTrigger(trigger);
         animator.SetTrigger(trigger);
         if(teleportGuide)guide.transform.position = transform.position;

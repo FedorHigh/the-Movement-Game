@@ -122,7 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
-  cooldown: 1
+  cooldown: 0.1
+  force: 1
+  push: 0
+  pushForce: {x: 0, y: 0, z: 0}
 --- !u!1 &7402108525014322648
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 5761598266694444467, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
   onCollision: 1
+  onStart: 0
   destroySelf: 1
   delay: 0.5
   layers:

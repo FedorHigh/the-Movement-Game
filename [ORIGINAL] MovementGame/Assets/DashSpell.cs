@@ -11,6 +11,7 @@ public class DashSpell : Ability, IAbility
     public GameObject box;
     public override void Cast()
     {
+        Debug.Log("woosh");
         Dash(CD[0], 0);
         attackBoxes[0].SetActive(true);
     }

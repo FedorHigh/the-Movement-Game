@@ -77,6 +77,7 @@ public class LeapSpell : Ability, IAbility
         if (player.dashing)
         {
             QueueCast(1);
+            return;
         }
         inHeavy = true;
         Dash(0, 1);
@@ -85,7 +86,11 @@ public class LeapSpell : Ability, IAbility
     public override void LightCast()
     {
         //Debug.Log("pew");
-        if (player.dashing | inHeavy) QueueCast(1);
+        if (player.dashing | inHeavy)
+        {
+            QueueCast(1);
+            return;
+        }
         CDleft = CD[2];
         CDset = CD[2];
         ready = false;
