@@ -408,6 +408,7 @@ namespace CustomClasses
         }
     }
     public class Entity : MonoBehaviour{
+        
         public float maxHp, moveSpeed;
         public float hp;
         public bool followTarget, lookAtTarget, moveForward;
@@ -451,6 +452,7 @@ namespace CustomClasses
             }
         }
         
+
         public virtual void DoFollowTarget() {
             //if (agent.enabled) agent.destination = trg.transform.position;
             //move = TargetObj.transform.position - transform.position;

@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHpManager : MonoBehaviour
 {
+    [SerializeField] private Slider healthBar;
     public float hp, maxHp, invincibilityTime, invTimeLeft;
     public bool invincible = false;
     public BetterController player;
@@ -51,8 +53,13 @@ public class PlayerHpManager : MonoBehaviour
         invincible = true;
         Stagger(other.transform.position, dmg.force);
         hp -= damage;
+        UpdateHealthBar();
         GetComponent<DamageIndicator>().FlashRed();
         CheckIsAlive();
+    }
+    private void UpdateHealthBar()
+    {
+        healthBar.value = hp/maxHp;
     }
     public void Start()
     {
