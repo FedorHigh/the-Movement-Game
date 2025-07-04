@@ -424,6 +424,7 @@ namespace CustomClasses
         }
     }
     public class Entity : MonoBehaviour{
+        
         public float maxHp, moveSpeed;
         public float hp;
         public bool followTarget, lookAtTarget, moveForward;
@@ -469,6 +470,7 @@ namespace CustomClasses
         }
         
         
+
         public virtual void DoFollowTarget() {
             //if (agent.enabled) agent.destination = trg.transform.position;
             //move = TargetObj.transform.position - transform.position;
@@ -494,6 +496,11 @@ namespace CustomClasses
             //UpdResistances();
         }
         public virtual void Damage(float damage) {
+            PlayerHpManager playerHp;
+            if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp)) {
+                playerHp.OnSuccesfulHit(damage);
+            }
+
             hp -= damage;
             GetComponent<DamageIndicator>().FlashRed();
             CheckIsAlive();
