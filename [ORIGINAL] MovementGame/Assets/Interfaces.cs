@@ -437,7 +437,7 @@ namespace CustomClasses
         public GameObject detector;
         public WanderAround wander;
         //public Bet TargetHp;
-        public float tmp;
+        public float tmp, lastDamage;
         public void RemoveResistance(GameObject source)
         {
             Resistance tmp;
@@ -497,6 +497,7 @@ namespace CustomClasses
         }
         public virtual void Damage(float damage) {
             PlayerHpManager playerHp;
+            lastDamage = damage;
             if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp)) {
                 playerHp.OnSuccesfulHit(damage);
             }
@@ -593,10 +594,12 @@ namespace CustomClasses
         public string[] triggers;
         public int curState = 0;
         public string[] inputTable;
+        public Entity entity;
         public virtual void Start()
         {
             //table = statesTable.table;
             //states = statesTable.states;
+            entity = GetComponent<Entity>();
             int n = states.Length;
             int t = triggers.Length;
             
@@ -654,22 +657,27 @@ namespace CustomClasses
     }
 
     public class StateEntity : Entity {
-        public string[] states;
-        public int state;
-        public string stateStr;
+        public StateMachine machine;
+        public int damageTrigger = -1;
         public void SetState(int s) {
             //state = s;
             //stateStr = states[state];
         }
         public override void Start()
         {
+            machine = GetComponent<StateMachine>();
             base.Start();
-            SetState(state);
+            //SetState(state);
         }
         public override void Update()
         {
             base.Update();
-            if(stateStr!="") Invoke(stateStr, 0);
+            //if(stateStr!="") Invoke(stateStr, 0);
+        }
+        public override void Damage(float damage)
+        {
+            base.Damage(damage);
+            if (damageTrigger != -1) machine.Trigger(damageTrigger);
         }
     }
 }

@@ -1,10 +1,13 @@
+using CustomClasses;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossEntity : BaseEntity
+public class BossEntity : StateEntity
 {
     [SerializeField] public Slider healthbarboss;
     public LevelManager manager;
+   
+    
     public override void OnDeath()
     {
         manager.OnBossDeath();
@@ -18,6 +21,7 @@ public class BossEntity : BaseEntity
     public override void Damage(float damage)
     {
         base.Damage(damage);
+        
         UpdateHealthBar();
     }
 
