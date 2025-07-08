@@ -3904,6 +3904,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3840122100297226624, guid: ccaff6efd9e68304e9f997d8ab2837a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Level1
+      objectReference: {fileID: 0}
     - target: {fileID: 9002442471672284460, guid: ccaff6efd9e68304e9f997d8ab2837a3, type: 3}
       propertyPath: m_Name
       value: CanvasGame
@@ -4780,6 +4784,10 @@ MonoBehaviour:
   PanelPause: {fileID: 302747520}
   Losepanel: {fileID: 1897810458}
   Winpanel: {fileID: 1897810456}
+  Settingspanel: {fileID: 0}
+  CanvasAbility: {fileID: 0}
+  CanvasinMenu: {fileID: 0}
+  EndGame: 0
   isPaused: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

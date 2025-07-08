@@ -1242,7 +1242,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 790175766}
         m_TargetAssemblyTypeName: Start_Game, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: LevelMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
