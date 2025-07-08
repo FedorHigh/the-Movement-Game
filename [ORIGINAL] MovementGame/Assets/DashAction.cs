@@ -8,6 +8,7 @@ public class DashAction : Action
     //public float slowSpeed, defSpeed, threshold, delay;
     //public bool slowDown, dash;
     public float dashStrength;
+    public Vector3 dashForce;
     //public MethodTrigger trigger;
     public NavMeshAgent agent;
     public Rigidbody rb;
@@ -33,7 +34,8 @@ public class DashAction : Action
         }
         rb.isKinematic = false;
         agent.enabled = false;
-        rb.AddForce(transform.forward * dashStrength * rb.mass, ForceMode.Impulse);
+        if(dashForce.magnitude==0)rb.AddForce(transform.forward * dashStrength * rb.mass, ForceMode.VelocityChange);
+        else rb.AddForce(dashForce.x * transform.right + dashForce.y * transform.up + dashForce.z * transform.forward, ForceMode.VelocityChange);
 
         Debug.Log("DASHED");
 

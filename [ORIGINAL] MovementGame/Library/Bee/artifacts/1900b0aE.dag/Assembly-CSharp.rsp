@@ -476,6 +476,7 @@
 "Assets/RandomisedRepositionAction.cs"
 "Assets/RangedRepositionAction.cs"
 "Assets/RepeatedActionState.cs"
+"Assets/shrinking.cs"
 "Assets/SlasherEnemy.cs"
 "Assets/SlasherEnemyStateMachine.cs"
 "Assets/SlashSpell.cs"

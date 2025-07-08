@@ -9,9 +9,14 @@ public class AttackAction : CustomClasses.Action
     public GameObject attack;
     public float delay;
     public MethodTrigger trigger;
+    public Vector3 push;
+    Rigidbody rb;
+    public bool doPush = false;
+    
 
     public override void Start()
     {
+        if (!TryGetComponent<Rigidbody>(out rb)) doPush = false;
         base.Start();
         if(attack == null ) attack = gameObject;
     }
@@ -25,6 +30,13 @@ public class AttackAction : CustomClasses.Action
     public void DoAttack() {
         UnityEngine.Debug.Log("did attack");
         attack.SetActive(true);
+        rb.isKinematic = false;
+        rb.AddForce(push.x*transform.right + push.y*transform.up + push.z*transform.forward, ForceMode.VelocityChange);
+    }
+    public override void EndAction()
+    {
+        rb.isKinematic = true;
+        base.EndAction();
     }
     public override void StartAction()
     {
@@ -35,6 +47,7 @@ public class AttackAction : CustomClasses.Action
         {
             return;
         }
+        
         base.StartAction();
 
         ready = false;

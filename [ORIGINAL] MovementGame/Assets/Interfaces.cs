@@ -325,6 +325,8 @@ namespace CustomClasses
         public Action chainAction;
         public float chainDelay;
         public bool chainActive = true, chainOnStart = false;
+        public Animator anim;
+        public string animTrigger;
 
         public virtual void Chain() {
             if (chainActive) {
@@ -403,7 +405,10 @@ namespace CustomClasses
         }
         public virtual void StartAction()
         {
-            
+            if (anim != null) { 
+                anim.ResetTrigger(animTrigger);
+                anim.SetTrigger(animTrigger);
+            }
         }
 
         public virtual void StartActionRepeating() {
@@ -538,6 +543,7 @@ namespace CustomClasses
     }
 
     public class State : MonoBehaviour {
+        public int id = 0;
         public StateMachine parent;
         public bool active;
         public State connected;
@@ -546,7 +552,7 @@ namespace CustomClasses
         }
         public virtual void Enter(string info = "") { 
             active = true;
-            Debug.Log("entered");
+            //Debug.Log("entered");
             if (connected != null)
             {
                 
@@ -556,12 +562,12 @@ namespace CustomClasses
         }
         public virtual void Exit(string info = "") { 
             active = false;
-            Debug.Log("exited");
+            //Debug.Log("exited");
             if (connected != null)
             {
                 
                 connected.Exit();
-                Debug.Log("connected");
+                //Debug.Log("connected");
             }
         }
     }
@@ -597,6 +603,7 @@ namespace CustomClasses
         public string[] inputTable;
         public Entity entity;
         public Queue<int> queued;
+        public string label = "bro 1";
         public virtual void Start()
         {
             //table = statesTable.table;
@@ -604,7 +611,7 @@ namespace CustomClasses
             entity = GetComponent<Entity>();
             int n = states.Length;
             int t = triggers.Length;
-            
+            queued = new Queue<int>();
             table = new int[10][];
 
             for (int i = 0; i < n; i++)
@@ -617,6 +624,7 @@ namespace CustomClasses
                     l[j] = i;
                 }
                 table[i] = l;
+                states[i].id = i;
             }
 
             for (int i = 0; i < n; i++)
@@ -645,13 +653,13 @@ namespace CustomClasses
         }
         public virtual void Trigger(int id)
         {
-            Debug.Log("TRIGGERED on state " + curState.ToString() + " trigger " + id.ToString());
+            Debug.Log(label+ " TRIGGERED on state " + curState.ToString() + " trigger " + id.ToString());
             //if (id == 3) return;
             if (table[curState][id] == -1) queued.Enqueue(id);
-            if (table[curState][id]!=curState) Switch(table[curState][id]);
+            else if (table[curState][id]!=curState) Switch(table[curState][id]);
         }
         public virtual void Switch(int target){
-            Debug.Log("switched state from " + curState.ToString()+ " to " + target.ToString());
+            Debug.Log(label + " switched state from " + curState.ToString()+ " to " + target.ToString());
             
             states[curState].Exit();
             //if (curState == 2) return;
@@ -660,9 +668,10 @@ namespace CustomClasses
             ResolveQueue();
         }
         public virtual void ResolveQueue() {
-            foreach (int i in queued) {
+            for(int i = 0;i<queued.Count;i++) {
+                int tmp = queued.Peek();
                 queued.Dequeue();
-                Trigger(i);
+                Trigger(tmp);
             }
         }
     }

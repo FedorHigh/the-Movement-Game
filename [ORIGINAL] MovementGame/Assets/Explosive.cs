@@ -8,8 +8,12 @@ public class Explosive : MonoBehaviour
     public LayerMask layers;
 
     void Explode() {
-        GameObject obj = Instantiate(Explosion);
-        obj.transform.position = transform.position;
+        GameObject obj;
+        if (Explosion != null)
+        {
+            obj = Instantiate(Explosion);
+            obj.transform.position = transform.position;
+        }
         if (destroySelf) Destroy(gameObject);
     }
 

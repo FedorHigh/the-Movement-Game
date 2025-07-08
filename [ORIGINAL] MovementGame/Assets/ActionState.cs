@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ActionState : State
 {
+    
     public Action action;
     public float duration, repetitionDelay = 0.2f;
     public int triggerId;
@@ -37,8 +38,10 @@ public class ActionState : State
         Invoke("bsExit", duration);
     }
     public void bsExit() {
-        if (action != null) action.Cancel();
+        
         if(triggerId>-1) parent.Trigger(triggerId);
+        Debug.Log(parent.label + " triggered on action exit: " + triggerId);
+        if (action != null) action.Cancel();
     }
     public override void Exit(string info = "")
     {

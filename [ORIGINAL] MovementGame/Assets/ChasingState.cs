@@ -6,6 +6,8 @@ public class ChasingState : State
 {
     public NavMeshAgent agent;
     public Entity host;
+    public float speed = -1;
+    float saved;
     public override void Start() { 
         base.Start();
         if(agent == null) agent = GetComponent<NavMeshAgent>();
@@ -23,5 +25,13 @@ public class ChasingState : State
     {
         base.Exit(info);
         agent.destination = transform.position;
+        agent.speed = saved;
+    }
+    public override void Enter(string info = "")
+    {
+        base.Enter(info);
+        saved = agent.speed;
+        if (speed != -1) agent.speed = speed;
+        
     }
 }

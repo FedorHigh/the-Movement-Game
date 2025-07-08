@@ -7,13 +7,17 @@ public class AccelerationChasingState : State
     NavMeshAgent agent;
     public float easingDuration, attackDelay, duration, maxSpeed;
     public float timePassed = 0;
+    public int trigger = 1;
     public bool accelerating = false, deccelerating = false;
     public GameObject attackBox;
     float defSpeed;
+    public Animator anim;
+    public string animTrigger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        
         base.Start();
     }
     public override void Enter(string info = "")
@@ -24,13 +28,17 @@ public class AccelerationChasingState : State
         Invoke("Attack", attackDelay);
         Invoke("Deccelerate", duration - easingDuration);
         Invoke("Finalize_", duration);
+        if (anim != null) {
+            anim.ResetTrigger(animTrigger);
+            anim.SetTrigger(animTrigger);
+        }
         base.Enter(info);
     }
     public void Finalize_() {
         agent.speed = defSpeed;
         
 
-        parent.Trigger(1);
+        parent.Trigger(trigger);
     }
     public void Attack() {
         attackBox.SetActive(true);

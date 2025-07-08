@@ -11,12 +11,15 @@ public class SmoothAnimate : MonoBehaviour
     public float time, speed, duration, speedOverwrite;
     public bool playing;
     IAbility caller;
+    StateMachine altCaller;
+    public string method = "AnimOver";
     //public string resetMethod;
     //public 
 
     public void Start()
     {
         anim = GetComponent<SplineAnimate>();
+        TryGetComponent<StateMachine>(out altCaller);
     }
     public void play(IAbility call = null)
     {
@@ -39,6 +42,7 @@ public class SmoothAnimate : MonoBehaviour
         if(toMove != null) toMove.position = transform.position;
         //Debug.Log(caller.ToString());
         if (caller != null) caller.Finish();
+        if (altCaller != null) altCaller.Invoke(method, 0);
         //else Debug.Log("NULL CALLER");
     }
     void Update()
