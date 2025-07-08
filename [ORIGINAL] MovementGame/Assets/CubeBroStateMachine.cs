@@ -46,7 +46,7 @@ public class DuoBossStateMachine : StateMachine
         }
         base.Switch(target);
     }
-    public bool DoAltAttack() {
+    public virtual bool DoAltAttack() {
         return Random.value >= 0.5f;
     }
     public override void Trigger(int id)
@@ -70,7 +70,7 @@ public class DuoBossStateMachine : StateMachine
         base.Trigger(id);
     }
     public void ResolveAggression() {
-        Debug.Log("angry!");
+        Debug.Log(label + " angry!");
         aggressionLevel = 0;
         if (ally.globalState == 1) Trigger(6);
         else Trigger(2);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
@@ -595,6 +596,7 @@ namespace CustomClasses
         public int curState = 0;
         public string[] inputTable;
         public Entity entity;
+        public Queue<int> queued;
         public virtual void Start()
         {
             //table = statesTable.table;
@@ -622,7 +624,8 @@ namespace CustomClasses
                 //List<int> l = new List<int>(t);
                 for (int j = 0; j < t; j++)
                 {
-                    if (inputTable[i][j] != '-') table[i][j] = inputTable[i][j]-'0';
+                    if (inputTable[i][j] == 'q') table[i][j] = -1;
+                    else if (inputTable[i][j] != '-') table[i][j] = inputTable[i][j]-'0';
                 }
                 //table[i] = l;
             }
@@ -644,6 +647,7 @@ namespace CustomClasses
         {
             Debug.Log("TRIGGERED on state " + curState.ToString() + " trigger " + id.ToString());
             //if (id == 3) return;
+            if (table[curState][id] == -1) queued.Enqueue(id);
             if (table[curState][id]!=curState) Switch(table[curState][id]);
         }
         public virtual void Switch(int target){
@@ -653,6 +657,13 @@ namespace CustomClasses
             //if (curState == 2) return;
             states[target].Enter();
             curState = target;
+            ResolveQueue();
+        }
+        public virtual void ResolveQueue() {
+            foreach (int i in queued) {
+                queued.Dequeue();
+                Trigger(i);
+            }
         }
     }
 
