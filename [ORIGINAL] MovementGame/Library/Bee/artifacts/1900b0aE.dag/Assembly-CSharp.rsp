@@ -437,7 +437,6 @@
 "Assets/BetterController.cs"
 "Assets/BossEntity.cs"
 "Assets/CameraSensitivity.cs"
-"Assets/CameraSettings.cs"
 "Assets/ChasingState.cs"
 "Assets/ConnectEntities.cs"
 "Assets/Cooldown.cs"
