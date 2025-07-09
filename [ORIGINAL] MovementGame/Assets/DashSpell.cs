@@ -29,7 +29,8 @@ public class DashSpell : Ability, IAbility
         charge = minCharge;
         charging = true;
     }
-    public override void ReleaseCharge() {
+    public override void ReleaseCharge()
+    {
         if (charge < maxCharge)
         {
             charging = true;
@@ -48,7 +49,7 @@ public class DashSpell : Ability, IAbility
         {
             //Debug.Log("RESET " + player.currentAbility.ID.ToString());
             player.abilities[player.currentAbility.ID].Reset();
-            
+
         }
 
         Dash(CD[2], 2);

@@ -5,13 +5,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject PanelPause;
     [SerializeField] private GameObject Losepanel;
     [SerializeField] private GameObject Winpanel;
-
+    [SerializeField] private GameObject Settingspanel;
+    [SerializeField] private GameObject CanvasAbility;
+    [SerializeField] private GameObject CanvasinMenu;
+    public bool EndGame = false;
 
     public bool isPaused; // Flag to track pause state
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (EndGame != true))
         {
             // Toggle pause state on Escape key press
             isPaused = !isPaused;
@@ -33,6 +36,7 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         // Make PauseMenu panel visible (activate its gameObject)
         PanelPause.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
     public void ResumeGame()
     {
@@ -48,6 +52,8 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
         // Make PauseMenu panel visible (activate its gameObject)
         Winpanel.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        EndGame = true;
     }
     public void Lose()
     {
@@ -55,6 +61,33 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
         // Make PauseMenu panel visible (activate its gameObject)
         Losepanel.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        EndGame = true;
+    }
+    public void Settings()
+    {
+        PanelPause.gameObject.SetActive(false);
+        CanvasAbility.gameObject.SetActive(false);
+        Settingspanel.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void ToPause()
+    {
+        CanvasAbility.gameObject.SetActive(true);
+        Settingspanel.gameObject.SetActive(false);
+        PanelPause.gameObject.SetActive(true);
+
+    }
+    public void BacktoMain()
+    {
+        Settingspanel.SetActive(false);
+        CanvasinMenu.gameObject.SetActive(true);
+
+    }
+    public void SettingMenu()
+    {
+        CanvasinMenu.gameObject.SetActive(false);
+        Settingspanel.gameObject.SetActive(true);
     }
     public void OnBossDeath() {
         Debug.Log("BOSS IS DEAD");
