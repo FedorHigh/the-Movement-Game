@@ -17,7 +17,7 @@ public class AttackBox : MonoBehaviour
     public void OnEnable()
     {
         //Debug.Log("spawned");
-        damager = GetComponent<damager>();
+        TryGetComponent<damager>(out damager);
         //constraint = GetComponent<ParentConstraint>();
 
         Invoke("endAttack", duration);
@@ -30,7 +30,7 @@ public class AttackBox : MonoBehaviour
     }
     public void endAttack()
     {
-        damager.enabled = false;
+        if(damager!=null)damager.enabled = false;
         storedTag = tag;
         tag = "Untagged";
     }
@@ -39,7 +39,7 @@ public class AttackBox : MonoBehaviour
         //Debug.Log("despawned");
         if (deleteOnTimeout) Destroy(gameObject);
         else {
-            damager.enabled = true;
+            if (damager != null) damager.enabled = true;
             tag = storedTag;
             gameObject.SetActive(false);
         }

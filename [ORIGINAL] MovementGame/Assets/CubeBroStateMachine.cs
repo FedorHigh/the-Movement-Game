@@ -23,14 +23,17 @@ public class DuoBossStateMachine : StateMachine
     float curChance = 0;
     float defSpeed = 20, fastSpeed = 70;
     NavMeshAgent agent;
-    
-    
+    public GameObject chargingParticles;
+    public MethodTrigger clippingProtector;
+
+
+
 
     public DuoBossStateMachine ally;
 
     public override void Switch(int target)
     {
-        /*
+        GetComponent<Rigidbody>().isKinematic = true;        /*
         if (target == 2 & retreat) {
             retreat = false;
             Debug.LogError(label + " retreating!");
@@ -58,6 +61,9 @@ public class DuoBossStateMachine : StateMachine
         if (target == 1 || target == 3 || target == 4) {
             attackReady = false;
 
+        }
+        if (target == 7) {
+            chargingParticles.SetActive(false);
         }
         base.Switch(target);
     }
@@ -133,7 +139,7 @@ public class DuoBossStateMachine : StateMachine
         base.Trigger(id);
         if (id == 12 && curState == 0)
         {
-            GetComponent<SmoothAnimate>().play();
+            if(!clippingProtector.inTrigger) GetComponent<SmoothAnimate>().play();
         }
     }
     public void AnimOver() {

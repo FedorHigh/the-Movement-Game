@@ -13,7 +13,7 @@ public class ThrowProjectileAction : CustomClasses.Action
         if (!base.PrepareToStart()) return;
         //base.StartAction();
         
-        GameObject obj = Instantiate(projectile);
+        GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
         obj.transform.position = transform.position;
         obj.GetComponent<ConstantForce>().force = new Vector3(0, (g + Physics.gravity.y) * -1, 0);
