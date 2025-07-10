@@ -81,7 +81,7 @@ public class DuoBossStateMachine : StateMachine
     }
     public virtual bool DoSmallAttack()
     {
-        return Random.value >= 0.8f;
+        return Random.value <= 0.8f;
     }
     public override void Trigger(int id)
     {
@@ -105,7 +105,7 @@ public class DuoBossStateMachine : StateMachine
                 else if (DoSmallAttack())
                 {
                     returnToDefense = true;
-                    aggressionLevel = aggressionThreshold * 0.5f;
+                    aggressionLevel = aggressionThreshold * 0.8f;
                     Switch(5);
                 }
                 else Switch(6);
@@ -163,6 +163,13 @@ public class DuoBossStateMachine : StateMachine
         //if (ally.dangerLevel > dangerThreshold) AllyInDanger();
         //dangerLevel -= dangerDepletion * Time.deltaTime;
         //dangerLevel = Mathf.Max(0, dangerLevel);
+
+        if (ally.entity.hp < entity.hp) {
+            float ttl = ally.entity.hp + entity.hp;
+            ally.entity.hp = ttl / 2;
+            entity.hp = ttl / 2;
+            Debug.LogError("split hp");
+        }
 
         if (!attackReady) {
             timePassed += Time.deltaTime;
