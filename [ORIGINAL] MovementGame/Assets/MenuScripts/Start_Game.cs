@@ -22,12 +22,6 @@ public class Start_Game : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("Level 3");
     }
-    public void Level3()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Level 3");
-
-    }
     public void ReloadScene ()
     {
         Time.timeScale = 1;
