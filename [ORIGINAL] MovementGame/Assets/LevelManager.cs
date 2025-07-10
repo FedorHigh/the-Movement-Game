@@ -39,12 +39,16 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
     public void ResumeGame()
+
     {
-        // Set Time.timeScale back to 1 to resume gameplay
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        // Hide PauseMenu panel (deactivate its gameObject)
-        PanelPause.gameObject.SetActive(false);
+        if (Settingspanel.gameObject.activeSelf == false) {
+            // Set Time.timeScale back to 1 to resume gameplay
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+                                                      // Hide PauseMenu panel (deactivate its gameObject)
+            PanelPause.gameObject.SetActive(false);
+        }
+        
     }
     public void Win()
     {
