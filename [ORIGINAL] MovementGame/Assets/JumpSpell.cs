@@ -85,6 +85,7 @@ public class JumpSpell : Ability, IAbility
 
     public override void HeavyCast()
     {
+        return;
         if (player.dashing)
         {
             QueueCast(1);
@@ -93,6 +94,7 @@ public class JumpSpell : Ability, IAbility
         if (!player.grounded | player.dashing) return;
         Debug.Log("started charging jump");
         player.dashing = true;
+        Debug.Log("dashing");
         ready = false;
         charging = true;
         charge = 0;

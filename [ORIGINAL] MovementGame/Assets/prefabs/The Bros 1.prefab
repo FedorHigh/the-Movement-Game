@@ -417,7 +417,7 @@ MonoBehaviour:
   attack: {fileID: 1731915191411430833}
   delay: 0.5
   trigger: {fileID: 0}
-  push: {x: 0, y: 0, z: 50}
+  push: {x: 0, y: 0, z: 30}
   doPush: 1
 --- !u!114 &8204668665312499936
 MonoBehaviour:
@@ -5873,8 +5873,8 @@ Transform:
   m_GameObject: {fileID: 1224928578083117910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.13, z: 2.3333335}
-  m_LocalScale: {x: 10, y: 0.33333334, z: 10}
+  m_LocalPosition: {x: 0, y: -0.13, z: 3.5}
+  m_LocalScale: {x: 10, y: 0.33333334, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7456978120033632283}
@@ -6549,7 +6549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2365623640379895505}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.4, y: -24.69528, z: -59.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11561,7 +11561,7 @@ Transform:
   m_GameObject: {fileID: 2892855198094940846}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -10.166667}
+  m_LocalPosition: {x: 0, y: 1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32593,7 +32593,7 @@ Transform:
   m_GameObject: {fileID: 7559993018634945727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32851,7 +32851,7 @@ GameObject:
   - component: {fileID: 1633463142480163499}
   - component: {fileID: 5170936031072680380}
   m_Layer: 0
-  m_Name: model
+  m_Name: model1
   m_TagString: HurtPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

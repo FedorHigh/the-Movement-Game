@@ -230,6 +230,7 @@ namespace CustomClasses
             CDset = CDleft;
 
             player.dashing = true;
+            Debug.Log("dashing");
             s.constraint.enabled = false;
             player.currentAbility = new CastInfo(ID, splineIndex);
             s.trail.time = s.duration;
