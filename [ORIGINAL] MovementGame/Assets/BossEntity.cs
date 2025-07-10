@@ -6,8 +6,14 @@ public class BossEntity : StateEntity
 {
     [SerializeField] public Slider healthbarboss;
     public LevelManager manager;
-   
-    
+    public override void Start()
+    {
+        TargetObj = GameObject.Find("playerBody");
+        healthbarboss = GameObject.Find("healthbarboss").GetComponent<Slider>();
+        manager = TargetObj.GetComponent<LevelManager>();
+        base.Start();
+    }
+
     public override void OnDeath()
     {
         manager.OnBossDeath();

@@ -17,7 +17,7 @@ public class UI_Script : MonoBehaviour
 
     private void Update()
     {
-        //ability = manager.currentAbility;
+        //ability = inputManager.currentAbility;
         //Debug.Log(ability.GetCDleft());
         //Debug.Log(ability.GetCDset());
         //curValue = ability.GetCDleft() / ability.GetCDset();

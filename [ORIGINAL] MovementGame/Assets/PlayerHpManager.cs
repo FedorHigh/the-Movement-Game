@@ -25,7 +25,11 @@ public class PlayerHpManager : MonoBehaviour
         
         
     }
-    public void OnSuccesfulHit(float damage = 0) {
+    public void OnSuccesfulHit(float damage = 0, DamageTrigger damageTrigger = null) {
+        if (damageTrigger != null) {
+            if (damageTrigger.TriggerAbility) player.abilities[player.currentAbility.ID].OnSuccessfulHit(damage);
+        }
+
         hp = Mathf.Min(hp + damage, rallyhp);
         if(hp>rallyhp)rallyhp = hp;
         UpdateHealthBar();
@@ -43,6 +47,10 @@ public class PlayerHpManager : MonoBehaviour
         Vector3 direction = transform.position - fromDir;
         if (direction.magnitude == 0) direction = transform.forward * -1;
         player.rb.AddForce((direction.normalized * 50 * force) + (transform.up * 25 * force), ForceMode.Impulse);
+    }
+    public void SetInvincibility(float time) {
+        invTimeLeft = time;
+        invincible = true;
     }
     public void Damage(damager dmg, Collider other) {
 

@@ -297,6 +297,8 @@ namespace CustomClasses
             box.transform.rotation = target.transform.rotation;
             Debug.Log("did attack");
         }
+
+        public virtual void OnSuccessfulHit(float damage) { }
     }
 
     public class Resistance : MonoBehaviour {
@@ -313,6 +315,7 @@ namespace CustomClasses
         public void Remove()
         {
             host.RemoveResistance(source);
+            Destroy(this);
         }
     }
     public class Action : MonoBehaviour
@@ -502,11 +505,7 @@ namespace CustomClasses
             //UpdResistances();
         }
         public virtual void Damage(float damage) {
-            PlayerHpManager playerHp;
-            lastDamage = damage;
-            if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp)) {
-                playerHp.OnSuccesfulHit(damage);
-            }
+            
 
             hp -= damage;
             GetComponent<DamageIndicator>().FlashRed();
@@ -529,10 +528,22 @@ namespace CustomClasses
                 Resistance tmp;
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 damager dmg = other.gameObject.GetComponent<damager>();
-                Damage(dmg.dmg);
                 Resistance tmpres = gameObject.AddComponent<Resistance>();
+                Debug.Log("new resistance: " + tmpres.ToString());
                 tmpres.Init(other.gameObject, dmg.cooldown, this);
                 resistances.Add(other.gameObject, tmpres);
+
+                PlayerHpManager playerHp;
+                lastDamage = dmg.dmg;
+                if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp))
+                {
+                    DamageTrigger damageTrigger;
+                    if(other.gameObject.TryGetComponent<DamageTrigger>(out damageTrigger)) playerHp.OnSuccesfulHit(dmg.dmg, damageTrigger);
+                    else playerHp.OnSuccesfulHit(dmg.dmg);
+                }
+
+                Damage(dmg.dmg);
+                
             }
         }
         public virtual IEnumerator OnWeakpointHit(float dmg) { 
@@ -697,7 +708,11 @@ namespace CustomClasses
         public override void Damage(float damage)
         {
             base.Damage(damage);
-            if (damageTrigger != -1) machine.Trigger(damageTrigger);
+            if (damageTrigger != -1)
+            {
+                machine.Trigger(damageTrigger);
+                Debug.Log("triggered from damage");
+            }
         }
     }
 }

@@ -4975,7 +4975,7 @@ GameObject:
   - component: {fileID: 5047579923210261534}
   - component: {fileID: 6968864416718747939}
   - component: {fileID: 907109008709644542}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BiggerBomb
   m_TagString: HurtPlayer
   m_Icon: {fileID: 0}

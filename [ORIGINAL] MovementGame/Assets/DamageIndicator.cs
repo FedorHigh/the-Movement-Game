@@ -36,6 +36,7 @@ public class DamageIndicator : MonoBehaviour
 
         // Возвращаем цвет через flashDuration секунд
         Invoke(nameof(ResetColors), flashDuration);
+        Debug.Log("colors flashed successfully");
     }
 
     private void ResetColors()
@@ -43,10 +44,12 @@ public class DamageIndicator : MonoBehaviour
         // Восстанавливаем оригинальные цвета
         for (int i = 0; i < _renderers.Length; i++)
         {
+            if (i >= _renderers.Length || i >= _originalColors.Count) break;
             if (_renderers[i] is SpriteRenderer spriteRenderer)
                 spriteRenderer.color = _originalColors[i];
             else if (_renderers[i] is MeshRenderer meshRenderer)
                 meshRenderer.material.color = _originalColors[i];
         }
+        Debug.Log("colors restored successfully");
     }
 }

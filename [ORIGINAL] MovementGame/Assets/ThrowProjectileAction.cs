@@ -8,6 +8,7 @@ public class ThrowProjectileAction : CustomClasses.Action
     public Vector3 groundTarget, velocity, targetPrediction;
 
     public override void StartAction() {
+        TargetObj = host.TargetObj;
         //Debug.Log("threw!");
         g = Physics.gravity.y * -1 * gravMultiplier;
         if (!base.PrepareToStart()) return;

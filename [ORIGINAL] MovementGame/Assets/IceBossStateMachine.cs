@@ -16,10 +16,14 @@ public class IceBossStateMachine : StateMachine
     Entity entity;
     public bool ticking = true, slashReady = false, spinReady = false;
     public MethodTrigger trigga;
+    public Animator animator;
     public override void Switch(int target)
     {
         if (target == 0 && entity.hp <= (entity.maxHp* phaseThreshold))
         {
+            Debug.Log("phase 2!");
+            animator.ResetTrigger("phase2");
+            animator.SetTrigger("phase2");
             target = 3;
         }
         base.Switch(target);
@@ -55,6 +59,8 @@ public class IceBossStateMachine : StateMachine
         if (curState == 0 && entity.hp <= (entity.maxHp * phaseThreshold))
         {
             Debug.Log("phase 2!");
+            animator.ResetTrigger("phase2");
+            animator.SetTrigger("phase2");
             Switch(3);
         }
         prevHP = entity.hp;

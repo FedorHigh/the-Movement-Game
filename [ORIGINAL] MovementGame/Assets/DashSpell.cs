@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class DashSpell : Ability, IAbility
 {
     public GameObject box;
+    public float heavyInvTime = 1;
     public override void Cast()
     {
         Debug.Log("woosh");
@@ -53,5 +54,11 @@ public class DashSpell : Ability, IAbility
         }
 
         Dash(CD[2], 2);
+    }
+
+    public override void OnSuccessfulHit(float damage)
+    {
+        player.hpManager.SetInvincibility(heavyInvTime);
+        Debug.Log("successful heavy dash hit");
     }
 }

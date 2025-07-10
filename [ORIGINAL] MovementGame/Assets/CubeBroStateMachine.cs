@@ -177,7 +177,7 @@ public class DuoBossStateMachine : StateMachine
     }
     public void InRange() {
         Debug.LogError(label + " in range");
-        agent.speed = defSpeed;
+        if(agent.speed == fastSpeed) agent.speed = defSpeed;
         //dangerLevel += 50;
         /*if (globalState == 2)
         {
@@ -194,7 +194,7 @@ public class DuoBossStateMachine : StateMachine
     }
     public void OutOfRange() {
         Debug.LogError(label + " out of range");
-        agent.speed = fastSpeed;
+        if(agent.speed == defSpeed) agent.speed = fastSpeed;
         /*dangerLevel -= 30;
         if (ally.globalState == 2)
         {
