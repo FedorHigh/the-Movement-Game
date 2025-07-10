@@ -95,4 +95,18 @@ public class SettingsManager : MonoBehaviour
         currentSettings.ySensitivity = value;
         SaveSettings();
     }
+    public void SetInvertCameraX(bool isInverted)
+    {
+        currentSettings.invertCameraX = isInverted;
+        SaveSettings();
+    }
+
+    public void SetInvertCameraY(bool isInverted)
+    {
+        currentSettings.invertCameraY = isInverted;
+        SaveSettings();
+    }
+
+    public bool IsCameraXInverted() => currentSettings.invertCameraX;
+    public bool IsCameraYInverted() => currentSettings.invertCameraY;
 }
