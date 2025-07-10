@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4474929569333222797}
   - component: {fileID: 5034679566095659204}
   - component: {fileID: 1791427019643127809}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyDamager
   m_TagString: HurtEntity
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 5965410965861899855}
   - component: {fileID: 680148867175850445}
   - component: {fileID: 3968040766869210375}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BigExplosion
   m_TagString: HurtPlayer
   m_Icon: {fileID: 0}

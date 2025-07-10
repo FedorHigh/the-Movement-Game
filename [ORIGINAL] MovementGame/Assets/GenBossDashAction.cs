@@ -41,7 +41,8 @@ public class GenBossDashAction : CustomClasses.Action
         box1.SetActive(true);
     }
     public void Explode() {
-        Instantiate(box2, transform.position, transform.rotation);
+        //Instantiate(box2, transform.position, transform.rotation);
+        box2.SetActive(true);
     }
 
 

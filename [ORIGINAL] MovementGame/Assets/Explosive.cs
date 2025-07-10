@@ -24,6 +24,7 @@ public class Explosive : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.name);
         if (onCollision) {
             Invoke("Explode", delay);
         }

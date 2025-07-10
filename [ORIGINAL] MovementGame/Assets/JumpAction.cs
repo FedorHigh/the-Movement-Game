@@ -19,6 +19,7 @@ public class JumpAction : Action
     public override void Start()
     {
         s = new DashSpline(splineObj);
+        animate = GetComponent<SmoothAnimate>();
         
         base.Start();
         //StartActionRepeating();
@@ -81,12 +82,14 @@ public class JumpAction : Action
         Debug.Log("played jump!");
         animate.duration = animDur;
         animate.play();
-        Instantiate(box1, obj.transform.position, obj.transform.rotation);
+        //Instantiate(box1, obj.transform.position, obj.transform.rotation);
+        box1.SetActive(true);
     }
     public override void EndAction()
     {
         Debug.Log("still standing");
-        Instantiate(box2, obj.transform.position, obj.transform.rotation);
+        //Instantiate(box2, obj.transform.position, obj.transform.rotation);
+        box2.SetActive(true);
         Debug.Log("still standing");
         base.EndAction();
         Debug.Log("still standing");

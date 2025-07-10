@@ -3,13 +3,18 @@ using CustomClasses;
 
 public class FirstBossStateMachine : StateMachine
 {
+    //0 idle
+    //1 dash
+    //2 jump
+    //3 shoot
+    //4 idle 2
 
     public Transform player;
     public float attackCD, leftCD;
     float prevHP;
     public bool countDown;
     public MethodTrigger trigga;
-    Entity entity;
+    //Entity entity;
 
     public override void Start()
     {
@@ -22,9 +27,7 @@ public class FirstBossStateMachine : StateMachine
         if (target == 0 && entity.hp <= (entity.maxHp * 0.5))
         {
             Debug.Log("2nd phase");
-            target = 3;
-            attackCD = 6;
-            leftCD = 6;
+            target = 4;
         }
         base.Switch(target);
     }
@@ -36,22 +39,22 @@ public class FirstBossStateMachine : StateMachine
                 Switch(2);
             }
             else {
-                if (Random.value < 0.3) Switch(4);
+                if (Random.value < 0.3) Switch(3);
                 else Switch(1);
             }
             return;
         }
 
         if (id == 1) {
-            leftCD = attackCD;
-            countDown = true;
+            //leftCD = attackCD;
+            //countDown = true;
         }
 
         base.Trigger(id);
     }
     public void Update()
     {
-        
+        /*
         if (countDown) {
             leftCD -= Time.deltaTime;
             if (leftCD <= 0) {
@@ -59,5 +62,6 @@ public class FirstBossStateMachine : StateMachine
                 Trigger(0);
             }
         }
+        */
     }
 }

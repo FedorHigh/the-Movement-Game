@@ -10,12 +10,17 @@ public class Start_Game : MonoBehaviour
     public void Level1()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level 1");
     }
     public void Level2()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Interface");
+        SceneManager.LoadScene("Level 2");
+    }
+    public void Level3()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level 3");
     }
 
 }
