@@ -14,8 +14,8 @@ public class CameraSensitivity : MonoBehaviour
     void UpdateCamera()
     {
         GameSettings settings = SettingsManager.Instance.GetSettings();
-        freeLookCamera.m_XAxis.m_MaxSpeed = settings.xSensitivity * 2400f;
-        freeLookCamera.m_YAxis.m_MaxSpeed = settings.ySensitivity * 80f;
+        freeLookCamera.m_XAxis.m_MaxSpeed = settings.xSensitivity * 600;
+        freeLookCamera.m_YAxis.m_MaxSpeed = settings.ySensitivity * 20;
 
         freeLookCamera.m_XAxis.m_InvertInput = settings.invertCameraX;
         freeLookCamera.m_YAxis.m_InvertInput = settings.invertCameraY;

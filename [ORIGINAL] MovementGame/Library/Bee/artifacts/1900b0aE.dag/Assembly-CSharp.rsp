@@ -449,6 +449,7 @@
 "Assets/DashAction.cs"
 "Assets/DasherEnemy.cs"
 "Assets/DashSpell.cs"
+"Assets/Delocker.cs"
 "Assets/detectTarget.cs"
 "Assets/Explosive.cs"
 "Assets/FillText.cs"
