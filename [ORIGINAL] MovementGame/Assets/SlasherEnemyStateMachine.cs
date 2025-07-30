@@ -5,7 +5,12 @@ using System.Collections.Generic;
 
 public class SlasherEnemyStateMachine : CustomClasses.StateMachine
 {
-    public void DetectionTrigger() 
+    public override void Start()
+    {
+        base.Start();
+        entity.onDetectionEvent += DetectionTrigger;
+    }
+    public void DetectionTrigger(GameObject ignored) 
     {
         Trigger(0);
     }

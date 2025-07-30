@@ -12,6 +12,7 @@ public class aimDirector : MonoBehaviour
     public bool hit;
     public BetterController player;
     public LockOnManager lockOnManager;
+    public float range = 10f;
 
 
 
@@ -33,7 +34,7 @@ public class aimDirector : MonoBehaviour
         else {
             ray = new Ray(cnm.position, cameraPoint.position - cnm.position);
         }
-        hit = Physics.Raycast(ray, out hitData, 10000f, layers);
+        hit = Physics.Raycast(ray, out hitData, range, layers);
         if (hit) marker.transform.position = hitData.point;
         else {
             if (player.lockedOn)
@@ -42,7 +43,7 @@ public class aimDirector : MonoBehaviour
             }
             else
             {
-                marker.transform.position = cameraPoint.position + (cameraPoint.position - cnm.position).normalized*10;
+                marker.transform.position = cameraPoint.position + (cameraPoint.position - cnm.position).normalized*range;
             }
         } 
 

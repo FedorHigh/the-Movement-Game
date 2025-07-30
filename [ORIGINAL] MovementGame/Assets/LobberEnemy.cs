@@ -7,9 +7,9 @@ public class LobberEnemy : StateEntity
     public RangedRepositionAction rep;
     public ThrowProjectileAction throwAttack;
     public int counter = 0;
-    public override void OnLocateTarget(GameObject target)
+    public override void LocateTarget(GameObject target)
     {
-        base.OnLocateTarget(target);
+        base.LocateTarget(target);
         //state = 1;
         TargetObj = target;
         rep.target = target;

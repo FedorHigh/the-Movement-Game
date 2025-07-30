@@ -7,7 +7,7 @@ public class ActionState : State
     public Action action;
     public float duration, repetitionDelay = 0.2f;
     public int triggerId;
-    public bool inherit = true;
+    public bool inherit = true, initDelay = false;
     public int repetitions = 1;
 
     public override void Start()
@@ -26,9 +26,11 @@ public class ActionState : State
         base.Enter(info);
         if (action != null)
         {
-            action.StartAction();
+            int I = 1;
+            if (!initDelay) action.StartAction();
+            else I--;
             float curDelay = repetitionDelay;
-            for (int i = 1; i < repetitions; i++) {
+            for (int i = I; i < repetitions; i++) {
                 Invoke("StartAction", curDelay);
                 curDelay += repetitionDelay;
             }

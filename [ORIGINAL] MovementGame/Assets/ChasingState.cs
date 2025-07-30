@@ -7,6 +7,7 @@ public class ChasingState : State
     public NavMeshAgent agent;
     public Entity host;
     public float speed = -1, angular = -1, acceleration = -1;
+    public bool nullify = false;
     float saved, sangular, sacceleration;
     public override void Start() { 
         base.Start();
@@ -28,6 +29,12 @@ public class ChasingState : State
         agent.speed = saved;
         agent.angularSpeed = sangular;
         agent.acceleration = sacceleration;
+        if (nullify)
+        {
+            agent.speed = 0;
+            agent.angularSpeed = 0;
+            agent.acceleration = 0;
+        }
     }
     public override void Enter(string info = "")
     {
@@ -38,6 +45,7 @@ public class ChasingState : State
         if (speed != -1) agent.speed = speed;
         if (angular != -1) agent.angularSpeed = angular;
         if (acceleration != -1) agent.acceleration = acceleration;
+        
         
     }
 }

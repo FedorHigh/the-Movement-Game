@@ -5,6 +5,7 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class weakpoint : Entity
 {
+    /*
     public Entity body;
     public string method;
     public float damage;
@@ -14,7 +15,7 @@ public class weakpoint : Entity
         base.Start();
         raycastLayer = GetComponent<LayerMask>();
     }
-    public override void Damage(float damage)
+    public override void Damage(HitInfo hit)
     {
         //Debug.Log("weakpoint hit");
         //IEnumerator tmp = body.OnWeakpointHit(damage);
@@ -49,4 +50,5 @@ public class weakpoint : Entity
 
             }
     }
+    */
 }

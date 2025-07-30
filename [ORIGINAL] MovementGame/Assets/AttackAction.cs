@@ -12,6 +12,7 @@ public class AttackAction : CustomClasses.Action
     public Vector3 push;
     Rigidbody rb;
     public bool doPush = false;
+    bool savedKinematic = false;
     
 
     public override void Start()
@@ -30,16 +31,18 @@ public class AttackAction : CustomClasses.Action
     public void DoAttack() {
         UnityEngine.Debug.Log("did attack");
         attack.SetActive(true);
+        if (!doPush) return;
         rb.isKinematic = false;
         rb.AddForce(push.x*transform.right + push.y*transform.up + push.z*transform.forward, ForceMode.VelocityChange);
     }
     public override void EndAction()
     {
-        rb.isKinematic = true;
+        rb.isKinematic = savedKinematic;
         base.EndAction();
     }
     public override void StartAction()
     {
+        savedKinematic = rb.isKinematic;
         UnityEngine.Debug.Log("tried attack");
         //StackTrace st = new StackTrace(true);
        // UnityEngine.Debug.Log(st.GetFrame(1).GetMethod().Name);

@@ -6,14 +6,13 @@ public class SlashSpell : Ability
 {
     
     public int cur = 0, n;
-    public float resetTime, resetTimer, baseSpeed, slowSpeed = 25;
+    public float resetTime, resetTimer;
 
 
     public override void Start()
     {
         base.Start();
         n = attackBoxes.Length;
-        baseSpeed = player.speed;
         cur = 0;
     }
     public override void Cast() {
@@ -23,7 +22,7 @@ public class SlashSpell : Ability
         if (cur == 0)
         {
             //baseSpeed = player.speed;
-            player.speed = slowSpeed;
+            player.forbidSprinting = true;
         }
         //
         ready = false;
@@ -35,7 +34,7 @@ public class SlashSpell : Ability
     }
     public void WaitToReset() {
         if (resetTimer >= resetTime) {
-            player.speed = baseSpeed;
+            player.forbidSprinting = false;
             cur = 0;
             
         }
@@ -43,7 +42,7 @@ public class SlashSpell : Ability
     }
     public override void Update() {
 
-        if (player.dashing) player.speed = baseSpeed;
+        if (player.dashing) player.forbidSprinting = false;
         base.Update();
         if(ready)WaitToReset();
     }

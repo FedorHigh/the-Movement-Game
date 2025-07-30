@@ -5,7 +5,6 @@ public class Explosive : MonoBehaviour
     public GameObject Explosion;
     public bool onCollision, onStart, destroySelf;
     public float delay;
-    public LayerMask layers;
 
     void Explode() {
         GameObject obj;

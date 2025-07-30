@@ -23,7 +23,7 @@ public class AbilityInputManager : MonoBehaviour
     public BetterController player;
     public bool canScroll;
     public float scrollCd = 0.1f;
-
+    public KeyCode sprintKey = KeyCode.LeftAlt;
     public void resetScroll()
     {
         canScroll = true;
@@ -65,8 +65,10 @@ public class AbilityInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //sprinting
+        if (Input.GetKeyDown(sprintKey)) player.sprinting = !player.sprinting;
 
+        //abilities
         jumpD = Input.GetKeyDown(jumpKey);
         //lightD = Input.GetKeyDown(lightKey);
         heavyD = Input.GetKeyDown(heavyKey);

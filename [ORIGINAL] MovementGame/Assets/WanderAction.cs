@@ -27,7 +27,7 @@ public class WanderAround : Action
         Debug.Log("Wandering...");
         if (!base.PrepareToStart()) return;
         //base.StartAction();
-        Vector3 vec = new Vector3(Random.value, 0, Random.value).normalized * (distance * Random.value);
+        Vector3 vec = new Vector3(Random.value, 0, Random.value).normalized * (distance * (Random.value-Random.value));
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;

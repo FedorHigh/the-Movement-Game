@@ -6,14 +6,15 @@ using System.Threading;
 using UnityEngine.Splines;
 using CustomClasses;
 using UnityEngine.UIElements;
+using System;
 
-public class BetterController : MonoBehaviour
+public class BetterController : MonoBehaviour, ISaveable
 {
 
     public Rigidbody rb;
     public float speed, sensitivity, Y;
     public Vector3 move, lookDirection, dirmove;
-    public GameObject cam, head, rtc, abdir, vabdir, pointer;//Rotation Centre, Ability Direction, Vertical ab.dir.
+    public GameObject cam, head, rtc, abdir, vabdir, pointer;//Rotation Center, Ability Direction, Vertical ab.dir.
     //public GameObject bbs;
     CinemachineFreeLook cnm;
     //public InputManager input;
@@ -21,6 +22,7 @@ public class BetterController : MonoBehaviour
     public float playerHeight;
     public LayerMask ground;
     public bool grounded;
+    public bool sprinting, forbidSprinting;
     public float groundDrag;
     public float airDrag, gravityScale;
     public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier, slowFallMultiplier = 2;
@@ -36,16 +38,19 @@ public class BetterController : MonoBehaviour
 
     public UIDocument doc;
 
-    Vector3 rtcrotat;
+    public Vector3 rtcrotat, safespot;
     public CastInfo queuedCast;
     public float queueWindow;
     public float queueTimer;
+    public float sprintSpeed = 150, threshold = 0.2f;
     public bool lastDashing;
 
     public Ability[] abilities;
 
     public AbilityInputManager inputManager;
     public PlayerHpManager hpManager;
+
+    
 
     public void ResetQueue()
     {
@@ -67,8 +72,21 @@ public class BetterController : MonoBehaviour
         queueTimer = queueWindow;
         //Debug.Log("set!");
     }
+    public void UpdateSafeSpot() {
+        if (!grounded) return;
+        RaycastHit spot;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(ray, out spot, playerHeight * 0.5f + groundGap, ground);
+        if (!spot.Equals(null) && spot.collider.CompareTag("Safe")) { 
+            safespot = spot.point;
+            safespot.y += 2;
+        }
+    }
     void Start()
     {
+        safespot = transform.position;
+        //currentAbility = new CastInfo(1, 0);
+        InvokeRepeating("UpdateSafeSpot", 0, 5);
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -92,6 +110,7 @@ public class BetterController : MonoBehaviour
             }
         }
     }
+    
     void FixedUpdate()
     {
 
@@ -154,8 +173,8 @@ public class BetterController : MonoBehaviour
             if (canJump)
             {
                 rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
-                canJump = false;
-                Invoke("resetJump", jumpCooldown);
+                //canJump = false;
+                //Invoke("resetJump", jumpCooldown);
             }
             else rb.AddForce(transform.up * jumpHeight * lowJumpMultiplier, ForceMode.Impulse);
             timedJump = false;
@@ -167,22 +186,32 @@ public class BetterController : MonoBehaviour
         if (rb.linearVelocity.y < 0 && !grounded & !dashing) {
             rb.AddForce(rtc.transform.up * Time.deltaTime * -100 * gravityScale * (fallMultiplier - 1), ForceMode.Acceleration);
         }
-        if (rb.linearVelocity.y > 0 && !dashing && !slowFall) { 
-            //rb.AddForce(rtc.transform.up * Time.deltaTime * 100 * gravityScale * (slowFallMultiplier - 1), ForceMode.Acceleration);
+        if (rb.linearVelocity.y < 0 && !dashing && slowFall) { 
+            rb.AddForce(rtc.transform.up * Time.deltaTime * 100 * gravityScale * (slowFallMultiplier - 1), ForceMode.Acceleration);
         }
 
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        move = rtc.transform.forward * vertical + rtc.transform.right * horizontal;
+        
 
-        if ((horizontal != 0.0f || vertical != 0.0f) & !dashing)
+        if ((Mathf.Abs(horizontal) >= threshold || Mathf.Abs(vertical) >= threshold) & !dashing)
         {
+            move = rtc.transform.forward * vertical + rtc.transform.right * horizontal;
             transform.localRotation = Quaternion.Euler(0.0f, 90 - (Mathf.Atan2(move.z, move.x) * Mathf.Rad2Deg), 0.0f);
             head.transform.localRotation = transform.localRotation;
         }
+        else move = Vector3.zero;
         //move = move * speed;
-        if(!dashing)rb.AddForce(move.normalized * speed * Time.deltaTime * 100, ForceMode.Force);
+
+
+
+        if (!dashing)
+        {   
+
+            if(sprinting && !forbidSprinting) rb.AddForce(move.normalized * sprintSpeed * Time.deltaTime * 100, ForceMode.VelocityChange);
+            else rb.AddForce(move.normalized * speed * Time.deltaTime * 100, ForceMode.VelocityChange);
+        }
         //Debug.Log(horizontal);
 
         dirmove = new Vector3(0, 0, 0);
@@ -223,10 +252,42 @@ public class BetterController : MonoBehaviour
         //}
         //Debug.Log(anim.IsPlaying);
     }
-
+    public void ToSafeSpot(Collider collision) {
+        rb.MovePosition(safespot);
+        damager dmg = new damager();
+        dmg.push = false;
+        dmg.dmg = 50;
+        hpManager.Damage(dmg, collision);
+        if (currentAbility.ID!=0) abilities[currentAbility.ID].Reset();
+        
+    }
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Respawn")){ 
+            ToSafeSpot(collision);
+        }
+    }
     public void AbortDash() {
+        Debug.Log("clipping detected! aborting ability");
         if (currentAbility == null) return;
         Debug.Log(currentAbility.ID.ToString() + " reset");
-        inputManager.abilities[currentAbility.ID].Reset();
+        inputManager.abilities[currentAbility.ID].Abort();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log("Loaded: " + data.respawnPoint);
+        rb = GetComponent<Rigidbody>();
+        if (!data.doTransport) rb.MovePosition(new Vector3(data.respawnPoint[0], data.respawnPoint[1], data.respawnPoint[2]));
+        else
+        {
+            rb.MovePosition(new Vector3(data.transportTo[0], data.transportTo[1], data.transportTo[2]));
+            data.doTransport = false;
+        }
     }
 }

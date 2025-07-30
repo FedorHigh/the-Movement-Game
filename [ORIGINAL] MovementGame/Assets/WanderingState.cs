@@ -15,7 +15,7 @@ public class WanderingState : State
     {
         base.Enter();
         Debug.Log("wandering ");
-        action.StartActionRepeating();
+        if(action!=null)action.StartActionRepeating();
     }
     public override void Exit(string info = "")
     {

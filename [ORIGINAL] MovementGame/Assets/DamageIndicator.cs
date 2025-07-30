@@ -7,24 +7,24 @@ public class DamageIndicator : MonoBehaviour
     private Renderer[] _renderers;
     private List<Color> _originalColors = new List<Color>();
     public float flashDuration = 0.5f;
+    public ParticleSystem particles;
 
     void Start()
     {
         // Получаем все рендереры (включая дочерние)
-        _renderers = GetComponentsInChildren<Renderer>(true);
+        _renderers = GetComponentsInChildren<Renderer>(false);
 
         // Сохраняем оригинальные цвета
         foreach (var renderer in _renderers)
         {
-            if (renderer is SpriteRenderer spriteRenderer)
-                _originalColors.Add(spriteRenderer.color);
-            else if (renderer is MeshRenderer meshRenderer)
-                _originalColors.Add(meshRenderer.material.color);
+            
+                _originalColors.Add(renderer.material.color);
         }
     }
 
     public void FlashRed()
     {
+        if(particles != null) particles.Play();
         // Проходим по всем рендерерам и меняем цвет
         for (int i = 0; i < _renderers.Length; i++)
         {

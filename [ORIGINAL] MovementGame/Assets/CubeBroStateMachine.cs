@@ -30,7 +30,7 @@ public class DuoBossStateMachine : StateMachine
 
 
     public DuoBossStateMachine ally;
-
+    
     public override void Switch(int target)
     {
         GetComponent<Rigidbody>().isKinematic = true;        /*
@@ -168,7 +168,7 @@ public class DuoBossStateMachine : StateMachine
             float ttl = ally.entity.hp + entity.hp;
             ally.entity.hp = ttl / 2;
             entity.hp = ttl / 2;
-            Debug.LogError("split hp");
+            //Debug.LogError("split hp");
         }
 
         if (!attackReady) {
@@ -183,7 +183,7 @@ public class DuoBossStateMachine : StateMachine
         }
     }
     public void InRange() {
-        Debug.LogError(label + " in range");
+        //Debug.LogError(label + " in range");
         if(agent.speed == fastSpeed) agent.speed = defSpeed;
         //dangerLevel += 50;
         /*if (globalState == 2)
@@ -197,7 +197,11 @@ public class DuoBossStateMachine : StateMachine
     {
         agent = GetComponent<NavMeshAgent>();
         base.Start();
+        ally.entity.onDeathEvent += Die;
         
+    }
+    public void Die(GameObject ignored) {
+        entity.OnDeath();
     }
     public void OutOfRange() {
         Debug.LogError(label + " out of range");

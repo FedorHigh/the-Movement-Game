@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
+
 //using System.Linq;
 //using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations;
+using UnityEngine.Events;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
 
@@ -22,6 +26,7 @@ namespace CustomClasses
         void Cast();
         void HeavyCast();
         void Reset();
+        void Abort();
         void Finish();
         public void ResolveQueue(CastInfo curAbility, int cast);
 
@@ -144,11 +149,16 @@ namespace CustomClasses
             //Debug.Log("RESET TRAIL " + curSpline.ToString());
             ResetVars();
         }
+        public virtual void Abort() {
+            Debug.Log("Ability aborted!");
+            Reset();
+        }
         public virtual void ResetVars()
         {
             //DashSpline s = splines[curSpline];
             //s.constraint.enabled = true;
             //Debug.Log(s.constraint.enabled.ToString());
+            
             player.dashing = false;
             player.ResetQueue();
             player.currentAbility = null;
@@ -433,11 +443,11 @@ namespace CustomClasses
             //StartCooldown();
         }
     }
-    public class Entity : MonoBehaviour{
+    public class Entity : MonoBehaviour, ISaveable{
         
         public float maxHp, moveSpeed;
         public float hp;
-        public bool followTarget, lookAtTarget, moveForward;
+        public bool followTarget, lookAtTarget, moveForward, saveDeath = false;
         public Rigidbody rb;
         public GameObject TargetObj, head, lockOnPoint;
         public Vector3 move;
@@ -446,8 +456,14 @@ namespace CustomClasses
         public NavMeshAgent agent;
         public GameObject detector;
         public WanderAround wander;
+        public UnityAction<HitInfo> onHitEvent = null;
+        public UnityAction<GameObject> onDetectionEvent = null;
+        public UnityAction<GameObject> onDeathEvent = null;
         //public Bet TargetHp;
         public float tmp, lastDamage;
+        public string ID = "";
+        
+
         public void RemoveResistance(GameObject source)
         {
             Resistance tmp;
@@ -460,11 +476,12 @@ namespace CustomClasses
         public virtual void locateAnyTarget(float radius) {
             Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetLayer);
             TargetObj = targets[0].gameObject;
-            OnLocateTarget(TargetObj);
+            LocateTarget(TargetObj);
         }
-        public virtual void OnLocateTarget(GameObject target) {
+        public virtual void LocateTarget(GameObject target) {
             TargetObj = target;
             detector.SetActive(false);
+            if(onDetectionEvent != null)onDetectionEvent.Invoke(target);
             //agent.speed = moveSpeed;
             //WanderAround tmp;
             //if (TryGetComponent<WanderAround>(out tmp)) tmp.enabled = false;
@@ -472,8 +489,10 @@ namespace CustomClasses
         }
 
         public virtual void Start() {
+            //ID = gameObject.name + transform.position.ToString() + transform.rotation.ToString();
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, Resistance>();
+            //Debug.LogError(resistances);
             agent = GetComponent<NavMeshAgent>();
             TryGetComponent<WanderAround>(out wander);
             
@@ -505,20 +524,25 @@ namespace CustomClasses
             //if (moveForward) DoMoveForward();
             //UpdResistances();
         }
-        public virtual void Damage(float damage) {
-            
-
-            hp -= damage;
-            GetComponent<DamageIndicator>().FlashRed();
+        public virtual void Damage(HitInfo hit) {
+            //Debug.LogError(hit.value);
+            //
+            hp -= hit.value;
             CheckIsAlive();
+            GetComponent<DamageIndicator>().FlashRed();
+            if(onHitEvent != null)onHitEvent.Invoke(hit);
+
         }
         public virtual void OnDeath() {
+            if(onDeathEvent!=null)onDeathEvent.Invoke(gameObject);
             LockOnManager tmpComp;
             if (TargetObj.TryGetComponent<LockOnManager>(out tmpComp))
             {
                 if (tmpComp.target == lockOnPoint) tmpComp.ResetLockOn();
             }
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            
+            gameObject.SetActive(false);
         }
         public virtual void CheckIsAlive() {
             if (hp <= 0) OnDeath();
@@ -527,6 +551,7 @@ namespace CustomClasses
             if (other.gameObject.CompareTag("HurtEntity")) {
                 //Debug.Log("ow");
                 Resistance tmp;
+                //Debug.LogError(resistances);
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 damager dmg = other.gameObject.GetComponent<damager>();
                 Resistance tmpres = gameObject.AddComponent<Resistance>();
@@ -543,7 +568,7 @@ namespace CustomClasses
                     else playerHp.OnSuccesfulHit(dmg.dmg);
                 }
 
-                Damage(dmg.dmg);
+                Damage(new HitInfo(other.gameObject, gameObject));
                 
             }
         }
@@ -552,6 +577,19 @@ namespace CustomClasses
             Debug.Log("Weakpoint hit for " + dmg.ToString() + " damage");
         }
 
+        public void SaveData(ref GameData data)
+        {
+            if (!saveDeath) return;
+            data.booleans[ID + " alive"] = gameObject.activeSelf;
+            //data.SetPoint(positionMarker.transform.position);
+        }
+
+        public void LoadData(GameData data)
+        {
+            if (!saveDeath) return;
+            if (!data.booleans.ContainsKey(ID + " alive"))gameObject.SetActive(true);
+            else gameObject.SetActive(data.booleans[ID + " alive"]);
+        }
     }
 
     public class State : MonoBehaviour {
@@ -559,17 +597,25 @@ namespace CustomClasses
         public StateMachine parent;
         public bool active;
         public State connected;
+        public Animator animator;
+        public string trigger;
         public virtual void Start() {
             if (parent == null) parent = GetComponent<StateMachine>();
         }
         public virtual void Enter(string info = "") { 
             active = true;
+            
             //Debug.Log("entered");
             if (connected != null)
             {
                 
                 connected.Enter();
                 Debug.Log("connected");
+            }
+
+            if (animator != null) { 
+                animator.ResetTrigger(trigger);
+                animator.SetTrigger(trigger);
             }
         }
         public virtual void Exit(string info = "") { 
@@ -605,7 +651,16 @@ namespace CustomClasses
             }
         }
     }
-
+    public class HitInfo
+    {
+        public GameObject hitBox, hurtBox;
+        public float value;
+        public HitInfo(GameObject hitBox_, GameObject hurtBox_) {
+            hitBox = hitBox_;
+            hurtBox = hurtBox_;
+            value = hitBox.GetComponent<damager>().dmg;
+        }
+    }
     public class StateMachine : MonoBehaviour {
         public StatesTable statesTable;
         public int[][] table;
@@ -616,6 +671,8 @@ namespace CustomClasses
         public Entity entity;
         public Queue<int> queued;
         public string label = "bro 1";
+        
+
         public virtual void Start()
         {
             //table = statesTable.table;
@@ -706,14 +763,35 @@ namespace CustomClasses
             base.Update();
             //if(stateStr!="") Invoke(stateStr, 0);
         }
-        public override void Damage(float damage)
+        public override void Damage(HitInfo hit)
         {
-            base.Damage(damage);
+            base.Damage(hit);
             if (damageTrigger != -1)
             {
                 machine.Trigger(damageTrigger);
                 Debug.Log("triggered from damage");
             }
+        }
+    }
+
+    public class Interactable : MonoBehaviour {
+        public string description = "interact with object";
+        public bool oneTime = true;
+        public string ID = "";
+        public GameObject parent;
+        public virtual void Start() {
+            //ID = gameObject.name + transform.position.ToString() + transform.rotation.ToString();
+            if (parent == null) parent = gameObject;
+            //if (ID == "") ID = parent.name;
+        }
+        public virtual void HoverOn() { 
+            
+        }
+        public virtual void HoverOff() { 
+        
+        }
+        public virtual void Activate() { 
+            
         }
     }
 }

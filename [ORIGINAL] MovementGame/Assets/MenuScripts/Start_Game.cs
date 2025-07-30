@@ -5,7 +5,8 @@ public class Start_Game : MonoBehaviour
 {
     public void LevelMenu()
     {
-        SceneManager.LoadScene("LevelMenu");
+        //SceneManager.LoadScene("LevelMenu");
+        SceneManager.LoadScene(DataManager.instance.gameData.scene);
     }
     public void Level1()
     {
@@ -21,6 +22,10 @@ public class Start_Game : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Level 3");
+    }
+    public void LevelMain() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("tutorial_level");
     }
     public void ReloadScene ()
     {

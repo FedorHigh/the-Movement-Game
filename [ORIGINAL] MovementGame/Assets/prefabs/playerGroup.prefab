@@ -1357,7 +1357,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6754884521667049904}
   - {fileID: 3955628682756090153}
   - {fileID: 1130000157983947146}
   - {fileID: 738958157564394431}
@@ -37974,6 +37973,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6754884521667049904}
   - {fileID: 3811193224156968148}
   - {fileID: 1465233395432352778}
   m_Father: {fileID: 6086335656482089216}
@@ -38117,6 +38117,7 @@ MonoBehaviour:
   fallMultiplier: 3
   dropdownMultiplier: 3
   lowJumpMultiplier: 0.5
+  slowFallMultiplier: 2
   jumpHeight: 50
   jumpCooldown: 0
   airMultiplier: 1
@@ -38125,6 +38126,7 @@ MonoBehaviour:
   dashing: 0
   lockedOn: 0
   queued: 0
+  slowFall: 0
   groundGap: 0.3
   tmp: 0
   timer: 0
@@ -38132,11 +38134,14 @@ MonoBehaviour:
   doc: {fileID: 0}
   queueWindow: 5
   queueTimer: 0
+  lastDashing: 0
   abilities:
   - {fileID: 0}
   - {fileID: 874231591096484088}
   - {fileID: 2528040042264405007}
   - {fileID: 3524032957649628238}
+  inputManager: {fileID: 0}
+  hpManager: {fileID: 0}
 --- !u!114 &1779920516444420023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38261,6 +38266,7 @@ MonoBehaviour:
   curKey: 0
   curSpline: 0
   box: {fileID: 4597100795490803654}
+  heavyInvTime: 1
 --- !u!114 &2528040042264405007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38325,6 +38331,7 @@ MonoBehaviour:
   duration: 0
   speedOverwrite: 0
   playing: 0
+  method: AnimOver
 --- !u!114 &7271012576921485733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38431,10 +38438,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095d46f5d221d348bfc11b933bfdcf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  rallyhpBar: {fileID: 0}
   hp: 50
   maxHp: 100
+  rallyhp: 0
   invincibilityTime: 1
   invTimeLeft: 0
+  depletionSpeed: 4
+  rallyEfficiency: 0.7
   invincible: 0
   player: {fileID: 0}
   manager: {fileID: 0}
@@ -38481,6 +38493,8 @@ MonoBehaviour:
   n: 0
   resetTime: 0.6
   resetTimer: 0
+  baseSpeed: 0
+  slowSpeed: 25
 --- !u!1 &7337219823584520997
 GameObject:
   m_ObjectHideFlags: 0
@@ -39058,11 +39072,11 @@ Transform:
   m_GameObject: {fileID: 8910188494244350146}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 652.6, y: 511.9, z: 186.99}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6086335656482089216}
+  m_Father: {fileID: 8033973444872264891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1773428102 &4400088942619799020
 ParentConstraint:
@@ -39074,10 +39088,10 @@ ParentConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 652.6, y: 511.9, z: 186.99}
+  m_TranslationAtRest: {x: 0, y: 7, z: 0}
   m_RotationAtRest: {x: 0, y: 90, z: 0}
   m_TranslationOffsets:
-  - {x: 0.64056396, y: 2.9299927, z: 3.2112732}
+  - {x: 0, y: 6.9999695, z: 0}
   m_RotationOffsets:
   - {x: 0, y: 90, z: 0}
   m_AffectTranslationX: 1

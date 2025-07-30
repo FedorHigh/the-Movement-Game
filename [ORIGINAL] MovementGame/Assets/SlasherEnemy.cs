@@ -30,9 +30,9 @@ public class SlasherEnemy : StateEntity
             attack.StartAction();
         }
     }
-    public override void OnLocateTarget(GameObject target)
+    public override void LocateTarget(GameObject target)
     {
-        base.OnLocateTarget(target);
+        base.LocateTarget(target);
 		//followTarget = true;
         agent.speed = defSpeed;
         GetComponent<StateMachine>().Trigger(0);

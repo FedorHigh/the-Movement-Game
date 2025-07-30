@@ -5,18 +5,20 @@ public class ThrowProjectileAction : CustomClasses.Action
 {
     public float g, dist, speed, time, horizontalDist, tmpspeed, cooldown, gravMultiplier, prediction, inaccuracy, repositionCD;
     public GameObject projectile, TargetObj;
-    public Vector3 groundTarget, velocity, targetPrediction;
+    public Vector3 groundTarget, velocity, targetPrediction, offset;
 
     public override void StartAction() {
         TargetObj = host.TargetObj;
         //Debug.Log("threw!");
         g = Physics.gravity.y * -1 * gravMultiplier;
+        if (TargetObj == null) return;
         if (!base.PrepareToStart()) return;
+            
         //base.StartAction();
         
         GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
-        Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
-        obj.transform.position = transform.position;
+        //Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
+        obj.transform.position = transform.position+offset;
         obj.GetComponent<ConstantForce>().force = new Vector3(0, (g + Physics.gravity.y) * -1, 0);
 
 
