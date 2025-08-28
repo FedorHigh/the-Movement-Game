@@ -51,8 +51,10 @@ public class BetterController : MonoBehaviour, ISaveable
     public PlayerHpManager hpManager;
 
     public GameObject slowfallParticles;
+    public ParticleSystem chargingParticles;
 
-    
+
+
 
     public void ResetQueue()
     {
@@ -306,7 +308,7 @@ public class BetterController : MonoBehaviour, ISaveable
         Debug.Log("clipping detected! aborting ability");
         if (currentAbility == null) return;
         Debug.Log(currentAbility.ID.ToString() + " reset");
-        inputManager.abilities[currentAbility.ID].Abort();
+        abilities[currentAbility.ID].Abort();
     }
 
     public void SaveData(ref GameData data)

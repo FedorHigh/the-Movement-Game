@@ -23,6 +23,7 @@ public class LeapSpell : Ability, IAbility
         charged = false;
         XTrail.emitting = false;
         inHeavy = false;
+        ignoreDashing = false;
     }
     public override void ReleaseCharge() {
         if (charge < maxCharge) {
@@ -43,26 +44,32 @@ public class LeapSpell : Ability, IAbility
     {
         base.Start();
     }
-
+    public override void Abort()
+    {
+        TryDischarge();
+        base.Abort();
+    }
     public override void Finish()
     {
         //Debug.Log("FINISHED LEAP");
+        TryDischarge();
         
-        if (charged) {
-            Debug.Log("BOOM");
-            doAttack(1, gameObject);
-        }
         ResetVars();
     }
 
-    
+    void TryDischarge() {
+        if (charged)
+        {
+            Debug.Log("BOOM");
+            doAttack(1, gameObject);
+        }
+    }
 
     public override void Cast()
     {
         Dash(CD[0], 0);
         doAttack(0, gameObject);
     }
-    
 
     public override void HeavyCast()
     {
@@ -74,17 +81,14 @@ public class LeapSpell : Ability, IAbility
             return;
         }
 
-        if (player.dashing)
-        {
-            QueueCast(1);
-            return;
-        }
         inHeavy = true;
+        ignoreDashing = true;
         Dash(0, 1);
     }
 
     public override void LightCast()
     {
+        return;
         //Debug.Log("pew");
         if (player.dashing | inHeavy)
         {

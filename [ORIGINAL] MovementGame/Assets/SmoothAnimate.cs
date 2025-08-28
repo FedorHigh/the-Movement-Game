@@ -37,7 +37,7 @@ public class SmoothAnimate : MonoBehaviour
     public void Reset()
     {
         playing = false;
-        time = 0;
+        //time = 0;
         if (constraint != null) constraint.enabled = true;
         if(toMove != null) toMove.position = transform.position;
         //Debug.Log(caller.ToString());

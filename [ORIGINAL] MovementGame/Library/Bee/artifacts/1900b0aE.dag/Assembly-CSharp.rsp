@@ -473,6 +473,7 @@
 "Assets/CameraInvertUI.cs"
 "Assets/CameraSensitivity.cs"
 "Assets/Campfire.cs"
+"Assets/Chain.cs"
 "Assets/ChasingState.cs"
 "Assets/Chest.cs"
 "Assets/ConnectEntities.cs"

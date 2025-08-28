@@ -11,6 +11,9 @@ public class JumpSpell : Ability, IAbility
 {
     private BezierKnot tmpknot;
     public float defDist, addDist;
+    public override bool IsReady() {
+        return base.IsReady() && player.grounded;
+    }
     public override void ResetVars()
     {
         player.Slowfall();
@@ -27,18 +30,18 @@ public class JumpSpell : Ability, IAbility
 
     public override void ResolveQueue(CastInfo curAbility, int cast)
     {
-        if (cast == 0)
-        {
-            if (curAbility.Equals(combos[0]))
+        base.ResolveQueue(curAbility, cast);
+        /* deprecated combo system
+            if (cast==0 && curAbility.Equals(combos[0]))
             {
                 Debug.Log("Combo works!");
                 Dash(CD[3], 2);
             }
-            else Cast();
-        }
-        //else if (cast == 2) LightCast();
-        else HeavyCast();
+            else ();
         
+        //else if (cast == 2) LightCast();
+        
+        */
     }
 
     public override void ReleaseCharge() {
@@ -73,11 +76,7 @@ public class JumpSpell : Ability, IAbility
    
     public override void Cast()
     {
-        if (player.dashing | !player.grounded)
-        {
-            QueueCast(0);
-            return;
-        }
+        
         player.slowFall = true;
 
         Instantiate(attackBoxes[0], transform.position, transform.rotation);
@@ -87,13 +86,6 @@ public class JumpSpell : Ability, IAbility
 
     public override void HeavyCast()
     {
-        return;
-        if (player.dashing)
-        {
-            QueueCast(1);
-            return;
-        }
-        if (!player.grounded | player.dashing) return;
         Debug.Log("started charging jump");
         player.dashing = true;
         Debug.Log("dashing");

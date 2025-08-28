@@ -11,7 +11,7 @@ public class AbilityInputManager : MonoBehaviour
     public KeyCode jumpKey, lightKey, heavyKey, altKey, nextKey, prevKey, castKey, QAKey1, QAKey2, QAKey3, attackKey;
 
     public Object[] _abilities;
-    public Ability[] abilities;
+    [SerializeField] private Ability[] abilities; // FOR INPUT ONLY!!!
     public Object _attack, _QAbility1, _QAbility2, _QAbility3;
     public Ability attack, QAbility1, QAbility2, QAbility3;
 
@@ -48,20 +48,20 @@ public class AbilityInputManager : MonoBehaviour
     }
 
     void DoCast(Ability toCast, KeyCode key) {
-        if (player.dashing) return;
+        //if (player.dashing) return;
         toCast.SetKey(key);
 
         if (heavy)
         {
-            if (!player.hpManager.UseManaAndStamina(toCast.heavyMana, toCast.heavyStamina)) return;
+            //if (!player.hpManager.UseManaAndStamina(toCast.heavyMana, toCast.heavyStamina)) return;
 
-            toCast.HeavyCast();
+            toCast.ProcessInput(1);
         }
         else
         {
-            if (!player.hpManager.UseManaAndStamina(toCast.defaultMana, toCast.defaultStamina)) return;
+            //if (!player.hpManager.UseManaAndStamina(toCast.defaultMana, toCast.defaultStamina)) return;
 
-            toCast.Cast();
+            toCast.ProcessInput(0);
         }
     }
 
@@ -105,21 +105,21 @@ public class AbilityInputManager : MonoBehaviour
         if (Input.GetKeyDown(castKey) & currentAbility.IsReady()) {
             DoCast(currentAbility, castKey);
         }
-        if (Input.GetKeyDown(QAKey1))
+        if (Input.GetKey(QAKey1))
         {
-            if (QAbility1.IsReady())DoCast(QAbility1, QAKey1);
+            DoCast(QAbility1, QAKey1);
         }
         if (Input.GetKeyDown(QAKey2))
         {
-            if(QAbility2.IsReady()) DoCast(QAbility2, QAKey2);
+            DoCast(QAbility2, QAKey2);
         }
         if (Input.GetKeyDown(QAKey3))
         {
-            if(QAbility3.IsReady()) DoCast(QAbility3, QAKey3);
+            DoCast(QAbility3, QAKey3);
         }
         if (Input.GetKeyDown(attackKey))
         {
-            if(attack.IsReady()) DoCast(attack, attackKey);
+            DoCast(attack, attackKey);
         }
     }
 

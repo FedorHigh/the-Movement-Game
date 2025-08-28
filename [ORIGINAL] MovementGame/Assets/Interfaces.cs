@@ -114,15 +114,41 @@ namespace CustomClasses
         public SmoothAnimate anim;
         public bool active;
         public float CDleft, CDset, charge;
-        public bool ready, charging;
+        public bool ready, charging, ignoreDashing = false;
         public KeyCode curKey;
         public DashSpline[] splines;
         public int curSpline;
         public CastInfo[] combos;
+        public ParticleSystem chargingParticles;
         
 
 
-        public bool IsReady() { return ready; }
+        public virtual bool IsReady() {
+            return ready && (ignoreDashing || !player.dashing); 
+        }
+        public virtual bool ProcessInput(int cast) {
+            if (!IsReady())
+            {
+                QueueCast(cast);
+                return false;
+            }
+
+            if (cast == 0)
+            {
+                if (!player.hpManager.UseManaAndStamina(defaultMana, defaultStamina)) return false;
+
+                Cast();
+            }
+            if (cast == 1)
+            {
+                if (!player.hpManager.UseManaAndStamina(heavyMana, heavyStamina)) return false;
+
+                HeavyCast();
+            }
+
+
+            return true;
+        }
         public VisualElement GetIcon() { return icon; }
         public int GetID() { return ID; }
         public float GetCDleft() { return CDleft; }
@@ -132,6 +158,7 @@ namespace CustomClasses
         //setting and reseting vars
         public virtual void Start()
         {
+            
             rb = GetComponent<Rigidbody>();
             anim = GetComponent<SmoothAnimate>();
             player = GetComponent<BetterController>();
@@ -142,7 +169,8 @@ namespace CustomClasses
                 splines[i] = new DashSpline(splineObjs[i]);
             }
 
-
+            if(chargingParticles==null)chargingParticles = player.chargingParticles;
+            chargingParticles.Stop();
         }
         public virtual void Reset()
         {
@@ -160,7 +188,7 @@ namespace CustomClasses
             //Debug.Log(s.constraint.enabled.ToString());
             
             player.dashing = false;
-            player.ResetQueue();
+            //player.ResetQueue();
             player.currentAbility = null;
             anim.playing = false;
             //s.trail.emitting = false;
@@ -195,6 +223,11 @@ namespace CustomClasses
         public virtual void DoCharging() {
             if (charging)
             {
+                if (!chargingParticles.isPlaying)
+                {
+                    //chargingParticles.set = minCharge;
+                    chargingParticles.Play();
+                }
                 if (!Input.GetKey(curKey))
                 {
                     if (charge < minCharge)
@@ -204,6 +237,7 @@ namespace CustomClasses
                     else
                     {
                         charging = false;
+                        //chargingParticles.Stop();
                         ReleaseCharge();
                     }
                 }
@@ -212,6 +246,7 @@ namespace CustomClasses
                 if (charge >= maxCharge)
                 {
                     charge = maxCharge;
+                    chargingParticles.Stop();
                     ReleaseCharge();
                     charging = false;
                 }
@@ -283,14 +318,16 @@ namespace CustomClasses
             throw new System.NotImplementedException();
         }
 
-        public virtual void QueueCast(int cast) { 
-            player.SetQueue(new CastInfo(ID, cast));
+        public void QueueCast(int cast) {
+            //Debug.Log("queued " + this.GetID().ToString());
+            //player.SetQueue(new CastInfo(ID, cast));
+
+            //too much trouble for what it's worth
         }
         public virtual void ResolveQueue(CastInfo curAbility, int cast)
         {
             //Debug.Log("resolved " + this.GetID().ToString());
-            if (cast == 0) Cast();
-            else if (cast == 1) HeavyCast();
+            ProcessInput(cast);
             //else LightCast();
             //Dash(curKey, CD[cast], cast);
         }
