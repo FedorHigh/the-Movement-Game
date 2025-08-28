@@ -22,9 +22,11 @@ public class DamageIndicator : MonoBehaviour
         }
     }
 
-    public void FlashRed()
+    public void FlashRed(float duration = -1)
     {
-        if(particles != null) particles.Play();
+        if (duration < 0) duration = flashDuration;
+
+        if (particles != null) particles.Play();
         // Проходим по всем рендерерам и меняем цвет
         for (int i = 0; i < _renderers.Length; i++)
         {
@@ -35,7 +37,25 @@ public class DamageIndicator : MonoBehaviour
         }
 
         // Возвращаем цвет через flashDuration секунд
-        Invoke(nameof(ResetColors), flashDuration);
+        Invoke(nameof(ResetColors), duration);
+        Debug.Log("colors flashed successfully");
+    }
+    public void FlashBlue(float duration = -1)
+    {
+        if(duration < 0) duration = flashDuration;
+
+        if (particles != null) particles.Play();
+        // Проходим по всем рендерерам и меняем цвет
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            if (_renderers[i] is SpriteRenderer spriteRenderer)
+                spriteRenderer.color = Color.blue;
+            else if (_renderers[i] is MeshRenderer meshRenderer)
+                meshRenderer.material.color = Color.blue;
+        }
+
+        // Возвращаем цвет через flashDuration секунд
+        Invoke(nameof(ResetColors), duration);
         Debug.Log("colors flashed successfully");
     }
 

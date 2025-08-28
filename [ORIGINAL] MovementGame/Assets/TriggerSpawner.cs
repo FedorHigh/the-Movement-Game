@@ -47,6 +47,7 @@ public class BossSpawner : MonoBehaviour
     public void Deactivate() {
         if(interact!=null) interact.Activate();
         deathParticles.SetActive(true);
+        UI.SetActive(false);
         deathDoor.SetActive(true);
         Destroy(toDisable);
     }

@@ -81,7 +81,7 @@ public class DuoBossStateMachine : StateMachine
     }
     public virtual bool DoSmallAttack()
     {
-        return Random.value <= 0.8f;
+        return Random.value <= 0.75f;
     }
     public override void Trigger(int id)
     {

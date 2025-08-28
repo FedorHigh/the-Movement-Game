@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 
 //using System.Linq;
 //using UnityEditor.SceneManagement;
@@ -103,6 +102,7 @@ namespace CustomClasses
         public float[] CD;
         //public float BaseCD, HeavyCD, LightCD;
         public float minCharge, maxCharge, chargeBoost, lightBoost;
+        public float defaultMana, defaultStamina, heavyMana, heavyStamina;
         [Space(100)]
 
         [Header ("Debug Vars")]
@@ -295,7 +295,7 @@ namespace CustomClasses
             //Dash(curKey, CD[cast], cast);
         }
 
-        void IAbility.SetKey(KeyCode key)
+        public void SetKey(KeyCode key)
         {
             curKey = key;
         }
@@ -446,7 +446,7 @@ namespace CustomClasses
     public class Entity : MonoBehaviour, ISaveable{
         
         public float maxHp, moveSpeed;
-        public float hp;
+        public float hp, rallyHp, rallyDepletion;
         public bool followTarget, lookAtTarget, moveForward, saveDeath = false;
         public Rigidbody rb;
         public GameObject TargetObj, head, lockOnPoint;
@@ -459,6 +459,9 @@ namespace CustomClasses
         public UnityAction<HitInfo> onHitEvent = null;
         public UnityAction<GameObject> onDetectionEvent = null;
         public UnityAction<GameObject> onDeathEvent = null;
+        public GameObject healthbarObj;
+        public EnemyHealthBar healthbar;
+        
         //public Bet TargetHp;
         public float tmp, lastDamage;
         public string ID = "";
@@ -490,6 +493,10 @@ namespace CustomClasses
 
         public virtual void Start() {
             //ID = gameObject.name + transform.position.ToString() + transform.rotation.ToString();
+            healthbarObj = Instantiate(GlobalVars.instance.EnemyHealthbarPrefab, transform);
+            healthbar = healthbarObj.GetComponent<EnemyHealthBar>();
+            rallyHp = hp;
+            rallyDepletion = maxHp * GlobalVars.instance.EnemyRallyDepletionPercent * 0.01f;
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, Resistance>();
             //Debug.LogError(resistances);
@@ -523,6 +530,11 @@ namespace CustomClasses
             //if (lookAtTarget) DoLookAtTarget();
             //if (moveForward) DoMoveForward();
             //UpdResistances();
+            if (rallyHp > hp) { 
+                rallyHp -= rallyDepletion*Time.deltaTime;
+                if(rallyHp < hp) rallyHp = hp;
+                healthbar.UpdateRally(rallyHp / maxHp);
+            }
         }
         public virtual void Damage(HitInfo hit) {
             //Debug.LogError(hit.value);
@@ -531,6 +543,7 @@ namespace CustomClasses
             CheckIsAlive();
             GetComponent<DamageIndicator>().FlashRed();
             if(onHitEvent != null)onHitEvent.Invoke(hit);
+            healthbar.UpdateHp(hp / maxHp);
 
         }
         public virtual void OnDeath() {
@@ -540,6 +553,7 @@ namespace CustomClasses
             {
                 if (tmpComp.target == lockOnPoint) tmpComp.ResetLockOn();
             }
+            GlobalVars.instance.player.hpManager.AddManaFromKill(rallyHp);
             //Destroy(gameObject);
             
             gameObject.SetActive(false);

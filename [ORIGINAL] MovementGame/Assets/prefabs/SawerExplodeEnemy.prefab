@@ -62,6 +62,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,6 +85,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -171,6 +174,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -192,6 +197,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -297,6 +303,8 @@ MonoBehaviour:
   maxHp: 300
   moveSpeed: 10
   hp: 300
+  rallyHp: 0
+  rallyDepletion: 0
   followTarget: 1
   lookAtTarget: 0
   moveForward: 0
@@ -312,6 +320,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 6557589092659852521}
   wander: {fileID: 0}
+  healthbarObj: {fileID: 0}
+  healthbar: {fileID: 0}
   tmp: 0
   lastDamage: 0
   ID: 
@@ -322,10 +332,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4259118224544346182}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 100
-  m_Drag: 5
-  m_AngularDrag: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -493,6 +503,7 @@ MonoBehaviour:
   speed: 100
   angular: 720
   acceleration: 12
+  nullify: 0
 --- !u!65 &9012442207367192528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -609,6 +620,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -630,6 +643,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -668,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LOS_required: 1
+  alertRadius: 20
   toSet: {fileID: 2910158406507084140}
   raycastLayer:
     serializedVersion: 2
@@ -799,12 +814,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 6524914422525352216}
     m_Modifications:
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: lengthInSec
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: ShapeModule.type
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: ForceModule.enabled
@@ -815,12 +834,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: ShapeModule.arc.value
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: VelocityModule.enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 816389387229753811, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: ShapeModule.radiusThickness
@@ -908,6 +943,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5761598266694444467, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965410965861899855, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6910131258559847646, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
@@ -969,7 +1008,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5761598266694444467, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4667302015743469669}
   m_SourcePrefab: {fileID: 100100000, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
 --- !u!4 &3019802046035678094 stripped
 Transform:
@@ -981,3 +1023,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5761598266694444467, guid: a1ee682b156efa24fbb805bb53d7339f, type: 3}
   m_PrefabInstance: {fileID: 8506677590427963216}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &4667302015743469669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177235071245757155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 0.1, z: 0.6}
+  m_Center: {x: 0, y: 0, z: 0.1}

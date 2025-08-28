@@ -489,6 +489,7 @@
 "Assets/detectTarget.cs"
 "Assets/DontDestroyOnLoad.cs"
 "Assets/EnemyDeathTrigger.cs"
+"Assets/EnemyHealthBar.cs"
 "Assets/Explosive.cs"
 "Assets/FillText.cs"
 "Assets/FindInteractable.cs"

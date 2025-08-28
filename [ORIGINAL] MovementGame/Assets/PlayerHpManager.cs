@@ -5,10 +5,14 @@ public class PlayerHpManager : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider rallyhpBar;
-    public float hp, maxHp,rallyhp, invincibilityTime, invTimeLeft, depletionSpeed = 4, rallyEfficiency = 0.7f;
+    [SerializeField] private Slider manaBar;
+    [SerializeField] private Slider staminaBar;
+    public float hp, maxHp,rallyhp, invincibilityTime, invTimeLeft, depletionSpeed = 4, rallyEfficiency = 0.7f, mana = 100, manaMax = 100, stamina = 100, staminaMax = 100, staminaRegen = 20;
     public bool invincible = false;
     public BetterController player;
     public LevelManager manager;
+    public float manaExponent = 1.1f, manaMultiplier = 0.1f; 
+    public DamageIndicator damageIndicator;
     private void Update()
     {
         if (invincible) { 
@@ -22,6 +26,12 @@ public class PlayerHpManager : MonoBehaviour
             rallyhp -= Time.deltaTime*depletionSpeed;
             UpdateRallyHealthBar();
         }
+        if (stamina < staminaMax) {
+            stamina += staminaRegen * Time.deltaTime;
+            if(stamina>staminaMax) stamina = staminaMax;
+            UpdateStaminaBar();
+        }
+        
         
         
     }
@@ -77,8 +87,15 @@ public class PlayerHpManager : MonoBehaviour
         hp -= damage;
         rallyhp -= damage * (1 - rallyEfficiency);
         UpdateHealthBar();
-        GetComponent<DamageIndicator>().FlashRed();
+        damageIndicator.FlashRed();
         CheckIsAlive();
+    }
+    public void Heal(float amount) {
+        hp += amount;
+        if(hp>maxHp) hp = maxHp;
+        UpdateHealthBar();
+        rallyhp = hp;
+        UpdateRallyHealthBar();
     }
     private void UpdateHealthBar()
     {
@@ -88,9 +105,66 @@ public class PlayerHpManager : MonoBehaviour
     {
         rallyhpBar.value = rallyhp / maxHp;
     }
+    public bool UseMana(float amount)
+    {
+        if (mana >= amount)
+        {
+            mana -= amount;
+            UpdateManaBar();
+            return true;
+        }
+        else return false;
+    }
+    public void AddMana(float amount) {
+        mana += amount;
+        if(mana > manaMax) mana = manaMax;
+        damageIndicator.FlashBlue(0.1f);
+
+        UpdateManaBar();
+    }
+    public void AddManaFromKill(float amount) {
+        float initial = amount;
+        amount = Mathf.Pow(amount, manaExponent) * manaMultiplier;
+        Debug.Log(amount + " mana added, initial was " + initial);
+        AddMana(amount);
+    } 
+    private void UpdateManaBar()
+    {
+        manaBar.value = mana / manaMax;
+    }
+    public bool UseStamina(float amount)
+    {
+        if (stamina >= amount)
+        {
+            stamina -= amount;
+            UpdateStaminaBar();
+            return true;
+        }
+        else return false;
+    }
+    public void UpdateStaminaBar()
+    {
+        staminaBar.value = stamina / staminaMax;
+    }
+    public bool UseManaAndStamina(float manaAmount, float staminaAmount) {
+        if (mana >= manaAmount && stamina >= staminaAmount)
+        {
+            mana -= manaAmount;
+            UpdateManaBar();
+
+            stamina -= staminaAmount;
+            UpdateStaminaBar();
+
+            return true;
+        }
+        else return false;
+    }
+
+
     public void Start()
     {
         player = GetComponent<BetterController>();
+        damageIndicator = GetComponent<DamageIndicator>();
         rallyhp = hp;
     }
     private void OnTriggerStay(Collider other)

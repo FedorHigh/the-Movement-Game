@@ -27,8 +27,8 @@ public class BetterController : MonoBehaviour, ISaveable
     public float airDrag, gravityScale;
     public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier, slowFallMultiplier = 2;
 
-    public float jumpHeight, jumpCooldown, airMultiplier;
-    public bool canJump, timedJump, dashing, lockedOn, queued, slowFall;
+    public float jumpHeight, jumpCooldown, airMultiplier, coyote = 0.5f;
+    public bool canJump, timedJump, dashing, lockedOn, queued, slowFall, justJumped;
 
     public float groundGap;
     public float tmp, timer;
@@ -49,6 +49,8 @@ public class BetterController : MonoBehaviour, ISaveable
 
     public AbilityInputManager inputManager;
     public PlayerHpManager hpManager;
+
+    public GameObject slowfallParticles;
 
     
 
@@ -110,7 +112,28 @@ public class BetterController : MonoBehaviour, ISaveable
             }
         }
     }
-    
+
+    private void leaveGround() {
+        grounded = false;
+    }
+    public void ForceLeaveGround() {
+        CancelInvoke("ResetJustJumped");
+        justJumped = true;
+        Invoke("ResetJustJumped", coyote);
+        leaveGround();
+    }
+    public void Slowfall() {
+        slowFall = true;
+        slowfallParticles.SetActive(true);
+    }
+    public void resetSlowfall()
+    {
+        slowFall = false;
+        slowfallParticles.SetActive(false);
+    }
+    public void ResetJustJumped() {
+        justJumped = false;
+    }
     void FixedUpdate()
     {
 
@@ -119,14 +142,25 @@ public class BetterController : MonoBehaviour, ISaveable
         }
         lastDashing = dashing;
         //Debug.Log(rb.linearVelocity);
-        
+
 
         //Ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + groundGap, ground);
+        if (!justJumped && Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + groundGap, ground))
+        {
+            
+            grounded = true;
+            CancelInvoke("leaveGround");
+            resetSlowfall();
+        }
+        else {
+            if (grounded) { 
+                Invoke("leaveGround", coyote);
+            }
+        }
+        
         if (grounded)
         {
             rb.linearDamping = groundDrag;
-            slowFall = false;
             if (!Input.GetKey(KeyCode.Space))
             {
                 timedJump = true;
@@ -173,6 +207,7 @@ public class BetterController : MonoBehaviour, ISaveable
             if (canJump)
             {
                 rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+                ForceLeaveGround();
                 //canJump = false;
                 //Invoke("resetJump", jumpCooldown);
             }

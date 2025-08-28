@@ -1,5 +1,4 @@
 using CustomClasses;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Chest : Interactable

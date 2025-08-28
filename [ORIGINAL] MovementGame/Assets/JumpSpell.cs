@@ -13,7 +13,8 @@ public class JumpSpell : Ability, IAbility
     public float defDist, addDist;
     public override void ResetVars()
     {
-        player.slowFall = true;
+        player.Slowfall();
+        player.ForceLeaveGround();
         base.ResetVars();
         
         Debug.Log("reset jump! dashing is "+player.dashing);
@@ -53,7 +54,8 @@ public class JumpSpell : Ability, IAbility
             return;
         }
 
-        player.slowFall = true;
+        player.Slowfall();
+        player.ForceLeaveGround();
         Instantiate(attackBoxes[1], transform.position, transform.rotation);
         DashSpline s = splines[1];
         tmpknot = s.spline.Spline.ToArray()[1];

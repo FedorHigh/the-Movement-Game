@@ -60,6 +60,8 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 10
   hp: 100
+  rallyHp: 0
+  rallyDepletion: 0
   followTarget: 0
   lookAtTarget: 0
   moveForward: 0
@@ -75,6 +77,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   detector: {fileID: 7951659154448601710}
   wander: {fileID: 0}
+  healthbarObj: {fileID: 0}
+  healthbar: {fileID: 0}
   tmp: 0
   lastDamage: 0
   ID: 
@@ -298,10 +302,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407948869249676106}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -427,6 +431,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -448,6 +454,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -536,6 +543,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -557,6 +566,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -595,6 +605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LOS_required: 1
+  alertRadius: 20
   toSet: {fileID: 3390808651404757064}
   raycastLayer:
     serializedVersion: 2
@@ -785,7 +796,7 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 3cc2f323047f1454eb09e0e62ede520b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: deb672c1f557ead46862bdb9cf7614ea, type: 2}
+      objectReference: {fileID: 2100000, guid: 1e1898f68636ee041af635d6e7ad10b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 3cc2f323047f1454eb09e0e62ede520b, type: 3}
       propertyPath: m_Name
       value: floater

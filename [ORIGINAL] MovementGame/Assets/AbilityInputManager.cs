@@ -11,12 +11,12 @@ public class AbilityInputManager : MonoBehaviour
     public KeyCode jumpKey, lightKey, heavyKey, altKey, nextKey, prevKey, castKey, QAKey1, QAKey2, QAKey3, attackKey;
 
     public Object[] _abilities;
-    public IAbility[] abilities;
+    public Ability[] abilities;
     public Object _attack, _QAbility1, _QAbility2, _QAbility3;
-    public IAbility attack, QAbility1, QAbility2, QAbility3;
+    public Ability attack, QAbility1, QAbility2, QAbility3;
 
     public int abilityNum;
-    public IAbility currentAbility;
+    public Ability currentAbility;
     public CastInfo queuedAbility;
     public bool queued, r = false;
     public float queueWindow = 1f;
@@ -35,31 +35,34 @@ public class AbilityInputManager : MonoBehaviour
         //RegisterCallback<KeyDownEvent>(OnKeyDown, TrickleDown.TrickleDown);
         player = GetComponent<BetterController>();
         //abilities.Length = tmp.Length;
-        abilities = new IAbility[_abilities.Length];
+        abilities = new Ability[_abilities.Length];
         for (int i = 0; i < _abilities.Length; i++) {
-            abilities[i] = (IAbility) _abilities[i];
+            abilities[i] = (Ability) _abilities[i];
         }
-        QAbility1 = (IAbility)_QAbility1;
-        QAbility2 = (IAbility)_QAbility2;
-        QAbility3 = (IAbility)_QAbility3;
-        attack = (IAbility)_attack;
+        QAbility1 = (Ability)_QAbility1;
+        QAbility2 = (Ability)_QAbility2;
+        QAbility3 = (Ability)_QAbility3;
+        attack = (Ability)_attack;
         //Debug.Log(abilities.Length);
         currentAbility = abilities[abilityNum];
     }
 
-    void DoCast(IAbility toCast, KeyCode key) {
+    void DoCast(Ability toCast, KeyCode key) {
         if (player.dashing) return;
         toCast.SetKey(key);
 
-        if (light_ && false)
+        if (heavy)
         {
-            //toCast.LightCast();
-        }
-        else if (heavy)
-        {
+            if (!player.hpManager.UseManaAndStamina(toCast.heavyMana, toCast.heavyStamina)) return;
+
             toCast.HeavyCast();
         }
-        else toCast.Cast();
+        else
+        {
+            if (!player.hpManager.UseManaAndStamina(toCast.defaultMana, toCast.defaultStamina)) return;
+
+            toCast.Cast();
+        }
     }
 
     // Update is called once per frame

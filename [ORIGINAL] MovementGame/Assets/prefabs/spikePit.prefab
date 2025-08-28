@@ -65,6 +65,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,6 +88,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -208,23 +211,23 @@ PrefabInstance:
     - target: {fileID: -8320724227555909419, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: -7958106736241618303, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: -3238974073974115220, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: -1806680513116206669, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: 452857147502470842, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: 919132149155446097, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: m_Name
       value: spikes
@@ -232,19 +235,23 @@ PrefabInstance:
     - target: {fileID: 1151130263568455710, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: 3368640997841646898, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: 6215180998360458898, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     - target: {fileID: 6567526433331510677, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 56fc12a6755399543a2a7e92e757f420, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
+    - target: {fileID: 7202271454713460447, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ddfc35e2e284f043ad51be3b82df212, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 64d8d1c779d4c184e8696afcf0080204, type: 3}

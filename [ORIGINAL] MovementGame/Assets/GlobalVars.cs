@@ -5,6 +5,8 @@ public class GlobalVars : MonoBehaviour
     public GameObject playerBody;
     public BetterController player;
     public ScoreCounter scoreCounter;
+    public float EnemyRallyDepletionPercent = 10;
+    public GameObject EnemyHealthbarPrefab;
     public static GlobalVars instance { get; set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
