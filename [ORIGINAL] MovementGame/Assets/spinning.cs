@@ -12,6 +12,6 @@ public class spinning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.angularVelocity = new Vector3(0, speed, 0);
+        //rb.angularVelocity = new Vector3(0, speed, 0);
     }
 }

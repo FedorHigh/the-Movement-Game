@@ -516,6 +516,7 @@
 "Assets/LobberEnemy.cs"
 "Assets/LobberEnemyStateMachine.cs"
 "Assets/LockOnManager.cs"
+"Assets/ManaRestorer.cs"
 "Assets/MenuScripts/ExitGame.cs"
 "Assets/MenuScripts/Start_Game.cs"
 "Assets/MenuScripts/ToMenu.cs"

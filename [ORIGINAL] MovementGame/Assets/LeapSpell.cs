@@ -11,39 +11,46 @@ public class LeapSpell : Ability, IAbility
     public TrailRenderer XTrail;
     public bool charged, inHeavy;
     public BezierKnot[] savedSpline;
-    public SplineContainer savedTarget;
+    public SplineContainer savedTarget = null;
     public int savedIndex;
-    public GameObject debugMarker1, debugMarker2, landingMarker;
+    public GameObject debugMarker1, debugMarker2, debugMarker3, debugMarker4, landingMarker;
     [SerializeField] private float maxDownwardDistance = 100f;
     LayerMask ground;
     void DisplaceNodes(SplineContainer targetContainer, int index) {
+        //if(savedTarget!=null)
         //return;
         savedTarget = targetContainer;
         Spline target = targetContainer.Spline;
         savedSpline = target.ToArray();
         savedIndex = index;
-        if (dashInfo[index].splineObj.transform.rotation.eulerAngles.z != 0) return;
 
+        
+        if (index==0) return;
+
+        Transform splineTransform = dashInfo[index].splineObj.transform;
         //Instantiate(debugMarker1, transform.position, transform.rotation);
-        Vector3 start = transform.position + dashInfo[index].splineObj.transform.forward*target.ToArray()[2].Position.z;
+        Vector3 start = transform.position + splineTransform.forward*target.ToArray()[2].Position.z;
         Vector3 initPos = start;
 
-        start.y += (dashInfo[index].splineObj.transform.up*target.ToArray()[1].Position.y).y;
+        start.y += (splineTransform.up*target.ToArray()[1].Position.y).y;
 
         //Instantiate(debugMarker2, start, transform.rotation);
         RaycastHit hit;
         Ray ray = new Ray(start, Vector3.down);
-        if (Physics.Raycast(ray,out hit, maxDownwardDistance, ground, QueryTriggerInteraction.Ignore)) { 
-            float descent = start.y - hit.point.y;
-            Vector3 debugVector = start;
-            debugVector.y -= descent;
-            descent = transform.position.y - debugVector.y;
-            descent -= 0.5f;
+        if (Physics.Raycast(ray,out hit, maxDownwardDistance, ground, QueryTriggerInteraction.Ignore)) {
+            Instantiate(landingMarker, hit.point, transform.rotation);
+            //float descent = start.y - hit.point.y;
+
+            //debugVector.y -= descent;
+            //descent = transform.position.y - debugVector.y;
+            //descent -= 0.5f;
 
             //Vector3 descentVector = splines[index].splineObj.transform.rotation * transform.up * -1 * descent;
-            Vector3 descentVector = dashInfo[index].splineObj.transform.rotation * (initPos - hit.point) * -1;
-            Debug.Log("Descent: " + descent.ToString() + " via " + descentVector.ToString() + " from " + start.ToString() + " to " + hit.point.ToString());
-
+            Vector3 descentVector = (start - hit.point) * -1;
+            descentVector.y += (splineTransform.up * target.ToArray()[1].Position.y).y;
+            //descentVector = Quaternion.
+            Debug.Log("Descent: " + descentVector.ToString() + " angle " + splineTransform.rotation.eulerAngles.z.ToString() + " to " + hit.point.ToString());
+            //descentVector = Quaternion.AngleAxis(splineTransform.rotation.eulerAngles.z, splineTransform.forward) * descentVector;
             BezierKnot tmpKnot;
             tmpKnot = target.ToArray()[1];
 
@@ -55,19 +62,20 @@ public class LeapSpell : Ability, IAbility
 
             tmpKnot = target.ToArray()[2];
 
-            tmpKnot.Position.x -= descentVector.x;
+            tmpKnot.Position.x += descentVector.x;
             tmpKnot.Position.y += descentVector.y;
-            tmpKnot.Position.z -= descentVector.z;
+            tmpKnot.Position.z += descentVector.z;
 
             target.SetKnot(2, tmpKnot);
-            
 
-            Instantiate(landingMarker, debugVector, transform.rotation);
+            Vector3 debugVector = start;
+            debugVector += descentVector;
+            //Instantiate(debugMarker3, debugVector, transform.rotation);
             debugVector.x = tmpKnot.Position.x;
             debugVector.y = tmpKnot.Position.y;
             debugVector.z = tmpKnot.Position.z;
-            //Instantiate(debugMarker1, transform.position + debugVector, transform.rotation);
-
+            //Instantiate(debugMarker4, transform.position + debugVector, transform.rotation);
+            
         }
     }
     void ResetNodes() {
@@ -117,7 +125,9 @@ public class LeapSpell : Ability, IAbility
     }
     public override void Abort()
     {
+
         TryDischarge();
+        
         base.Abort();
         ResetNodes();
     }

@@ -52,11 +52,12 @@ public class JumpSpell : Ability, IAbility
             charging = true;
             return;
         }
-        if (!player.grounded) {
-            Invoke("ReleaseCharge", 0.1f);
+        //*if (!player.grounded) {
+            //Invoke("ReleaseCharge", 0.1f);
             //Debug.Log("delayed");
-            return;
-        }
+            //return;
+        //}
+        
         base.ReleaseCharge();
         player.Slowfall();
         player.ForceLeaveGround();
