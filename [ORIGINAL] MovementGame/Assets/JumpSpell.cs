@@ -45,6 +45,7 @@ public class JumpSpell : Ability, IAbility
     }
 
     public override void ReleaseCharge() {
+        
         //Debug.Log("releasing jump!");
         if (charge < maxCharge)
         {
@@ -56,27 +57,30 @@ public class JumpSpell : Ability, IAbility
             //Debug.Log("delayed");
             return;
         }
-
+        base.ReleaseCharge();
         player.Slowfall();
         player.ForceLeaveGround();
         Instantiate(attackBoxes[1], transform.position, transform.rotation);
-        DashSpline s = splines[1];
+        
+        DashInfo s = dashInfo[1];
+        /*
         tmpknot = s.spline.Spline.ToArray()[1];
         tmpknot.Position.y = defDist + (charge / maxCharge) * addDist;
         splines[1].spline.Spline.SetKnot(1, tmpknot);
         splines[1].addedVelocity *= (charge / maxCharge);
         splines[1].addedVelocity = s.addedVelocity * (charge / maxCharge);
+        */
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
         player.dashing = false;
         Dash(CD[1], 1);
 
-        splines[1].addedVelocity = s.addedVelocity;
+        dashInfo[1].addedVelocity = s.addedVelocity;
     }
    
     public override void Cast()
     {
-        
+        base.Cast();
         player.slowFall = true;
 
         Instantiate(attackBoxes[0], transform.position, transform.rotation);
@@ -86,12 +90,12 @@ public class JumpSpell : Ability, IAbility
 
     public override void HeavyCast()
     {
+        base.HeavyCast();
         Debug.Log("started charging jump");
         player.dashing = true;
         Debug.Log("dashing");
         ready = false;
-        charging = true;
-        charge = 0;
+        BeginCharging();
     }
 
     public override void LightCast()
@@ -107,7 +111,7 @@ public class JumpSpell : Ability, IAbility
         CDleft = CD[2];
         CDset = CDleft;
 
-        DashSpline s = splines[0];
+        DashInfo s = dashInfo[0];
         rb.linearVelocity = Vector3.zero;
         appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
         rb.AddForce(appliedVeclocity * lightBoost, ForceMode.Impulse);

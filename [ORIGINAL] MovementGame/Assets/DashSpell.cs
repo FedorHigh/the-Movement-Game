@@ -12,12 +12,14 @@ public class DashSpell : Ability, IAbility
     public float heavyInvTime = 1;
     public override void Cast()
     {
-        Debug.Log("woosh");
+        //Debug.Log("woosh");
+        base.Cast();
         Dash(CD[0], 0);
         attackBoxes[0].SetActive(true);
     }
     public override void HeavyCast()
     {
+        base.HeavyCast();
         if (player.dashing)
         {
             QueueCast(1);
@@ -28,15 +30,17 @@ public class DashSpell : Ability, IAbility
         CDleft = CD[1];
         CDset = CDleft;
         charge = minCharge;
-        charging = true;
+        BeginCharging();
     }
     public override void ReleaseCharge()
     {
+        
         if (charge < maxCharge)
         {
             charging = true;
             return;
         }
+        base.ReleaseCharge();
         player.queued = false;
         player.queuedCast = null;
         if (player.currentAbility != null) player.abilities[player.currentAbility.ID].Reset();
@@ -58,6 +62,7 @@ public class DashSpell : Ability, IAbility
 
     public override void OnSuccessfulHit(float damage)
     {
+        base.OnSuccessfulHit(damage);
         player.hpManager.SetInvincibility(heavyInvTime);
         Debug.Log("successful heavy dash hit");
     }

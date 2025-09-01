@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHpManager : MonoBehaviour
@@ -10,9 +11,11 @@ public class PlayerHpManager : MonoBehaviour
     public float hp, maxHp,rallyhp, invincibilityTime, invTimeLeft, depletionSpeed = 4, rallyEfficiency = 0.7f, mana = 100, manaMax = 100, stamina = 100, staminaMax = 100, staminaRegen = 20;
     public bool invincible = false;
     public BetterController player;
-    public LevelManager manager;
+    public LevelManager levelManager;
     public float manaExponent = 1.1f, manaMultiplier = 0.1f; 
     public DamageIndicator damageIndicator;
+    public UnityEvent onDamageUnityEvent = null;
+    public UnityEvent onDeathUnityEvent = null;
     private void Update()
     {
         if (invincible) { 
@@ -47,7 +50,8 @@ public class PlayerHpManager : MonoBehaviour
     }
     public void OnDeath() {
         //Debug.Log("Man im dead!");
-        manager.OnPlayerDeath();
+        onDeathUnityEvent.Invoke();
+        levelManager.OnPlayerDeath();
         //Destroy(gameObject);
     }
     public void CheckIsAlive() {
@@ -65,7 +69,8 @@ public class PlayerHpManager : MonoBehaviour
     public void Damage(damager dmg, Collider other) {
 
         if (invincible) return;
-
+        onDamageUnityEvent.Invoke();
+        
         /*
         if (dmg.push)
         {

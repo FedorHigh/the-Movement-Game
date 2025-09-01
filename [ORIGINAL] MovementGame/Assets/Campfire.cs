@@ -11,6 +11,7 @@ public class Campfire : Interactable, ISaveable
 
     public override void Activate()
     {
+        base.Activate();
         if (!activated)
         {
             activated = true;

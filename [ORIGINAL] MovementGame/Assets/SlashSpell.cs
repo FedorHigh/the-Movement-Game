@@ -16,6 +16,7 @@ public class SlashSpell : Ability
         cur = 0;
     }
     public override void Cast() {
+        base.Cast();
         resetTimer = 0;
         player.transform.rotation = player.abdir.transform.rotation;
         attackBoxes[cur].SetActive(true);

@@ -6,7 +6,7 @@ using UnityEngine.Splines;
 public class JumpAction : Action
 {
     public GameObject splineObj, guide, obj, box1, box2;
-    public DashSpline s;
+    public DashInfo s;
     public Animator animator;
     public SmoothAnimate animate;
     public string trigger = "jump";
@@ -18,7 +18,7 @@ public class JumpAction : Action
 
     public override void Start()
     {
-        s = new DashSpline(splineObj);
+        s = new DashInfo(splineObj);
         animate = GetComponent<SmoothAnimate>();
         
         base.Start();
