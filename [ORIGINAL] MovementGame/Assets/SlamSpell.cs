@@ -9,7 +9,7 @@ public class SlamSpell : Ability, IAbility
     bool descending = false, hitEnemy = false, inHeavy = false, validHeight = false;
     public UnityEvent onWeakCastUnityEvent;
     //public UnityEvent onHeavyFinishUnityEvent;
-
+    Vector3 forceVector;
     bool CheckHeight()
     {
         RaycastHit hit;
@@ -138,14 +138,14 @@ public class SlamSpell : Ability, IAbility
                 Finish();
             }
             else{
-                Vector3 forceVector = new Vector3();
+                forceVector = new Vector3(0, 0, 0);
 
-                forceVector += player.abdir.transform.right * -1 * Input.GetAxis("Horizontal") * steeringSpeed;
-                forceVector.y = -1 * downwardsForce;
-                if(inHeavy) forceVector.y *= 0.5f;
-                forceVector += player.abdir.transform.forward * Input.GetAxis("Vertical") * steeringSpeed;
-                
-                
+                if (inHeavy) forceVector = new Vector3(0, -2 * downwardsForce, 0);
+                else {
+                    forceVector += player.abdir.transform.right * -1 * Input.GetAxis("Horizontal") * steeringSpeed;
+                    forceVector.y = -1 * downwardsForce;
+                    forceVector += player.abdir.transform.forward * Input.GetAxis("Vertical") * steeringSpeed;
+                }
 
                 player.rb.AddForce(forceVector, ForceMode.Acceleration);
             }
