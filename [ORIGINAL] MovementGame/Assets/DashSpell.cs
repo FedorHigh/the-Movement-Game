@@ -43,21 +43,10 @@ public class DashSpell : Ability, IAbility
         base.ReleaseCharge();
         player.queued = false;
         player.queuedCast = null;
-        if (player.currentAbility != null) player.abilities[player.currentAbility.ID].Reset();
+        if (player.currentAbility != null) player.abilities[player.currentAbility.ID].Abort();
 
         attackBoxes[1].SetActive(true);
         Dash(CD[1], 1);
-    }
-    public override void LightCast()
-    {
-        if (player.currentAbility != null)
-        {
-            //Debug.Log("RESET " + player.currentAbility.ID.ToString());
-            player.abilities[player.currentAbility.ID].Reset();
-
-        }
-
-        Dash(CD[2], 2);
     }
 
     public override void OnSuccessfulHit(float damage)

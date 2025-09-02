@@ -293,11 +293,10 @@ public class BetterController : MonoBehaviour, ISaveable
     }
     public void ToSafeSpot(Collider collision) {
         rb.MovePosition(safespot);
-        damager dmg = new damager();
-        dmg.push = false;
-        dmg.dmg = 50;
-        hpManager.Damage(dmg, collision);
-        if (currentAbility.ID!=0) abilities[currentAbility.ID].Reset();
+        //damager dmg = new damager();
+        hpManager.SelfDamage(50);
+        //hpManager.Damage(dmg, collision);
+        if (currentAbility.ID!=0) abilities[currentAbility.ID].Abort();
         
     }
     public void OnTriggerEnter(Collider collision)

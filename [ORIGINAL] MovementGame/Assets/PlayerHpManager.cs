@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
 public class PlayerHpManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerHpManager : MonoBehaviour
     public DamageIndicator damageIndicator;
     public UnityEvent onDamageUnityEvent = null;
     public UnityEvent onDeathUnityEvent = null;
+    damager selfDamager;
     private void Update()
     {
         if (invincible) { 
@@ -66,9 +68,17 @@ public class PlayerHpManager : MonoBehaviour
         invTimeLeft = time;
         invincible = true;
     }
-    public void Damage(damager dmg, Collider other) {
+    public void SelfDamage(float damage, bool ignoreInvincibility = false)
+    {
+        selfDamager.dmg = damage;
+        selfDamager.cooldown = 0;
+        selfDamager.force = 1;
+        selfDamager.push = false;
+        Damage(selfDamager, gameObject.GetComponent<Collider>(), ignoreInvincibility);
+    }
+    public void Damage(damager dmg, Collider other, bool ignoreInvincibility = false) {
 
-        if (invincible) return;
+        if (invincible && !ignoreInvincibility) return;
         onDamageUnityEvent.Invoke();
         
         /*
@@ -81,14 +91,13 @@ public class PlayerHpManager : MonoBehaviour
             player.rb.AddForce(push * dmg.force, ForceMode.Impulse);
         }
         */
-        float cooldown = dmg.cooldown;
         float damage = dmg.dmg;
 
         //cooldown = cooldown * invincibilityTime;
         //invTimeLeft = cooldown;
         invTimeLeft = invincibilityTime;
         invincible = true;
-        Stagger(other.transform.position, dmg.force);
+        if(dmg.push)Stagger(other.transform.position, dmg.force);
         hp -= damage;
         rallyhp -= damage * (1 - rallyEfficiency);
         UpdateHealthBar();
@@ -170,6 +179,7 @@ public class PlayerHpManager : MonoBehaviour
     {
         player = GetComponent<BetterController>();
         damageIndicator = GetComponent<DamageIndicator>();
+        selfDamager = gameObject.AddComponent<damager>();
         rallyhp = hp;
     }
     private void OnTriggerStay(Collider other)

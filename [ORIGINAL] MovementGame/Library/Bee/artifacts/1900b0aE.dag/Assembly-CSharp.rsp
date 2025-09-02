@@ -544,6 +544,7 @@
 "Assets/SettingsUIHandler.cs"
 "Assets/Shockwave.cs"
 "Assets/shrinking.cs"
+"Assets/SlamSpell.cs"
 "Assets/SlasherEnemy.cs"
 "Assets/SlasherEnemyStateMachine.cs"
 "Assets/SlashSpell.cs"

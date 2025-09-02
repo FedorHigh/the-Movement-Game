@@ -76,10 +76,10 @@ namespace CustomClasses
     public class CastInfo { 
         public int ID;
         public int cast;
-        public CastInfo(int a, int c)
+        public CastInfo(int ID, int cast)
         {
-            ID = a;
-            cast = c;
+            this.ID = ID;
+            this.cast = cast;
         }
         public bool Equals(CastInfo other, bool loose = false) {
             return (ID == other.ID & (loose | cast == other.cast));
@@ -364,12 +364,16 @@ namespace CustomClasses
         }
         public virtual void Finish() {
             onDashFinishUnityEvent.Invoke();
-            DashInfo s = dashInfo[currendDashIndex];
-            //rb.AddForce(appliedVeclocity, ForceMode.Impulse);
-            
-            //rb.linearVelocity = appliedVeclocity;
-            if (s.prtEnd != null) s.prtEnd.Play();
-            Reset();
+            if (currendDashIndex < dashInfo.Length)
+            {
+                DashInfo s = dashInfo[currendDashIndex];
+                if (s.prtEnd != null) s.prtEnd.Play();
+            }
+                //rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+
+                //rb.linearVelocity = appliedVeclocity;
+
+           Reset();
         }
 
         public virtual void LightCast()

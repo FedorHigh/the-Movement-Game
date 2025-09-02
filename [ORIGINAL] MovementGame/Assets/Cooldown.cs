@@ -5,22 +5,32 @@ using TMPro;
 
 public class UICooldown : MonoBehaviour
 {
-    [SerializeField] private Image cooldownOverlay; // Filled Image
-    [SerializeField] private TextMeshProUGUI cooldownText;     // Обычный UI Text
+    [SerializeField] private Image cooldownOverlay;
+    [SerializeField] private GameObject noManaOverlay, noStaminaOverlay;
+    [SerializeField] private TextMeshProUGUI cooldownText; 
+    //public Color dull = Color.gray;
     private float cooldownDuration = 0f;
     private float currentCooldown = 0f;
     private bool isOnCooldown = false;
-
+    public BetterController player;
     public Ability ability;
+    public bool debug = false;
 
     void Start()
     {
-        
+        if(player==null)player = GlobalVars.instance.player;
     }
 
     void Update()
     {
-        // Получаем значения из внешнего класса
+        if (debug) {
+            Debug.Log("UI debug cur stamina: " + player.hpManager.stamina);
+            Debug.Log("UI debugneeded stamina: " + ability.defaultStamina);
+        }
+        noManaOverlay.SetActive(player.hpManager.mana < ability.defaultMana);
+        noStaminaOverlay.SetActive(!noManaOverlay.activeSelf && player.hpManager.stamina < ability.defaultStamina); // OPTIMISE 
+        
+
         if (ability != null)
         {
             cooldownDuration = ability.CDset;
