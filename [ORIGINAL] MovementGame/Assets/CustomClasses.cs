@@ -674,11 +674,13 @@ namespace CustomClasses
             //Debug.LogError(hit.value);
             //
             hp -= hit.value;
-            CheckIsAlive();
-            GetComponent<DamageIndicator>().FlashRed();
+            
+            
             if(onHitEvent != null)onHitEvent.Invoke(hit);
             healthbar.UpdateHp(hp / maxHp);
 
+            CheckIsAlive();
+            GetComponent<DamageIndicator>().FlashRed();
         }
         public virtual void OnDeath() {
             if(onDeathEvent!=null)onDeathEvent.Invoke(gameObject);
