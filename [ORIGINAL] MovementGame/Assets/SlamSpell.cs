@@ -5,11 +5,17 @@ using UnityEngine.UIElements;
 
 public class SlamSpell : Ability, IAbility
 {
-    public float maxInvTime = 10, invTime = 1, damageOnFail = 30, damageOnHeavyFail = 80, downwardsForce, steeringSpeed, minHeight = 10f, maxHeight = 1000f;
+    public float maxInvTime = 10, invTime = 1, damageOnFail = 30, damageOnHeavyFail = 80, downwardsForce, steeringSpeed, nudgeForce = 30, minHeight = 10f, maxHeight = 1000f;
     bool descending = false, hitEnemy = false, inHeavy = false, validHeight = false;
     public UnityEvent onWeakCastUnityEvent;
     //public UnityEvent onHeavyFinishUnityEvent;
     Vector3 forceVector;
+    void Nudge() {
+        forceVector = new Vector3(0, 0, 0);
+        forceVector += player.abdir.transform.right * -1 * Input.GetAxis("Horizontal") * nudgeForce;
+        forceVector += player.abdir.transform.forward * Input.GetAxis("Vertical") * nudgeForce;
+        player.rb.AddForce(forceVector, ForceMode.Impulse);
+    }
     bool CheckHeight()
     {
         RaycastHit hit;
@@ -34,6 +40,7 @@ public class SlamSpell : Ability, IAbility
         hitEnemy = false;
 
         validHeight = false;
+        Nudge();
         onWeakCastUnityEvent.Invoke();
     }
     public override void Cast()
@@ -51,6 +58,7 @@ public class SlamSpell : Ability, IAbility
         player.currentAbility = new CastInfo(ID, 0);
 
         //
+        Nudge();
         descending = true;
         hitEnemy = false;
         player.hpManager.SetInvincibility(maxInvTime);
@@ -113,6 +121,7 @@ public class SlamSpell : Ability, IAbility
         }
         base.ReleaseCharge();
         inHeavy = true;
+        Nudge();
         descending = true;
         //player.queued = false;
         //player.queuedCast = null;
@@ -122,9 +131,9 @@ public class SlamSpell : Ability, IAbility
         //Dash(CD[1], 1);
         
     }
-    public override void OnSuccessfulHit(float damage)
+    public override void OnSuccessfulHit(Damager dmg, DamageTrigger damageTrigger)
     {
-        base.OnSuccessfulHit(damage);
+        base.OnSuccessfulHit(dmg, damageTrigger);
         hitEnemy = true;
 
     }

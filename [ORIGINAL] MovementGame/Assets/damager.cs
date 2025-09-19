@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class damager : MonoBehaviour
+public class Damager : MonoBehaviour
 {
     public float dmg, cooldown, force = 1;
     public bool push;

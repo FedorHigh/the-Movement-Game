@@ -4,7 +4,7 @@ using UnityEngine.Animations;
 public class AttackBox : MonoBehaviour
 {
     public float duration = 0.3f, finDuration = 0.3f;
-    damager damager;
+    Damager damager;
     public bool deleteOnTimeout = true;
     public string storedTag;
 
@@ -17,7 +17,7 @@ public class AttackBox : MonoBehaviour
     public void OnEnable()
     {
         //Debug.Log("spawned");
-        TryGetComponent<damager>(out damager);
+        TryGetComponent<Damager>(out damager);
         //constraint = GetComponent<ParentConstraint>();
 
         Invoke("endAttack", duration);

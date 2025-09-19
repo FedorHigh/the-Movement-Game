@@ -133,7 +133,11 @@ namespace CustomClasses
         public UnityEvent onCastUnityEvent;
         public UnityEvent onHeavyCastUnityEvent;
 
-
+        public void SetCooldown(float cooldown) {
+            ready = false;
+            CDleft = cooldown;
+            CDset = cooldown;
+        }
         public virtual bool IsReady() {
             return ready && (ignoreDashing || !player.dashing); 
         }
@@ -315,10 +319,10 @@ namespace CustomClasses
             anim.container = s.spline;
             anim.play(self);
 
-            rb.linearVelocity = Vector3.zero;
-            appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
-            //rb.AddForce(appliedVeclocity, ForceMode.VelocityChange);
-            rb.AddForce(appliedVeclocity, ForceMode.Impulse);
+            //rb.linearVelocity = Vector3.zero;
+            //appliedVeclocity = s.splineObj.transform.right * s.addedVelocity.x + s.splineObj.transform.up * s.addedVelocity.y + s.splineObj.transform.forward * s.addedVelocity.z;
+           // rb.AddForce(appliedVeclocity, ForceMode.VelocityChange);
+            //rb.AddForce(appliedVeclocity, ForceMode.Impulse);
             //rb.linearVelocity = appliedVeclocity;
         }
 
@@ -362,11 +366,24 @@ namespace CustomClasses
             rb.AddForce(appliedVeclocity, ForceMode.Impulse);
             //rb.linearVelocity = appliedVeclocity;
         }
+
+        protected void ApplyVelocity(Transform referencePoint, Vector3 velocity) {
+            rb.linearVelocity = Vector3.zero;
+            appliedVeclocity = referencePoint.right * velocity.x + referencePoint.up * velocity.y + referencePoint.forward * velocity.z;
+            //appliedVeclocity = point.right * velocity.x + point.forward * velocity.z;
+            //appliedVeclocity.y += velocity.y;
+            rb.AddForce(appliedVeclocity, ForceMode.VelocityChange);
+        }
         public virtual void Finish() {
+
             onDashFinishUnityEvent.Invoke();
+
+            
+
             if (currendDashIndex < dashInfo.Length)
             {
                 DashInfo s = dashInfo[currendDashIndex];
+                if(s.addedVelocity != Vector3.zero)ApplyVelocity(s.splineObj.transform, s.addedVelocity);
                 if (s.prtEnd != null) s.prtEnd.Play();
             }
                 //rb.AddForce(appliedVeclocity, ForceMode.Impulse);
@@ -419,7 +436,7 @@ namespace CustomClasses
             Debug.Log("did attack");
         }
 
-        public virtual void OnSuccessfulHit(float damage) {
+        public virtual void OnSuccessfulHit(Damager dmg, DamageTrigger damageTrigger) {
             onSuccessfulHitUnityEvent.Invoke();
         }
     }
@@ -601,10 +618,10 @@ namespace CustomClasses
             onDetectionEvent += OnDetectionEvent;
             onDeathEvent += OnDeathEvent;
 
-            healthbarObj = Instantiate(GlobalVars.instance.EnemyHealthbarPrefab, transform);
+            healthbarObj = Instantiate(GlobalVars.instance.enemyHealthbarPrefab, transform);
             healthbar = healthbarObj.GetComponent<EnemyHealthBar>();
             rallyHp = hp;
-            rallyDepletion = maxHp * GlobalVars.instance.EnemyRallyDepletionPercent * 0.01f;
+            rallyDepletion = maxHp * GlobalVars.instance.enemyRallyDepletionPercent * 0.01f;
             rb = GetComponent<Rigidbody>();
             resistances = new Dictionary<GameObject, Resistance>();
             //Debug.LogError(resistances);
@@ -703,7 +720,7 @@ namespace CustomClasses
                 Resistance tmp;
                 //Debug.LogError(resistances);
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
-                damager dmg = other.gameObject.GetComponent<damager>();
+                Damager dmg = other.gameObject.GetComponent<Damager>();
                 Resistance tmpres = gameObject.AddComponent<Resistance>();
                 Debug.Log("new resistance: " + tmpres.ToString());
                 tmpres.Init(other.gameObject, dmg.cooldown, this);
@@ -714,8 +731,8 @@ namespace CustomClasses
                 if (TargetObj.TryGetComponent<PlayerHpManager>(out playerHp))
                 {
                     DamageTrigger damageTrigger;
-                    if(other.gameObject.TryGetComponent<DamageTrigger>(out damageTrigger)) playerHp.OnSuccesfulHit(dmg.dmg, damageTrigger);
-                    else playerHp.OnSuccesfulHit(dmg.dmg);
+                    if(other.gameObject.TryGetComponent<DamageTrigger>(out damageTrigger)) playerHp.OnSuccesfulHit(dmg, damageTrigger);
+                    else playerHp.OnSuccesfulHit(dmg, damageTrigger);
                 }
 
                 Damage(new HitInfo(other.gameObject, gameObject));
@@ -808,7 +825,7 @@ namespace CustomClasses
         public HitInfo(GameObject hitBox_, GameObject hurtBox_) {
             hitBox = hitBox_;
             hurtBox = hurtBox_;
-            value = hitBox.GetComponent<damager>().dmg;
+            value = hitBox.GetComponent<Damager>().dmg;
         }
     }
     public class StateMachine : MonoBehaviour {

@@ -17,7 +17,7 @@ public class JumpSpell : Ability, IAbility
     public override void ResetVars()
     {
         player.Slowfall();
-        player.ForceLeaveGround();
+        //player.ForceLeaveGround();
         base.ResetVars();
         
         Debug.Log("reset jump! dashing is "+player.dashing);
@@ -73,7 +73,7 @@ public class JumpSpell : Ability, IAbility
         */
 
         //if (player.currentAbility != null) player.currentAbility.Reset();
-        player.dashing = false;
+        //player.dashing = false;
         Dash(CD[1], 1);
 
         dashInfo[1].addedVelocity = s.addedVelocity;
@@ -82,7 +82,8 @@ public class JumpSpell : Ability, IAbility
     public override void Cast()
     {
         base.Cast();
-        player.slowFall = true;
+        player.Slowfall();
+        player.ForceLeaveGround();
 
         Instantiate(attackBoxes[0], transform.position, transform.rotation);
 

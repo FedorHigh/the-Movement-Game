@@ -26,7 +26,7 @@ public class BetterController : MonoBehaviour, ISaveable
     public bool sprinting, forbidSprinting;
     public float groundDrag;
     public float airDrag, gravityScale;
-    public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier, slowFallMultiplier = 2;
+    public float fallMultiplier, dropdownMultiplier, lowJumpMultiplier, slowFallMultiplier = 1.5f;
 
     public float jumpHeight, jumpCooldown, airMultiplier, coyote = 0.5f;
     public bool canJump, timedJump, dashing, lockedOn, queued, slowFall, justJumped;
@@ -44,7 +44,7 @@ public class BetterController : MonoBehaviour, ISaveable
     public float queueWindow;
     public float queueTimer;
     public float sprintSpeed = 150, threshold = 0.2f;
-    public bool lastDashing;
+    public bool lastDashing, moving;
 
     public Ability[] abilities;
 
@@ -54,8 +54,22 @@ public class BetterController : MonoBehaviour, ISaveable
     public GameObject slowfallParticles;
     public ParticleSystem chargingParticles;
 
-    
+    public UnityEvent OnReachGround;
+    void ReachGround() {
+        if (grounded) return;
+        CancelInvoke("LeaveGround");
+        grounded = true; 
+        resetSlowfall();
+        OnReachGround.Invoke();
+    }
 
+    public UnityEvent OnLeaveGround;
+    void LeaveGround()
+    {   
+        if (!grounded) return;
+        grounded = false;
+        OnLeaveGround.Invoke();
+    }
 
 
     public void ResetQueue()
@@ -117,14 +131,12 @@ public class BetterController : MonoBehaviour, ISaveable
         }
     }
 
-    private void leaveGround() {
-        grounded = false;
-    }
     public void ForceLeaveGround() {
+        if (!grounded) return;
         CancelInvoke("ResetJustJumped");
         justJumped = true;
         Invoke("ResetJustJumped", coyote);
-        leaveGround();
+        LeaveGround();
     }
     public void Slowfall() {
         slowFall = true;
@@ -138,30 +150,33 @@ public class BetterController : MonoBehaviour, ISaveable
     public void ResetJustJumped() {
         justJumped = false;
     }
+    public bool UpdateGrounded() {
+        if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + groundGap, ground))
+        {
+            if (!justJumped) ReachGround();
+            return true;
+        }
+        else
+        {
+            Invoke("LeaveGround", coyote);
+            return false;
+        }
+    }
     void FixedUpdate()
     {
-
+        /*
         if (dashing != lastDashing) {
             Debug.Log("changed dashing to " + dashing);
         }
         lastDashing = dashing;
+        */
+
         //Debug.Log(rb.linearVelocity);
 
 
         //Ground check
-        if (!justJumped && Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + groundGap, ground))
-        {
-            
-            grounded = true;
-            CancelInvoke("leaveGround");
-            resetSlowfall();
-        }
-        else {
-            if (grounded) { 
-                Invoke("leaveGround", coyote);
-            }
-        }
-        
+        UpdateGrounded();
+
         if (grounded)
         {
             rb.linearDamping = groundDrag;
@@ -232,15 +247,19 @@ public class BetterController : MonoBehaviour, ISaveable
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        
 
         if ((Mathf.Abs(horizontal) >= threshold || Mathf.Abs(vertical) >= threshold) & !dashing)
         {
+            moving = true;
             move = rtc.transform.forward * vertical + rtc.transform.right * horizontal;
             transform.localRotation = Quaternion.Euler(0.0f, 90 - (Mathf.Atan2(move.z, move.x) * Mathf.Rad2Deg), 0.0f);
             head.transform.localRotation = transform.localRotation;
         }
-        else move = Vector3.zero;
+        else
+        {
+            moving = false;
+            move = Vector3.zero;
+        }
         //move = move * speed;
 
 
@@ -248,8 +267,8 @@ public class BetterController : MonoBehaviour, ISaveable
         if (!dashing)
         {   
 
-            if(sprinting && !forbidSprinting) rb.AddForce(move.normalized * sprintSpeed * Time.deltaTime * 100, ForceMode.VelocityChange);
-            else rb.AddForce(move.normalized * speed * Time.deltaTime * 100, ForceMode.VelocityChange);
+            if(sprinting && !forbidSprinting) rb.AddForce(move.normalized * sprintSpeed * Time.deltaTime * 5000, ForceMode.Force);
+            else rb.AddForce(move.normalized * speed * Time.deltaTime * 5000, ForceMode.Force);
         }
         //Debug.Log(horizontal);
 
@@ -296,7 +315,7 @@ public class BetterController : MonoBehaviour, ISaveable
         //damager dmg = new damager();
         hpManager.SelfDamage(50);
         //hpManager.Damage(dmg, collision);
-        if (currentAbility.ID!=0) abilities[currentAbility.ID].Abort();
+        abilities[currentAbility.ID].Abort();
         
     }
     public void OnTriggerEnter(Collider collision)

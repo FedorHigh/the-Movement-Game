@@ -17,7 +17,7 @@ public class PlayerHpManager : MonoBehaviour
     public DamageIndicator damageIndicator;
     public UnityEvent onDamageUnityEvent = null;
     public UnityEvent onDeathUnityEvent = null;
-    damager selfDamager;
+    Damager selfDamager;
     private void Update()
     {
         if (invincible) { 
@@ -40,12 +40,12 @@ public class PlayerHpManager : MonoBehaviour
         
         
     }
-    public void OnSuccesfulHit(float damage = 0, DamageTrigger damageTrigger = null) {
+    public void OnSuccesfulHit(Damager dmg, DamageTrigger damageTrigger = null) {
         if (damageTrigger != null) {
-            if (damageTrigger.TriggerAbility) player.abilities[player.currentAbility.ID].OnSuccessfulHit(damage);
+            player.abilities[damageTrigger.AbilityIndex].OnSuccessfulHit(dmg, damageTrigger);
         }
 
-        hp = Mathf.Min(hp + damage, rallyhp);
+        hp = Mathf.Min(hp + dmg.dmg, rallyhp);
         if(hp>rallyhp)rallyhp = hp;
         UpdateHealthBar();
         UpdateRallyHealthBar();
@@ -76,7 +76,7 @@ public class PlayerHpManager : MonoBehaviour
         selfDamager.push = false;
         Damage(selfDamager, gameObject.GetComponent<Collider>(), ignoreInvincibility);
     }
-    public void Damage(damager dmg, Collider other, bool ignoreInvincibility = false) {
+    public void Damage(Damager dmg, Collider other, bool ignoreInvincibility = false) {
 
         if (invincible && !ignoreInvincibility) return;
         onDamageUnityEvent.Invoke();
@@ -179,7 +179,7 @@ public class PlayerHpManager : MonoBehaviour
     {
         player = GetComponent<BetterController>();
         damageIndicator = GetComponent<DamageIndicator>();
-        selfDamager = gameObject.AddComponent<damager>();
+        selfDamager = gameObject.AddComponent<Damager>();
         rallyhp = hp;
     }
     private void OnTriggerStay(Collider other)
@@ -187,7 +187,7 @@ public class PlayerHpManager : MonoBehaviour
 
         
         if (other.CompareTag("HurtPlayer")) {
-            damager dmg = other.gameObject.GetComponent<damager>();
+            Damager dmg = other.gameObject.GetComponent<Damager>();
             
             Damage(dmg, other);
         }
