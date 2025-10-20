@@ -4,7 +4,7 @@ public class Chain : MonoBehaviour
 {
     public GameObject target;
     public float delay;
-    void Start()
+    void OnEnable()
     {
         Invoke("Activate", delay);
     }

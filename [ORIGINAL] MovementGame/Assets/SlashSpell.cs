@@ -7,9 +7,17 @@ public class SlashSpell : Ability
 
     [SerializeField] private int cur = 0, n;
     [SerializeField] private float resetTime, resetTimer, diveCooldown = 0.5f, diveDelay = 0.2f, diveNudgeMultiplier = 1;
-    [SerializeField] private Vector3 nudgeDown, nudgeUp, knockback, initialNudge;
+    private bool canBounce = false;
+
+    //dive attack
+    [SerializeField] private Vector3 diveNudge, bounceNudge, knockback, diveNudgeInitial;
     [SerializeField] private GameObject diveBox;
     [SerializeField] private bool didDive = false;
+
+    //dash attack
+    [SerializeField] private Vector3 dashNudge, dashKnockback;
+    [SerializeField] private GameObject dashBox;
+    [SerializeField] private float dashDuration; 
 
 
     public override void Start()
@@ -28,7 +36,16 @@ public class SlashSpell : Ability
     }
     public override void Cast() {
         base.Cast();
-        if (player.grounded)
+        if (player.statusEffects.CheckEffect("QuickSprint")) {
+
+            canBounce = true;
+            player.SetLocked(dashDuration);
+            ApplyVelocity(transform, dashNudge);
+            dashBox.SetActive(true);
+            Debug.Log("DASH ATTACK!");
+            player.statusEffects.CleanseEffect("QuickSprint");
+        }
+        else if (player.grounded)
         {
             resetTimer = 0;
             player.transform.rotation = player.abdir.transform.rotation;
@@ -44,11 +61,13 @@ public class SlashSpell : Ability
             cur++;
             cur %= n;
         }
-        else {
+        else
+        {
             //savedNudge = player.rb.linearVelocity;
+            canBounce = true;
             player.dashing = true;
             player.transform.rotation = player.abdir.transform.rotation;
-            ApplyVelocity(transform, initialNudge);
+            ApplyVelocity(transform, diveNudgeInitial);
             Invoke("DiveAttack", diveDelay);
         }
     }
@@ -62,17 +81,24 @@ public class SlashSpell : Ability
         resetTimer = 0;
 
         diveBox.SetActive(true);
-        ApplyVelocity(transform, nudgeDown);
+        ApplyVelocity(transform, diveNudge);
     }
     public override void OnSuccessfulHit(Damager dmg, DamageTrigger damageTrigger)
     {
+  
         base.OnSuccessfulHit(dmg, damageTrigger);
+        
 
         if (damageTrigger.cast == 0) ApplyVelocity(transform, Vector3.zero);//
-        else
+        else if (damageTrigger.cast == 1 && canBounce)
         {
             //player.Slowfall();
-            ApplyVelocity(transform, nudgeUp);
+            canBounce = false;
+            ApplyVelocity(transform, bounceNudge);
+        }
+        else if (damageTrigger.cast == 2 && canBounce) {
+            canBounce = false;
+            ApplyVelocity(transform, dashKnockback);
         }
     }
     public void WaitToReset() {

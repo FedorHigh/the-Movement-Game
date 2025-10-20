@@ -21,7 +21,7 @@ public class Campfire : Interactable, ISaveable
         }
         PlayerHpManager player = GlobalVars.instance.player.hpManager;
         player.Heal(player.maxHp);
-        player.AddMana(player.maxHp);
+        player.AddMana(player.manaMax);
 
         DataManager.instance.gameData.SetPoint(positionMarker.transform.position);
         DataManager.instance.SaveGame();

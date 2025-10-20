@@ -8,14 +8,18 @@ using UnityEngine.UIElements;
 
 public class DashSpell : Ability, IAbility
 {
-    public GameObject direction;
+    public GameObject direction, storm;
     public float heavyInvTime = 1;
     public QuickSprint quickSprint;
     public Vector3 bounceUp, bounceBack;
     bool lockDirection = false;
     bool isDirectionDown = false;
+    bool addSprint = false;
     [SerializeField] bool canBounce = true;
     StatusEffectManager effectManager;
+    [SerializeField] float lookThreshold = 80;
+
+    //[SerializeField] GameObject burstAttack;
     public override void Start()
     {
         base.Start();
@@ -28,14 +32,19 @@ public class DashSpell : Ability, IAbility
         base.Cast();
         lockDirection = true;
         //effectManager.AddEffect(new QuickSprint());
+        addSprint = true;
         Dash(CD[0], 0);
         attackBoxes[0].SetActive(true);
     }
     public override void Finish()
     {
         //quickSprint = new QuickSprint();
-        effectManager.AddEffect(quickSprint);
-        
+        if(addSprint)
+        {
+            addSprint = false;
+            effectManager.AddEffect(quickSprint);
+        }
+
         base.Finish();
 
     }
@@ -47,6 +56,16 @@ public class DashSpell : Ability, IAbility
         lockDirection = false;
         if(player.grounded) DirectionUp();
         else DirectionDown();
+    }
+    public void SetDirection() { 
+        if(player.lookAngle < lookThreshold || player.grounded)
+        {
+            DirectionUp();
+        }
+        else
+        {
+            DirectionDown();
+        }
     }
     public void DirectionUp() 
     {
@@ -68,6 +87,8 @@ public class DashSpell : Ability, IAbility
             QueueCast(1);
             return;
         }
+
+        SetDirection();
         lockDirection = true;
         //player.dashing = true;
         ready = false;
@@ -84,8 +105,11 @@ public class DashSpell : Ability, IAbility
             charging = true;
             return;
         }
+        SetDirection();
+
         base.ReleaseCharge();
         //effectManager.AddEffect(new QuickSprint());
+        player.statusEffects.CleanseEffect("QuickSprint");
         lockDirection = true;
         player.queued = false;
         player.queuedCast = null;
@@ -97,17 +121,32 @@ public class DashSpell : Ability, IAbility
 
     public override void OnSuccessfulHit(Damager dmg, DamageTrigger damageTrigger)
     {
+        
+        //return;
+
         if (!canBounce) return;
         canBounce = false;
         base.OnSuccessfulHit(dmg, damageTrigger);
         //player.hpManager.SetInvincibility(heavyInvTime);
         Debug.Log("successful heavy dash hit");
 
-        Abort();
+        //Abort();
+        
 
         DashInfo s = dashInfo[currendDashIndex];
-        if (isDirectionDown) ApplyVelocity(player.transform, bounceUp);
-        else ApplyVelocity(player.transform, bounceBack);
+        if (isDirectionDown)
+        {
+            Instantiate(storm, player.transform.position, Quaternion.Euler(0, 0, 0));
+            //ApplyVelocity(player.transform, bounceUp);
+        }
+        else
+        {
+            Instantiate(storm, player.transform.position, Quaternion.Euler(90, 0, 0));
+            //ApplyVelocity(player.transform, bounceBack);
+        }
+        
+    }
+    void BurstAttack() { 
         
     }
 }

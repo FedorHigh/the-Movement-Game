@@ -13,7 +13,7 @@ public class BetterController : MonoBehaviour, ISaveable
 {
 
     public Rigidbody rb;
-    public float speed, sensitivity, Y;
+    public float speed, sensitivity, lookAngle;
     public Vector3 move, lookDirection, dirmove;
     public GameObject cam, head, rtc, abdir, vabdir, pointer;//Rotation Center, Ability Direction, Vertical ab.dir.
     //public GameObject bbs;
@@ -53,8 +53,33 @@ public class BetterController : MonoBehaviour, ISaveable
 
     public GameObject slowfallParticles;
     public ParticleSystem chargingParticles;
+    public StatusEffectManager statusEffects;
 
     public UnityEvent OnReachGround;
+    private bool locked = false; 
+
+    public void SetDashing(float duration = -1) { 
+        dashing = true;
+
+        if(duration!=-1) Invoke("ResetDashing", duration);
+    }
+    public void ResetDashing() { 
+        dashing = false;
+    }
+
+    public void SetLocked(float duration = -1)
+    {
+        locked = true;
+        inputManager.locked = true;
+
+        if (duration != -1) Invoke("ResetLocked", duration);
+    }
+    public void ResetLocked()
+    {
+        locked = false;
+        inputManager.locked = false;
+    }
+
     void ReachGround() {
         if (grounded) return;
         CancelInvoke("LeaveGround");
@@ -115,6 +140,7 @@ public class BetterController : MonoBehaviour, ISaveable
         hpManager = GetComponent<PlayerHpManager>();
 
         cnm = cam.GetComponent<CinemachineFreeLook>();
+        statusEffects = GetComponent<StatusEffectManager>();
     }
 
     void resetJump() {
@@ -164,15 +190,6 @@ public class BetterController : MonoBehaviour, ISaveable
     }
     void FixedUpdate()
     {
-        /*
-        if (dashing != lastDashing) {
-            Debug.Log("changed dashing to " + dashing);
-        }
-        lastDashing = dashing;
-        */
-
-        //Debug.Log(rb.linearVelocity);
-
 
         //Ground check
         UpdateGrounded();
@@ -192,18 +209,9 @@ public class BetterController : MonoBehaviour, ISaveable
         }
 
         //Rotation
-        const float MIN_Y = -60.0f;
-        const float MAX_Y = 70.0f;
-        
-        Y += Input.GetAxis("Mouse Y") * (sensitivity * Time.deltaTime);
 
-        if (Y < MIN_Y)
-            Y = MIN_Y;
-        else if (Y > MAX_Y)
-            Y = MAX_Y;
-
-        
         lookDirection = new Vector3(cnm.m_XAxis.Value, cnm.m_YAxis.Value, 0.0f);
+        lookAngle = (180 * cnm.m_YAxis.Value) % 180;
 
         if (!lockedOn) rtcrotat = new Vector3(0.0f, 90 + lookDirection.x, 0.0f);
         else
@@ -247,6 +255,10 @@ public class BetterController : MonoBehaviour, ISaveable
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        if (locked) { 
+            horizontal = 0;
+            vertical = 0;
+        }
 
         if ((Mathf.Abs(horizontal) >= threshold || Mathf.Abs(vertical) >= threshold) & !dashing)
         {

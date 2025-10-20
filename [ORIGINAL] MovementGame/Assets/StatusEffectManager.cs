@@ -28,7 +28,18 @@ public class StatusEffectManager : MonoBehaviour
             activeEffects[effect.effectName] = effect;
         }
     }
+    public bool CheckEffect(String effectName) {
+        return activeEffects.ContainsKey(effectName);
+    }
 
+    public void CleanseEffect(String effectName) {
+        Debug.Log("cleansing effect " + effectName);
+
+        if (activeEffects.ContainsKey(effectName))//sole reason to use dict, mb change later?
+        {
+            activeEffects[effectName].Remove();
+        }
+    }
     public void RemoveEffect(StatusEffect effect) {
         Debug.Log("removing effect " + effect.effectName);
         if (activeEffects.ContainsKey(effect.effectName))//sole reason to use dict, mb change later?
@@ -36,5 +47,9 @@ public class StatusEffectManager : MonoBehaviour
             Destroy(activeEffects[effect.effectName].gameObject);
             activeEffects.Remove(effect.effectName);
         }
+    }
+    public StatusEffect GetEffect(String effectName) { 
+        if(!activeEffects.ContainsKey(effectName))return null;
+        return activeEffects[effectName];
     }
 }

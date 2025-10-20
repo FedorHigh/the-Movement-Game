@@ -86,8 +86,8 @@ public class SlamSpell : Ability, IAbility
         }
         else {
             player.hpManager.SetInvincibility(0);
-            if(!inHeavy)player.hpManager.SelfDamage(damageOnFail, true);
-            else player.hpManager.SelfDamage(damageOnHeavyFail, true);
+            //if(!inHeavy)player.hpManager.SelfDamage(damageOnFail, true);
+            //else player.hpManager.SelfDamage(damageOnHeavyFail, true);
         }
         descending = false;
         inHeavy = false;

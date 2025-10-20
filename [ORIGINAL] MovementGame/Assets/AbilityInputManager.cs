@@ -24,6 +24,7 @@ public class AbilityInputManager : MonoBehaviour
     public bool canScroll;
     public float scrollCd = 0.1f;
     public KeyCode sprintKey = KeyCode.LeftAlt;
+    public bool locked = false;
     public void resetScroll()
     {
         canScroll = true;
@@ -72,15 +73,18 @@ public class AbilityInputManager : MonoBehaviour
         if (Input.GetKeyDown(sprintKey)) player.sprinting = !player.sprinting;
 
         //abilities
-        jumpD = Input.GetKeyDown(jumpKey);
-        //lightD = Input.GetKeyDown(lightKey);
-        heavyD = Input.GetKeyDown(heavyKey);
-        //altD = Input.GetKeyDown(altKey);
+        if (!locked)
+        {
+            jumpD = Input.GetKeyDown(jumpKey);
+            //lightD = Input.GetKeyDown(lightKey);
+            heavyD = Input.GetKeyDown(heavyKey);
+            //altD = Input.GetKeyDown(altKey);
 
-        jump = Input.GetKey(jumpKey);
-        //light_ = Input.GetKey(lightKey);
-        heavy = Input.GetKey(heavyKey);
-        //alt = Input.GetKey(altKey);
+            jump = Input.GetKey(jumpKey);
+            //light_ = Input.GetKey(lightKey);
+            heavy = Input.GetKey(heavyKey);
+            //alt = Input.GetKey(altKey);
+        }
 
         if (Input.GetKeyDown(nextKey) && canScroll)
         {
