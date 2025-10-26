@@ -27,6 +27,10 @@ public class Start_Game : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("tutorial_level");
     }
+    public void ShowcaseLevel() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Showcase_level");
+    }
     public void ReloadScene ()
     {
         Time.timeScale = 1;
