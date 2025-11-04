@@ -36,11 +36,12 @@ public class FirstBossStateMachine : StateMachine
         if (id == 0) {
             if (!trigga.inTrigger)
             {
-                Switch(2);
+                if (Random.value < 0.3) Switch(3);
+                else Switch(2);
             }
             else {
-                if (Random.value < 0.3) Switch(3);
-                else Switch(1);
+       
+                Switch(1);
             }
             return;
         }

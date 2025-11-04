@@ -521,6 +521,7 @@
 "Assets/MenuScripts/Start_Game.cs"
 "Assets/MenuScripts/ToMenu.cs"
 "Assets/MethodTrigger.cs"
+"Assets/MovementAnimator.cs"
 "Assets/MovementEasingAction.cs"
 "Assets/NavMeshFollow.cs"
 "Assets/newAnimate.cs"

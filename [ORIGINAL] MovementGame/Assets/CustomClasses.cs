@@ -580,7 +580,7 @@ namespace CustomClasses
         public Rigidbody rb;
         public GameObject TargetObj, head, lockOnPoint;
         public Vector3 move;
-        public Dictionary<GameObject, Resistance> resistances;
+        public Dictionary<GameObject, Resistance> resistances = new Dictionary<GameObject, Resistance>();
         public LayerMask targetLayer;
         public NavMeshAgent agent;
         public GameObject detector;
@@ -596,6 +596,7 @@ namespace CustomClasses
 
         public GameObject healthbarObj;
         public EnemyHealthBar healthbar;
+        public float healthbarOffset = 0;
         
         //public Bet TargetHp;
         public float tmp, lastDamage;
@@ -619,6 +620,7 @@ namespace CustomClasses
             onDeathEvent += OnDeathEvent;
 
             healthbarObj = Instantiate(GlobalVars.instance.enemyHealthbarPrefab, transform);
+            healthbarObj.transform.position += Vector3.up*healthbarOffset;
             healthbar = healthbarObj.GetComponent<EnemyHealthBar>();
             rallyHp = hp;
             rallyDepletion = maxHp * GlobalVars.instance.enemyRallyDepletionPercent * 0.01f;
@@ -719,6 +721,10 @@ namespace CustomClasses
                 //Debug.Log("ow");
                 Resistance tmp;
                 //Debug.LogError(resistances);
+                if (resistances == null) {
+                    Debug.Log("NULL DAMAGER");
+                    return;
+                }
                 if (resistances.TryGetValue(other.gameObject, out tmp)) return;
                 Damager dmg = other.gameObject.GetComponent<Damager>();
                 Resistance tmpres = gameObject.AddComponent<Resistance>();

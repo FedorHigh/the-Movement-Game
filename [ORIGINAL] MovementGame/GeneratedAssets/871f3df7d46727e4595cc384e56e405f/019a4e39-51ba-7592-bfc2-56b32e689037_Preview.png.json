@@ -1,0 +1,11 @@
+{
+    "asset": "7d974e264d5afa24db8d9eaa5610f0de",
+    "fileName": "019a4e39-51ba-7592-bfc2-56b32e689037_Preview.png",
+    "prompt": "classic green-and-black \"matrix\" moving grid effect, pulsating",
+    "negativePrompt": "",
+    "model": "44ec3749-963a-44b1-aa54-dc19f6ed8ab2",
+    "modelName": "Unity Texture2D",
+    "customSeed": 1982484322,
+    "w3CTraceId": "e837d33106f00c51820a06ba396d433b",
+    "refinementMode": "Generation"
+}

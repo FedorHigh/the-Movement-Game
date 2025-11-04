@@ -14,7 +14,7 @@ public class ThrowProjectileAction : CustomClasses.Action
         if (TargetObj == null) return;
         if (!base.PrepareToStart()) return;
             
-        //base.StartAction();
+        base.StartAction();
         
         GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
         //Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
