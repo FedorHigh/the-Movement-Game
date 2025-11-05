@@ -18,7 +18,7 @@ public class CameraSensitivity : MonoBehaviour
         freeLookCamera.m_YAxis.m_MaxSpeed = settings.ySensitivity * 20;
 
         freeLookCamera.m_XAxis.m_InvertInput = settings.invertCameraX;
-        freeLookCamera.m_YAxis.m_InvertInput = settings.invertCameraY;
+        freeLookCamera.m_YAxis.m_InvertInput = !settings.invertCameraY;
     }
 
     void OnDestroy()

@@ -38,6 +38,7 @@ public class SlamSpell : Ability, IAbility
         player.currentAbility = new CastInfo(ID, 0);
         descending = true;
         hitEnemy = false;
+        SetCooldown(CD[0]);
 
         validHeight = false;
         Nudge();
