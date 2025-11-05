@@ -37555,7 +37555,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -52910,7 +52910,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -57785,7 +57785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2668616602571419684
 Transform:
   m_ObjectHideFlags: 0
@@ -57934,7 +57934,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 651.86, y: 509.9, z: 177.66}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.09942627, y: 0.9299927, z: -6.1187286}
+  - {x: -0.09942627, y: 0.9299927, z: -6.118744}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -73514,7 +73514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 17.61038, z: -18.76426}
+  m_FollowOffset: {x: 0, y: 32, z: -1}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -84156,7 +84156,7 @@ Transform:
   m_GameObject: {fileID: 2407235299049940441}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77873}
+  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77875}
   m_LocalScale: {x: 10.737, y: 0.04098805, z: 0.87443084}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -84212,7 +84212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5851597831202105627
 Transform:
   m_ObjectHideFlags: 0
@@ -101517,7 +101517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6725152152347717622
 Transform:
   m_ObjectHideFlags: 0
@@ -107139,8 +107139,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3953088035828788423}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18057741, y: 0, z: 0, w: 0.9835608}
-  m_LocalPosition: {x: 651.9594, y: 515.03, z: 171.77873}
+  m_LocalRotation: {x: 0.49212822, y: 0.5077499, z: -0.49213058, w: 0.5077474}
+  m_LocalPosition: {x: 650.96, y: 546.54, z: 183.85999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107449,7 +107449,7 @@ Transform:
   m_GameObject: {fileID: 4124121358927316976}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000016363312, y: 0.000019816609, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -148800,7 +148800,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.09942627, y: -0.42001343, z: 0.34126282}
   m_RotationAtRest: {x: 0, y: 90, z: -20.000004}
   m_TranslationOffsets:
-  - {x: -0.09942627, y: -0.42001343, z: 0.34126282}
+  - {x: -0.09942627, y: -0.42001343, z: 0.34124756}
   m_RotationOffsets:
   - {x: 0, y: 90, z: -20.000004}
   m_AffectTranslationX: 1
@@ -149068,7 +149068,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.07
+      scalar: 0.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -153676,7 +153676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 17.61038, z: -18.76426}
+  m_FollowOffset: {x: 0, y: 32, z: -1}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -159120,7 +159120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1978521320537585285
 Transform:
   m_ObjectHideFlags: 0
@@ -159290,7 +159290,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 651.9594, y: 510.45, z: 186.75873}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: 1.480011, z: 2.9799957}
+  - {x: 0, y: 1.480011, z: 2.9799805}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -164578,7 +164578,7 @@ Transform:
   m_GameObject: {fileID: 5836093002318043736}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 650.96, y: 546.54, z: 183.86}
+  m_LocalPosition: {x: 650.96, y: 546.54, z: 183.85999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -164758,7 +164758,7 @@ Transform:
   m_GameObject: {fileID: 5964761849492518114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77873}
+  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -164977,7 +164977,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 651.96, y: 514.54, z: 183.86}
   m_RotationAtRest: {x: 0, y: 90, z: 0}
   m_TranslationOffsets:
-  - {x: 0.00061035156, y: 5.569977, z: 0.08126831}
+  - {x: 0.00061035156, y: 5.569977, z: 0.08123779}
   m_RotationOffsets:
   - {x: 0, y: 90, z: 0}
   m_AffectTranslationX: 1
@@ -165093,7 +165093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4381481174308175127
 Transform:
   m_ObjectHideFlags: 0
@@ -165244,7 +165244,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 651.86, y: 510.42, z: 184.12}
   m_RotationAtRest: {x: 0, y: 90, z: 0}
   m_TranslationOffsets:
-  - {x: -0.09942627, y: 1.4500122, z: 0.34126282}
+  - {x: -0.09942627, y: 1.4500122, z: 0.34124756}
   m_RotationOffsets:
   - {x: 0, y: 90, z: 0}
   m_AffectTranslationX: 1
@@ -170300,7 +170300,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -175448,7 +175448,7 @@ Transform:
   m_GameObject: {fileID: 6269026276244937524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 650.96, y: 546.54, z: 183.86}
+  m_LocalPosition: {x: 650.96, y: 546.54, z: 183.85999}
   m_LocalScale: {x: 3.73, y: 3.08, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -175499,7 +175499,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 1
     m_SpeedMode: 0
-    m_MaxSpeed: 3.423863
+    m_MaxSpeed: 2.684958
     m_AccelTime: 0
     m_DecelTime: 0
     m_InputAxisName: Mouse Y
@@ -175523,7 +175523,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 266.7339
+    m_MaxSpeed: 229.0181
     m_AccelTime: 0
     m_DecelTime: 0
     m_InputAxisName: Mouse X
@@ -176080,7 +176080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8391970396419121598
 Transform:
   m_ObjectHideFlags: 0
@@ -177615,7 +177615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 17.61038, z: -18.76426}
+  m_FollowOffset: {x: 0, y: 32, z: -1}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -178387,7 +178387,7 @@ Transform:
   m_GameObject: {fileID: 7297683310020106849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 652.01, y: 510.1, z: 183.67}
+  m_LocalPosition: {x: 652.01, y: 510.1, z: 183.67001}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188838,7 +188838,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.01, y: 2.13, z: -0.01}
   m_RotationAtRest: {x: -0.24841537, y: 0, z: 0.22232279}
   m_TranslationOffsets:
-  - {x: -0.010009766, y: 0.9181824, z: 0.09965515}
+  - {x: -0.010009766, y: 0.9181824, z: 0.09967041}
   m_RotationOffsets:
   - {x: -0.2484154, y: 0, z: 0.22232282}
   m_AffectTranslationX: 0
@@ -188989,7 +188989,7 @@ Transform:
   m_GameObject: {fileID: 7741112313333252450}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77873}
+  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77875}
   m_LocalScale: {x: 1, y: 0.37174, z: 1.253}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -189892,7 +189892,7 @@ Transform:
   m_GameObject: {fileID: 8041562979818185517}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77873}
+  m_LocalPosition: {x: 651.9594, y: 508.97, z: 183.77875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -190173,7 +190173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3375846394586718672
 Transform:
   m_ObjectHideFlags: 0
@@ -190314,7 +190314,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 651.9594, y: 508.97, z: 189.05}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: 0, z: 5.2712708}
+  - {x: 0, y: 0, z: 5.27124}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -190892,7 +190892,7 @@ Transform:
   m_GameObject: {fileID: 8522238540915361231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 651.9594, y: 510.45, z: 183.77873}
+  m_LocalPosition: {x: 651.9594, y: 510.45, z: 183.77875}
   m_LocalScale: {x: 1, y: 1, z: 1.4443735}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191420,8 +191420,8 @@ MonoBehaviour:
   storm: {fileID: 4899133404953891052, guid: 1a2973d6cc3179e468d5419884ca9224, type: 3}
   heavyInvTime: 2
   quickSprint: {fileID: 5516015367106578280, guid: 3e37c42dc99161c4c80b63806e0f35eb, type: 3}
-  bounceUp: {x: 0, y: 240, z: 80}
-  bounceBack: {x: 0, y: 240, z: -80}
+  bounceUp: {x: 0, y: 80, z: 30}
+  bounceBack: {x: 0, y: 80, z: -30}
   canBounce: 1
   lookThreshold: 80
 --- !u!114 &861738016325355910
@@ -191982,8 +191982,8 @@ MonoBehaviour:
   rallyhpBar: {fileID: 4928216964664568357}
   manaBar: {fileID: 288537861998940076}
   staminaBar: {fileID: 8204496035756748617}
-  hp: 100
-  maxHp: 100
+  hp: 200
+  maxHp: 200
   rallyhp: 0
   invincibilityTime: 1
   invTimeLeft: 0
@@ -192208,7 +192208,7 @@ RectTransform:
   m_Father: {fileID: 926447406019964496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.0000023841858, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

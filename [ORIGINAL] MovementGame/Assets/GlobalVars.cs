@@ -11,7 +11,7 @@ public class GlobalVars : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        scoreCounter = GameObject.Find("ScoreCounter").GetComponent<ScoreCounter>();
+        //scoreCounter = GameObject.Find("ScoreCounter").GetComponent<ScoreCounter>();
         playerBody = GameObject.Find("playerBody");
         player = playerBody.GetComponent<BetterController>();
        // instance = this;

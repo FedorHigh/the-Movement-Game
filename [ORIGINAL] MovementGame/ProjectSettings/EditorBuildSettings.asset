@@ -44,10 +44,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main_level.unity
     guid: f1dde7c10fae74444a6e532ee26ba682
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/arena1.unity
     guid: 7d2ef1d928eaf2e40ba8381d38880ae6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/arena2.unity
     guid: 6c6bce04388134e478bf418a659fab41
   - enabled: 1
