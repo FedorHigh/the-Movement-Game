@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackAction : CustomClasses.Action
+public class AttackAction : CustomClasses.ActionOld
 {
     public GameObject attack;
     public float delay;

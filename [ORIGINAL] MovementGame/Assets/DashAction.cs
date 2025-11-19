@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using CustomClasses;
 
-public class DashAction : Action
+public class DashAction : ActionOld
 {
     //public GameObject attack;
     //public float slowSpeed, defSpeed, threshold, delay;

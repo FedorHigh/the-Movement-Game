@@ -3,7 +3,7 @@ using System.Transactions;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedRepositionAction : Action
+public class RangedRepositionAction : ActionOld
 {
     public Entity entity;
     public GameObject target;

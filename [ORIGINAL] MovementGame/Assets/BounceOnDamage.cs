@@ -8,7 +8,7 @@ public class BounceOnDamage : MonoBehaviour
     public Vector3 force;
     public float multiplier = 1;
     public Entity entity;
-    public Action action;
+    public ActionOld action;
     public bool resetSpeed = true;
     Rigidbody rb;
     NavMeshAgent agent;

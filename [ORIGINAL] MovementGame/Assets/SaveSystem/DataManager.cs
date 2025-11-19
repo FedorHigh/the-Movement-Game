@@ -49,7 +49,7 @@ public class DataManager : MonoBehaviour
     }
     public void SaveGame() {
         savedObjects = GetSavedObjects();
-        Debug.Log("GAME SAVED");
+        Debug.LogError("GAME SAVE");
         foreach(ISaveable saveable in savedObjects)
         {
             try
@@ -77,11 +77,11 @@ public class DataManager : MonoBehaviour
         // load from file
         writer = new DataFileWriter(Application.persistentDataPath);
         gameData = writer.Load();
-        Debug.Log("GAME LOADED");
+        Debug.Log("GAME LOAD ATTEMPT");
         if (gameData == null)
         {
             Debug.LogError("No game data found to load.");
-            gameData = new GameData(new Vector3(20, 18, 75), 0);
+            gameData = new GameData(player.transform.position, 0);
         }
 
         foreach (ISaveable saveable in savedObjects)

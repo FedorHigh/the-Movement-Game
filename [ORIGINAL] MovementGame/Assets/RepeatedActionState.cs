@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RepeatedActionState : State
 {
-    public Action action;
+    public ActionOld action;
     public float delay;
     public bool inherit = true;
 

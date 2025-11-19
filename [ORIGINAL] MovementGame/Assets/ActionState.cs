@@ -4,7 +4,7 @@ using UnityEngine;
 public class ActionState : State
 {
     
-    public Action action;
+    public ActionOld action;
     public float duration, repetitionDelay = 0.2f;
     public int triggerId;
     public bool inherit = true, initDelay = false;

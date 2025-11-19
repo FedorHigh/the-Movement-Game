@@ -2,7 +2,7 @@ using UnityEngine;
 using CustomClasses;
 using UnityEngine.AI;
 
-public class MovementEasingAction : Action
+public class MovementEasingAction : ActionOld
 {
     public NavMeshAgent agent;
     public Rigidbody rb;

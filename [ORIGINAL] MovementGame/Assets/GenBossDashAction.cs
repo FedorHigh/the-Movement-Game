@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEngine.Splines;
 
-public class GenBossDashAction : CustomClasses.Action
+public class GenBossDashAction : CustomClasses.ActionOld
 {
     public SmoothAnimate animate;
     public Animator animator;

@@ -2,7 +2,7 @@ using CustomClasses;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomisedRepositionAction : Action
+public class RandomisedRepositionAction : ActionOld
 {
     public Vector3 min;
     public Vector3 max;

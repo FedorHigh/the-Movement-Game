@@ -1,7 +1,7 @@
 using UnityEngine;
 using CustomClasses;
 
-public class ThrowProjectileAction : CustomClasses.Action 
+public class ThrowProjectileAction : CustomClasses.ActionOld 
 {
     public float g, dist, speed, time, horizontalDist, tmpspeed, cooldown, gravMultiplier, prediction, inaccuracy, repositionCD;
     public GameObject projectile, TargetObj;

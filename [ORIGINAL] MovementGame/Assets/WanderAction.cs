@@ -2,7 +2,7 @@ using CustomClasses;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WanderAround : Action
+public class WanderAround : ActionOld
 {
     public Entity target;
     public NavMeshAgent agent;

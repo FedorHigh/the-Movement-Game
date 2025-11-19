@@ -458,14 +458,14 @@ namespace CustomClasses
             Destroy(this);
         }
     }
-    public class Action : MonoBehaviour
+    public class ActionOld : MonoBehaviour
     {
         public float CDset, duration;
         float CDleft;
         public bool ready = true, waiting = false, enableWait = true, enableChaining = false;
         public Entity host;
         public string endMethod = "", readyMethod = "";
-        public Action chainAction;
+        public ActionOld chainAction;
         public float chainDelay;
         public bool chainActive = true, chainOnStart = false;
         public Animator anim;

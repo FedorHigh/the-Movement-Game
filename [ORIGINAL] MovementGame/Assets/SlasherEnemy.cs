@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class SlasherEnemy : StateEntity
 {
-	public Action attack;
+	public ActionOld attack;
     public float defSpeed;
     public MethodTrigger trigger;
 

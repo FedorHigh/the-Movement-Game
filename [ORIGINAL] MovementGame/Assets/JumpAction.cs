@@ -3,7 +3,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class JumpAction : Action
+public class JumpAction : ActionOld
 {
     public GameObject splineObj, guide, obj, box1, box2;
     public DashInfo s;
